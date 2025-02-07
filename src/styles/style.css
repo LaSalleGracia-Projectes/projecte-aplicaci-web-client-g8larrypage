@@ -1,3 +1,101 @@
-h1 {
-  color: blue;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  flex-wrap: wrap;
+  height: 100px;
+}
+
+.logo img {
+  width: auto;
+  height: 80px;
+}
+
+.main-nav {
+  margin-left: 220px;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-buttons {
+  display: flex;
+  gap: 25px;
+}
+
+.header-container div button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-container div button img {
+  height: 40px;
+}
+
+.img-principal img {
+  object-fit: cover;
+  width: 100%;
+  height: 60vh;
+}
+
+.download-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+.download-buttons button {
+  margin: 10px;
+  padding: 15px 30px;
+  border: none;
+  background-color: #ffcc00;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.news {
+  padding: 50px 20px;
+}
+
+.news-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.news-container img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+
+footer {
+  background-color: #000;
+  color: white;
+  padding: 20px;
+  margin-top: 50px;
 }

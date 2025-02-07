@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boilerplate-JS</title>
+    <title>Ciudad de las leyendas</title>
     <link rel="stylesheet" href="./styles/style.css">
     <script type="module" src="./js/main.js" defer></script>
   </head>
   <body>
+
+    <!-- Encabezado de la página -->
     <header>
     <div class="header-container">
-      <div>
-        <div class="logo"></div>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="./assets/img/logo-principal.jpeg" alt="Logo Principal">
       </div>
+      <!-- Menú de navegación -->
       <nav class="main-nav">
         <ul>
           <li><a href="#">Sobre Nosotros</a></li>
@@ -21,33 +24,39 @@
           <li><a href="#">Idioma</a></li>
         </ul>
       </nav>
-      <div>
-        <button id="button-clan"><img src="" alt="Clan"></button>
-        <button id="button-tiends"><img src="" alt="Tienda"></button>
-        <button id="button-ranking"><img src="" alt="Ranking"></button>
-        <button id="button-perfil"><img src="" alt="Perfil"></button>
+      <!-- Botones de acceso rápido -->
+      <div class="main-buttons">
+        <button id="button-clan"><img src="./assets/img/clan.png" alt="Clan"></button>
+        <button id="button-tienda"><img src="./assets/img/tienda.png" alt="Tienda"></button>
+        <button id="button-ranking"><img src="./assets/img/trofeo.png" alt="Ranking"></button>
+        <button id="button-perfil"><img src="./assets/img/usuario.png" alt="Perfil"></button>
       </div>
     </div>
     </header>
 
+    <!-- Contenido principal -->
     <section class="img-principal">
-      <img src="" alt="Imagen Principal">
+      <img src="./assets/img/preview.png" alt="Imagen Principal">
     </section>
 
-    <section class="descargar">
-      <h2>Descarga el juego</h2>
+    <section class="download-section">
+      <h2>DESCARGALO YA!</h2>
       <p>Descarga el juego en tu dispositivo y comienza a jugar</p>
-      <img src="" alt="Imagen juego">
-      <button>Descargar</button>
-      <button>sexo</button>
+      <img src="./assets/img/anuncio-app.png" alt="Imagen juego">
+      <div class="download-buttons">
+        <button>Descargar</button>
+      </div>
     </section>
 
-    <section class="info-version">
+    <section class="news">
       <h2>Noticias</h2>
-      <img src="" alt="Imagen1">
-      <img src="" alt="Imagen2">
-      <p>Hola</p>
+      <div class="news-container">
+        <img src="./assets/img/noticia1.png" alt="Imagen1">
+        <img src="./assets/img/noticia2.png" alt="Imagen2">
+      </div>
     </section>
-    <footer></footer>
+
+    <!-- Pie de página -->
+    <footer>Pie de página</footer>
   </body>
 </html>
