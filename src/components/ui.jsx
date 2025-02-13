@@ -6,7 +6,7 @@ export function Header() {
     return (
       <header className="bg-black text-white py-4 px-6 flex justify-between items-center">
         <div className="flex items-center">
-          <Image src="/assets/img/logo-principal.jpeg" alt="Logo Principal" width={80} height={80} />
+          <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={80} height={80} />
         </div>
         <nav>
           <ul className="flex gap-4">
