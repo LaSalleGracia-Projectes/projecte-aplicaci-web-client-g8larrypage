@@ -1,42 +1,24 @@
 {
-  "name": "boilerplate-js",
-  "version": "1.0.0",
-  "description": "Este repositorio es tu punto de partida ideal para proyectos basados en JavaScript puro (Vanilla JS). Está equipado con herramientas modernas para optimizar y mejorar tu experiencia de desarrollo.",
-  "type": "module",
+  "name": "demo-nextjs",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "prepare": "husky",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "format": "prettier --write src"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodeLudus/Boilerplate-JS.git"
-  },
-  "keywords": [
-    "JS"
-  ],
-  "author": "CodeLudus",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/CodeLudus/Boilerplate-JS/issues"
-  },
-  "homepage": "https://github.com/CodeLudus/Boilerplate-JS#readme",
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "@material-tailwind/react": "^2.1.10",
+    "next": "15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.29.1",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
-    "vite": "^5.3.3"
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.6",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
   }
 }
