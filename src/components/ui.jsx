@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { NavList } from '@/components/navbar';
 import { CopyRight } from './copyrightfooter';
@@ -17,7 +18,11 @@ export function Header() {
           <button><Image src="/assets/img/clan.png" alt="Clan" width={40} height={40} className="hover:bg-purple-200" /></button>
           <button><Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40} className="hover:bg-purple-400" /></button>
           <button><Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40} className="hover:bg-purple-400" /></button>
-          <button><Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40} className="hover:bg-purple-400" /></button>
+          <button>
+            <Link href="/register">
+              <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40} className="hover:bg-purple-400" />
+            </Link>
+          </button>
       </div>
     </header>
   );
