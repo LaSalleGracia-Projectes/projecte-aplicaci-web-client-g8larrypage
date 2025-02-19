@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Header, Footer } from "../components/ui";
+import { Header, Footer } from "@/components/ui";
 import { ButtonColors } from "@/components/downloadbutton";
 import { GalleryWithCarousel } from "@/components/carrusel";
 
@@ -8,10 +8,16 @@ export default function Home() {
     <div>
 
       <Header/>
-      
       {/* Main Image */}
       <section className="w-full h-[90vh] relative">
-        <Image src="/assets/img/preview.png" alt="Imagen Principal" layout="fill" objectFit="cover" />
+        <Image 
+          src="/assets/img/preview.png" 
+          alt="Imagen Principal" 
+          layout="fill" 
+          objectFit="cover" 
+          quality={100} 
+          priority 
+        />
       </section>
       
       {/* Download Section */}
