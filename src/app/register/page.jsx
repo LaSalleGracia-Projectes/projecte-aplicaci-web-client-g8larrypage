@@ -7,7 +7,6 @@ import {
     Input,
     Button,
     CardBody,
-    CardHeader,
     Typography,
     Checkbox
 } from "@/components/material-components";
@@ -26,6 +25,11 @@ export default function Register() {
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
+            options: {
+                data: {
+                    display_name: fullName
+                }
+            }
         });
 
         if (error) {
@@ -40,6 +44,21 @@ export default function Register() {
         setEmail("");
         setName("");
         setPassword("");
+    };
+
+    const handleGoogleSignUp = async () => {
+        const { user, error } = await supabase.auth.signInWithOAuth({
+            provider: "google"
+        });
+
+        if (error) {
+            setMessage(error.message);
+            return;
+        }
+
+        if (user) {
+            setMessage("Registro exitoso! Revisa tu correo electrónico para confirmar tu cuenta.");
+        }
     };
 
     return (
@@ -60,7 +79,7 @@ export default function Register() {
                             required
                         />
                         <Input
-                            onChange={(e) => Name(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                             value={fullName}
                             type="text"
                             label="Name"
@@ -83,8 +102,9 @@ export default function Register() {
                     <Button
                         variant="outlined"
                         size="lg"
-                        className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
+                        className="flex h-12 border-blue-gray-200 items-center justify-center gap-2 mb-2"
                         fullWidth
+                        onClick={handleGoogleSignUp}
                     >
                         <img
                             src={`https://www.material-tailwind.com/logos/logo-google.png`}
@@ -131,7 +151,7 @@ export default function Register() {
                     <Typography className="mt-3 text-center text-sm">
                         Already have an account? {" "}
                         <Link href="/login" className="text-blue-500">
-                            Login here
+                            Log In
                         </Link>
                     </Typography>
                 </CardBody>
