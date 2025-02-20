@@ -8,6 +8,7 @@ import {
     CardBody,
     CardHeader,
     Typography,
+    Checkbox
 } from '@material-tailwind/react';
 
 export {
@@ -18,4 +19,5 @@ export {
     CardBody,
     CardHeader,
     Typography,
+    Checkbox
 };
