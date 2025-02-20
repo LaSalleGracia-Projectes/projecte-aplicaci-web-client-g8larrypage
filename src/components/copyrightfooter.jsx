@@ -43,7 +43,7 @@ export function CopyRight() {
         className="p-1 font-[Electrolize]"
       >
         <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
-            Adminstrar cookies
+            Administrar cookies
         </a>
       </Typography>
     </ul>

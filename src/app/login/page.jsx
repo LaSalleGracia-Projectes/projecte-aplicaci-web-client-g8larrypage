@@ -14,7 +14,6 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { CpuChipIcon } from "@heroicons/react/24/solid";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -39,63 +38,59 @@ export default function Login() {
         }
 
         if (data) {
+            console.log(data);
             setMessage("¡Log In exitoso!");
             // Redirigir al usuario a la página principal
             router.push('/');
         }
     };
 
+    const handleGoogleLogin = async () => {
+        const { user, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+        });
+
+        if (error) {
+            setMessage(error.message);
+            return;
+        }
+
+        if (user) {
+            setMessage("¡Log In exitoso!");
+            // Redirigir al usuario a la página principal
+            router.push('/');
+        }
+    }
+
     return (
-        <div className="flex justify-center items-center h-200">
+        <div className="flex justify-center items-center h-screen">
             <Card shadow={false} className="md:px-10 md:py-8 py-6 border border-gray-300">
                 <CardHeader shadow={false} floated={false} className="text-center">
                     <div className="flex items-center justify-center">
-                            <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={300} height={200} />
+                        <Link href="/">
+                            <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={240} height={200} />
+                        </Link>
                     </div>
                 </CardHeader>
                 <CardBody>
                     {message && <Typography color="red">{message}</Typography>}
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:mt-12">
-                        <div>
-                            <label htmlFor="email">
-                                <Typography variant="small" color="blue-gray" className="block font-medium mb-2">
-                                    Your Email
-                                </Typography>
-                            </label>
-                            <Input
-                                id="email"
-                                color="gray"
-                                size="lg"
-                                type="email"
-                                name="email"
-                                placeholder="name@mail.com"
-                                className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
-                                labelProps={{ className: "hidden" }}
-                                onChange={(e) => setEmail(e.target.value)}
-                                value={email}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password">
-                                <Typography variant="small" color="blue-gray" className="block font-medium mb-2">
-                                    Password
-                                </Typography>
-                            </label>
-                            <Input
-                                id="password"
-                                color="gray"
-                                size="lg"
-                                type="password"
-                                name="password"
-                                placeholder="********"
-                                className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
-                                labelProps={{ className: "hidden" }}
-                                onChange={(e) => setPassword(e.target.value)}
-                                value={password}
-                                required
-                            />
-                        </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:mt-6">
+                        <Input
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            type="email"
+                            label="Your email"
+                            size="sm"
+                            required
+                        />
+                        <Input
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            type="password"
+                            label="Password"
+                            size="sm"
+                            required
+                        />
                         <Button type="submit" size="lg" color="gray" fullWidth>
                             Log In
                         </Button>
@@ -104,6 +99,7 @@ export default function Login() {
                             size="lg"
                             className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
                             fullWidth
+                            onClick={handleGoogleLogin}
                         >
                             <img
                                 src={`https://www.material-tailwind.com/logos/logo-google.png`}
@@ -136,10 +132,10 @@ export default function Login() {
                             </a>
                         </Typography>
                     </form>
-                    <Typography className="mt-4 text-center">
-                        No tienes una cuenta?{" "}
+                    <Typography className="mt-4 text-center text-md">
+                        Don't have an account yet?{" "}
                         <Link href="/register" className="text-blue-500">
-                            Registrarse
+                            Sign Up
                         </Link>
                     </Typography>
                 </CardBody>
