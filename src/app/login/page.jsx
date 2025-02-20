@@ -1,36 +1,42 @@
+'use client';
+
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
 
-export default function Register() {
+export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage("");
 
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
         });
 
         if (error) {
             setMessage(error.message);
+            setEmail("");
+            setPassword("");
             return;
         }
 
         if (data) {
-            setMessage("¡Registro exitoso! Por favor, revisa tu bandeja de entrada para verificar tu correo electrónico.");
+            setMessage("¡Log In exitoso!");
+            // Redirigir al usuario a la página principal
+            router.push('/');
         }
-
-        setEmail("");
-        setPassword("");
     };
 
     return (
         <div>
-            <h2>Register</h2>
+            <h2>Login</h2>
             <br></br>
             {message && <span>{message}</span>}
 
@@ -38,23 +44,30 @@ export default function Register() {
                 <input
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
-                    type="email" 
+                    type="email"
                     placeholder="Email"
                     required
                 />
+                <br></br>
                 <br></br>
 
                 <input
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    type="password" 
+                    type="password"
                     placeholder="Password"
                     required
                 />
                 <br></br>
+                <br></br>
 
-                <button type="submit">Registrarse</button>
+                <button type="submit">Log In</button>
             </form>
+            <br></br>
+            <span>No tienes una cuenta? </span>
+            <Link href="/register">
+                Registrarse
+            </Link>
         </div>
     );
 }

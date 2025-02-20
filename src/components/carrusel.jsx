@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel } from "@material-tailwind/react";
+import { Carousel } from "@/components/material-components";
  
 export function GalleryWithCarousel() {
   return (

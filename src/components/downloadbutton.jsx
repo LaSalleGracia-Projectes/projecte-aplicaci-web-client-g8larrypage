@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Button } from "@material-tailwind/react";
+import { Button } from "@/components/material-components";
  
 export function ButtonColors() {
   return (
