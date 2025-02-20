@@ -1,9 +1,7 @@
 'use client';
 
 import React from "react";
-import {
-  Typography,
-} from "@material-tailwind/react";
+import { Typography } from "@/components/material-components";
 
 export function CopyRight() {
   return (
