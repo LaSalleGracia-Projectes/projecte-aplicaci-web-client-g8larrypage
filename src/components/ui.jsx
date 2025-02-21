@@ -9,12 +9,13 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center">
-        <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={100} height={100} />
+        <Link href="/">
+          <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={100} height={100} />
+        </Link>
         <NavList />
       </div>
 
       <div className="flex gap-4">
-        
           <button><Image src="/assets/img/clan.png" alt="Clan" width={40} height={40} className="hover:bg-purple-200" /></button>
           <button><Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40} className="hover:bg-purple-400" /></button>
           <button><Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40} className="hover:bg-purple-400" /></button>

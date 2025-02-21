@@ -97,7 +97,7 @@ export default function Register() {
                             onChange={(e) => setName(e.target.value)}
                             value={fullName}
                             type="text"
-                            label="Name"
+                            label="Full name"
                             size="sm"
                             required
                         />
