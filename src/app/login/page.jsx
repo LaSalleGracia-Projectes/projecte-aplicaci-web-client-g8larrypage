@@ -42,7 +42,7 @@ export default function Login() {
             // Redirigir al usuario a la página principal
             router.push('/');
         }
-    };
+    }
 
     const handleGoogleLogin = async () => {
         const { user, error } = await supabase.auth.signInWithOAuth({
@@ -122,7 +122,7 @@ export default function Login() {
                                 alt="google"
                                 className="h-6 w-6"
                             />{" "}
-                            Sign in with Google
+                            Log in with Google
                         </Button>
                         <Button
                             variant="outlined"
@@ -136,15 +136,15 @@ export default function Login() {
                                 alt="facebook"
                                 className="h-8 w-8"
                             />{" "}
-                            Sign in with Facebook
+                            Log in with Facebook
                         </Button>
                         <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600">
                             Upon signing in, you consent to abide by our{" "}
-                            <a href="#" className="text-gray-900">
+                            <a href="#" className="text-blue-500 hover:text-blue-700">
                                 Terms of Service
                             </a>{" "}
                             &{" "}
-                            <a href="#" className="text-gray-900">
+                            <a href="#" className="text-blue-500 hover:text-blue-700">
                                 Privacy Policy.
                             </a>
                         </Typography>

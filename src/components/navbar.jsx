@@ -13,7 +13,7 @@ export function NavList() {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-start hover:text-purple-500 transition-colors">
+        <a href="/about-us" className="flex items-start hover:text-purple-500 transition-colors">
           Sobre nosotros
         </a>
       </Typography>
