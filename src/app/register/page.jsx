@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import supabase from "@/helpers/supabaseClient";
 import {
     Card,
     Input,
@@ -10,7 +11,6 @@ import {
     Typography,
     Checkbox
 } from "@/components/material-components";
-import supabase from "@/helpers/supabaseClient";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = async (event) => {
+    const handleEmailSignUp = async (event) => {
         event.preventDefault();
         setMessage("");
 
@@ -61,6 +61,21 @@ export default function Register() {
         }
     };
 
+    const handleFacebookSignUp = async () => {
+        const { user, error } = await supabase.auth.signInWithOAuth({
+            provider: "facebook"
+        });
+
+        if (error) {
+            setMessage(error.message);
+            return;
+        }
+
+        if (user) {
+            setMessage("Registro exitoso! Revisa tu correo electrónico para confirmar tu cuenta.");
+        }
+    }
+
     return (
         <div className="flex justify-center items-center h-screen">
             <Card className="w-full max-w-sm p-4">
@@ -69,7 +84,7 @@ export default function Register() {
                 </Typography>
                 <CardBody>
                     {message && <Typography color="red">{message}</Typography>}
-                    <form onSubmit={handleSubmit} className="space-y-3">
+                    <form onSubmit={handleEmailSignUp} className="space-y-3">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
@@ -118,6 +133,7 @@ export default function Register() {
                         size="lg"
                         className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
                         fullWidth
+                        onClick={handleFacebookSignUp}
                     >
                         <img
                             src={`https://www.material-tailwind.com/logos/logo-facebook.png`}
