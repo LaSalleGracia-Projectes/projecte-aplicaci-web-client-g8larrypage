@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
 import Image from "next/image";
-
 import {
   Card,
   Input,
@@ -21,7 +20,7 @@ export default function Login() {
     const [message, setMessage] = useState("");
     const router = useRouter();
 
-    const handleSubmit = async (event) => {
+    const handleEmailLogin = async (event) => {
         event.preventDefault();
         setMessage("");
 
@@ -62,6 +61,23 @@ export default function Login() {
         }
     }
 
+    const handleFacebookLogin = async () => {
+        const { user, error } = await supabase.auth.signInWithOAuth({
+            provider: "facebook",
+        });
+
+        if (error) {
+            setMessage(error.message);
+            return;
+        }
+
+        if (user) {
+            setMessage("¡Log In exitoso!");
+            // Redirigir al usuario a la página principal
+            router.push('/');
+        }
+    }
+
     return (
         <div className="flex justify-center items-center h-screen">
             <Card shadow={false} className="md:px-10 md:py-8 py-6 border border-gray-300">
@@ -74,7 +90,7 @@ export default function Login() {
                 </CardHeader>
                 <CardBody>
                     {message && <Typography color="red">{message}</Typography>}
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:mt-6">
+                    <form onSubmit={handleEmailLogin} className="flex flex-col gap-4 md:mt-6">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
@@ -113,6 +129,7 @@ export default function Login() {
                             size="lg"
                             className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
                             fullWidth
+                            onClick={handleFacebookLogin}
                         >
                             <img
                                 src={`https://www.material-tailwind.com/logos/logo-facebook.png`}
