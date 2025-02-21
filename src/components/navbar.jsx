@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Typography } from "@/components/material-components";
+import { Language } from "./language";
 
 export function NavList() {
   return (
@@ -32,8 +33,8 @@ export function NavList() {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
-          Idioma
+        <a className="flex items-center hover:text-purple-500 transition-colors">
+        <Language />
         </a>
       </Typography>
     </ul>
