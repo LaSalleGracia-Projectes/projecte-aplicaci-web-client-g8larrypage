@@ -8,16 +8,16 @@ const languages = [
   { code: "ca", label: "Català (CA)", flag: "/assets/img/flags/cataluna.png" },
 ];
 
-export function Language() {
+export function Language({ language, changeLanguage }) {
   const [open, setOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState(languages[1]);
+  const selectedLang = languages.find(lang => lang.code === language) || languages[0];
 
   const toggleDropdown = () => {
     setOpen(!open);
   };
 
   const selectLanguage = (lang) => {
-    setSelectedLang(lang);
+    changeLanguage(lang.code);
     setOpen(false);
   };
 

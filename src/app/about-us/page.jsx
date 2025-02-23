@@ -1,11 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import { Header, Footer } from "@/components/ui";
+import { translations } from '@/lang/translations';
 
-export default function AboutUs() {
+export default function AboutUs({ language }) {
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+
+  const changeLanguage = (newLanguage) => {
+    setCurrentLanguage(newLanguage);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header language={currentLanguage} changeLanguage={changeLanguage} />
       <div className="flex-grow overflow-y-auto p-4 mt-40">
         <div className="text-center">
           <h2 className="text-4xl font-bold mb-4">⚔️ Ciudad de las leyendas ⚔️</h2>
@@ -57,7 +65,7 @@ export default function AboutUs() {
           <p>"Ciudad de los Héroes" convierte los hábitos saludables en un juego social donde cada paso cuenta para construir y fortalecer una ciudad virtual. Los jugadores compiten en equipo cada semana, fortaleciendo sus ciudades con edificios, lucky boxes, y estrategias para ganar recompensas. Además, pueden disfrutar del avance en un mapa de aventuras y personalizar su ciudad mientras desarrollan hábitos saludables para todo el mundo.</p>
         </div>
       </div>
-      <Footer />
+      <Footer language={currentLanguage} />
     </div>
   );
 }
