@@ -1,9 +1,12 @@
 'use client';
 
 import React from "react";
-import { Typography } from "@/components/material-components";
+import { Typography } from "@/components/material-components"; 
+import { translations } from '@/lang/translations';
 
-export function CopyRight() {
+export function CopyRight({ language }) {
+  const translation = translations[language] || translations['en'];
+
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:ml-14 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
@@ -13,7 +16,7 @@ export function CopyRight() {
         className="p-1 font-[Electrolize]"
       >
         <a href="#" className="flex items-start hover:text-purple-500 transition-colors">
-          Condiciones de servicio
+          {translation.conditions_service}
         </a>
       </Typography>
       <Typography
@@ -23,7 +26,7 @@ export function CopyRight() {
         className="p-1 font-[Electrolize]"
       >
         <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
-          Politica de privacidad
+          {translation.privacy_policy}
         </a>
       </Typography>
       <Typography
@@ -33,7 +36,7 @@ export function CopyRight() {
         className="p-1 font-[Electrolize]"
       >
         <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
-            Politica de juego limpio y seguro
+          {translation.game_policy}
         </a>
       </Typography>
       <Typography
@@ -43,7 +46,7 @@ export function CopyRight() {
         className="p-1 font-[Electrolize]"
       >
         <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
-            Administrar cookies
+          {translation.cookies_admin}
         </a>
       </Typography>
     </ul>
