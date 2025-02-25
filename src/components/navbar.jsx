@@ -1,4 +1,3 @@
-// filepath: /src/components/navbar.jsx
 'use client';
 
 import React from "react";
@@ -7,7 +6,7 @@ import { Language } from "./language";
 import { translations } from '@/lang/translations';
 
 export function NavList({ language, changeLanguage }) {
-  const translation = translations[language] || translations['en']; // Fallback to 'en' if language is not valid
+  const translation = translations[language] || translations['en'];
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:ml-14 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
