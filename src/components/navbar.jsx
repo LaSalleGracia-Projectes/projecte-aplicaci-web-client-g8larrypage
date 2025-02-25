@@ -27,7 +27,7 @@ export function NavList({ language, changeLanguage }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
+        <a href="/help" className="flex items-center hover:text-purple-500 transition-colors">
           {translation.help}
         </a>
       </Typography>
