@@ -9,7 +9,7 @@ export const translations = {
       privacy_policy: "Privacy Policy",
       game_policy: "Fair and Safe Game Policy",
       cookies_admin: "Cookies Policy",
-      copyright_text: "All rights reserved",
+      copyright_text: "Ciudad de las Leyendas. All rights reserved. ",
     },
     es: {
       about_us: "Sobre nosotros",
@@ -21,7 +21,7 @@ export const translations = {
       privacy_policy: "Política de Privacidad",
       game_policy: "Política del Juego limpio y seguro",
       cookies_admin: "Política de Cookies",
-      copyright_text: "Todos los derechos reservados",
+      copyright_text: "Ciudad de las Leyendas. Todos los derechos reservados",
     },
     ca: {
       about_us: "Sobre nosaltres",
@@ -33,7 +33,7 @@ export const translations = {
       privacy_policy: "Política de Privacitat",
       game_policy: "Política del Joc net i segur",
       cookies_admin: "Política de Cookies",
-      copyright_text: "Tots els drets reservats",
+      copyright_text: "Ciudad de las Leyendas. Tots els drets reservats",
     },
 };
 
