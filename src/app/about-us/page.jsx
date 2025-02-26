@@ -6,7 +6,7 @@ import { translationsAboutUs } from '@/lang/translations';
 
 export default function AboutUs({ language }) {
   const [currentLanguage, setCurrentLanguage] = useState(language);
-  const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['en'];
+  const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
   const changeLanguage = (newLanguage) => {
     setCurrentLanguage(newLanguage);

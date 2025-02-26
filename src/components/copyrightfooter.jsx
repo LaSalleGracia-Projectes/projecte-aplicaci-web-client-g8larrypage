@@ -15,7 +15,7 @@ export function CopyRight({ language }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-start hover:text-purple-500 transition-colors">
+        <a href="/terms-service" className="flex items-start hover:text-purple-500 transition-colors">
           {translation.conditions_service}
         </a>
       </Typography>
@@ -25,7 +25,7 @@ export function CopyRight({ language }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
+        <a href="/privacy-policy" className="flex items-center hover:text-purple-500 transition-colors">
           {translation.privacy_policy}
         </a>
       </Typography>
@@ -35,7 +35,7 @@ export function CopyRight({ language }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
+        <a href="/game-policy" className="flex items-center hover:text-purple-500 transition-colors">
           {translation.game_policy}
         </a>
       </Typography>
@@ -45,7 +45,7 @@ export function CopyRight({ language }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
-        <a href="#" className="flex items-center hover:text-purple-500 transition-colors">
+        <a href="/cookies-policy" className="flex items-center hover:text-purple-500 transition-colors">
           {translation.cookies_admin}
         </a>
       </Typography>
