@@ -8,11 +8,11 @@ import Link from "next/link";
 export default function HelpPage() {
   const helpOptions = [
     { icon: <FaKey className="text-red-500 text-2xl" />, title: "Contraseña", description: "Descripción sobre la contraseña", link: "/help/help-contrasena" },
-    { icon: <FaEnvelope className="text-red-500 text-2xl" />, title: "Correo Electrónico", description: "Descripción sobre el correo electrónico" },
-    { icon: <FaShieldAlt className="text-red-500 text-2xl" />, title: "Seguridad", description: "Descripción sobre la seguridad" },
-    { icon: <FaShoppingCart className="text-red-500 text-2xl" />, title: "Pedidos", description: "Descripción sobre los pedidos" },
-    { icon: <FaFolderOpen className="text-red-500 text-2xl" />, title: "Problemas", description: "Descripción sobre problemas" },
-    { icon: <FaHandPaper className="text-red-500 text-2xl" />, title: "Historial de Bloqueos", description: "Descripción sobre el historial de bloqueos" },
+    { icon: <FaEnvelope className="text-red-500 text-2xl" />, title: "Correo Electrónico", description: "Descripción sobre el correo electrónico", link: "/help/help-email" },
+    { icon: <FaShieldAlt className="text-red-500 text-2xl" />, title: "Seguridad", description: "Descripción sobre la seguridad", link: "/help/help-seguridad" },
+    { icon: <FaShoppingCart className="text-red-500 text-2xl" />, title: "Pedidos", description: "Descripción sobre los pedidos", link: "/help/help-pedidos" },
+    { icon: <FaFolderOpen className="text-red-500 text-2xl" />, title: "Problemas", description: "Descripción sobre problemas", link: "/help/help-problemas" },
+    { icon: <FaHandPaper className="text-red-500 text-2xl" />, title: "Historial de Bloqueos", description: "Descripción sobre el historial de bloqueos", link: "/help/help-bloqueos" },
   ];
 
   return (
