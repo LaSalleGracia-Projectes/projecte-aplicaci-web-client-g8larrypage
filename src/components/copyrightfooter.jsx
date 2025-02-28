@@ -5,7 +5,7 @@ import { Typography } from "@/components/material-components";
 import { translations } from '@/lang/translations';
 
 export function CopyRight({ language }) {
-  const translation = translations[language] || translations['en'];
+  const translation = translations[language] || translations['es'];
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:ml-14 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">

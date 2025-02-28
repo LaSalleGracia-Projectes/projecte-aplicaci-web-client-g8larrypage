@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
 
-export default function AboutUs({ language }) {
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+export default function AboutUs() {
+  const [currentLanguage, setCurrentLanguage] = useState('es');
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
   const changeLanguage = (newLanguage) => {
@@ -17,7 +17,7 @@ export default function AboutUs({ language }) {
       <Header language={currentLanguage} changeLanguage={changeLanguage} />
       <div className="flex-grow overflow-y-auto p-4 mt-40">
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-4">{translation.title}</h2>
+          <h2 className="text-4xl font-bold mt-8 mb-4">{translation.title}</h2>
           <p className="text-lg mb-16 max-w-2xl mx-auto">{translation.description}</p>
         </div>
         <h2 className="text-2xl font-semibold text-center mb-4">{translation.key_elements}</h2>
