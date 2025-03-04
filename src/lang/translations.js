@@ -738,3 +738,525 @@ export const translationsCookiesPolicy = {
     contact_email: "ciudaddelasleyendas4@gmail.com"
   }
 };
+
+export const translationsHelp = {
+  en: {
+    manage_account: "Manage Account",
+    password: "Password",
+    password_description: "Description about the password",
+    email: "Email",
+    email_description: "Description about the email",
+    security: "Security",
+    security_description: "Description about security",
+    orders: "Orders",
+    orders_description: "Description about orders",
+    issues: "Issues",
+    issues_description: "Description about issues",
+    block_history: "Block History",
+    block_history_description: "Description about block history",
+  },
+  es: {
+    manage_account: "Gestionar Cuenta",
+    password: "Contraseña",
+    password_description: "Descripción sobre la contraseña",
+    email: "Correo Electrónico",
+    email_description: "Descripción sobre el correo electrónico",
+    security: "Seguridad",
+    security_description: "Descripción sobre la seguridad",
+    orders: "Pedidos",
+    orders_description: "Descripción sobre los pedidos",
+    issues: "Problemas",
+    issues_description: "Descripción sobre problemas",
+    block_history: "Historial de Bloqueos",
+    block_history_description: "Descripción sobre el historial de bloqueos",
+  },
+  ca: {
+    manage_account: "Gestionar Compte",
+    password: "Contrasenya",
+    password_description: "Descripció sobre la contrasenya",
+    email: "Correu Electrònic",
+    email_description: "Descripció sobre el correu electrònic",
+    security: "Seguretat",
+    security_description: "Descripció sobre la seguretat",
+    orders: "Comandes",
+    orders_description: "Descripció sobre les comandes",
+    issues: "Problemes",
+    issues_description: "Descripció sobre problemes",
+    block_history: "Historial de Bloquejos",
+    block_history_description: "Descripció sobre l'historial de bloquejos",
+  },
+};
+
+export const translationsHelpEmail = {
+  en: {
+    title: "Email Issues",
+    description: "Here you will find solutions to common email problems.",
+    quick_solutions: "Quick Solutions",
+    quick_solutions_list: [
+      "Verify that you entered the email correctly",
+      "Check the spam or junk mail folder",
+      "Make sure your mailbox is not full"
+    ],
+    faq: "Questions and Answers",
+    faq_list: [
+      {
+        question: "I didn't receive the verification email?",
+        answer: "Make sure to check the spam folder or try resending the email from your account settings."
+      },
+      {
+        question: "What do I do if I forgot my associated email?",
+        answer: "Try to remember possible emails you used or contact technical support for assistance."
+      },
+      {
+        question: "Why can't I change my email on the account?",
+        answer: "Some accounts have restrictions on changing the email. Check the settings or contact support."
+      }
+    ]
+  },
+  es: {
+    title: "Problemas con el Correo Electrónico",
+    description: "Aquí encontrarás soluciones a problemas comunes con tu correo electrónico.",
+    quick_solutions: "Soluciones rápidas",
+    quick_solutions_list: [
+      "Verifica que ingresaste el correo correctamente",
+      "Revisa la bandeja de spam o correo no deseado",
+      "Asegúrate de que tu buzón no esté lleno"
+    ],
+    faq: "Preguntas y Respuestas",
+    faq_list: [
+      {
+        question: "¿No recibí el correo de verificación?",
+        answer: "Asegúrate de revisar la carpeta de spam o intenta reenviar el correo desde la configuración de tu cuenta."
+      },
+      {
+        question: "¿Qué hago si olvidé mi correo asociado?",
+        answer: "Intenta recordar posibles correos que usaste o comunícate con el soporte técnico para asistencia."
+      },
+      {
+        question: "¿Por qué no puedo cambiar mi correo en la cuenta?",
+        answer: "Algunas cuentas tienen restricciones para cambiar el correo. Consulta la configuración o contacta al soporte."
+      }
+    ]
+  },
+  ca: {
+    title: "Problemes amb el Correu Electrònic",
+    description: "Aquí trobaràs solucions a problemes comuns amb el teu correu electrònic.",
+    quick_solutions: "Solucions ràpides",
+    quick_solutions_list: [
+      "Verifica que has introduït el correu correctament",
+      "Revisa la carpeta de correu brossa o correu no desitjat",
+      "Assegura't que la teva bústia no estigui plena"
+    ],
+    faq: "Preguntes i Respostes",
+    faq_list: [
+      {
+        question: "No he rebut el correu de verificació?",
+        answer: "Assegura't de revisar la carpeta de correu brossa o intenta reenviar el correu des de la configuració del teu compte."
+      },
+      {
+        question: "Què faig si he oblidat el correu associat?",
+        answer: "Intenta recordar possibles correus que has utilitzat o contacta amb el suport tècnic per obtenir ajuda."
+      },
+      {
+        question: "Per què no puc canviar el meu correu al compte?",
+        answer: "Alguns comptes tenen restriccions per canviar el correu. Consulta la configuració o contacta amb el suport."
+      }
+    ]
+  }
+};
+
+export const translationsHelpOrders = {
+  en: {
+    title: "Help with Skin and Pass Purchases",
+    description: "Here you will find answers to frequently asked questions about purchasing skins, battle passes, and other digital items.",
+    faq_title: "Frequently Asked Questions",
+    faq_list: [
+      "How can I verify my skin or pass purchase?",
+      "How long does it take for my purchase to be credited?",
+      "What should I do if I didn't receive my skin or pass after paying?"
+    ],
+    qa_title: "Questions and Answers",
+    qa_list: [
+      {
+        question: "Question 1: How can I verify my skin or pass purchase?",
+        answer: "You can check your purchase history in your account settings within the game or in the online store."
+      },
+      {
+        question: "Question 2: How long does it take for my purchase to be credited?",
+        answer: "Normally, purchases are credited within a few minutes, but in some cases, it may take up to 24 hours. Check your confirmation email."
+      },
+      {
+        question: "Question 3: What should I do if I didn't receive my skin or pass after paying?",
+        answer: "First, verify that the payment was successful. Then, check your in-game inventory. If the issue persists, contact game support with the payment receipt."
+      }
+    ]
+  },
+  es: {
+    title: "Ayuda con Compras de Skins y Pases",
+    description: "Aquí encontrarás respuestas a preguntas frecuentes sobre la compra de skins, pases de batalla y otros artículos digitales.",
+    faq_title: "Preguntas Frecuentes",
+    faq_list: [
+      "¿Cómo puedo verificar mi compra de skins o pases?",
+      "¿Cuánto tiempo tarda en acreditarse mi compra?",
+      "¿Qué hago si no recibí mi skin o pase después de pagar?"
+    ],
+    qa_title: "Preguntas y Respuestas",
+    qa_list: [
+      {
+        question: "Pregunta 1: ¿Cómo puedo verificar mi compra de skins o pases?",
+        answer: "Puedes revisar el historial de compras en la configuración de tu cuenta dentro del juego o en la tienda en línea."
+      },
+      {
+        question: "Pregunta 2: ¿Cuánto tiempo tarda en acreditarse mi compra?",
+        answer: "Normalmente, las compras se acreditan en unos minutos, pero en algunos casos puede tardar hasta 24 horas. Revisa tu correo de confirmación."
+      },
+      {
+        question: "Pregunta 3: ¿Qué hago si no recibí mi skin o pase después de pagar?",
+        answer: "Primero, verifica que el pago haya sido exitoso. Luego, revisa tu inventario dentro del juego. Si el problema persiste, contacta al soporte del juego con el comprobante de pago."
+      }
+    ]
+  },
+  ca: {
+    title: "Ajuda amb les Compres de Skins i Passis",
+    description: "Aquí trobaràs respostes a preguntes freqüents sobre la compra de skins, passis de batalla i altres articles digitals.",
+    faq_title: "Preguntes Freqüents",
+    faq_list: [
+      "Com puc verificar la meva compra de skins o passis?",
+      "Quant de temps triga a acreditar-se la meva compra?",
+      "Què faig si no he rebut el meu skin o passi després de pagar?"
+    ],
+    qa_title: "Preguntes i Respostes",
+    qa_list: [
+      {
+        question: "Pregunta 1: Com puc verificar la meva compra de skins o passis?",
+        answer: "Pots revisar l'historial de compres a la configuració del teu compte dins del joc o a la botiga en línia."
+      },
+      {
+        question: "Pregunta 2: Quant de temps triga a acreditar-se la meva compra?",
+        answer: "Normalment, les compres s'acrediten en uns minuts, però en alguns casos pot trigar fins a 24 hores. Revisa el teu correu de confirmació."
+      },
+      {
+        question: "Pregunta 3: Què faig si no he rebut el meu skin o passi després de pagar?",
+        answer: "Primer, verifica que el pagament hagi estat exitós. Després, revisa el teu inventari dins del joc. Si el problema persisteix, contacta amb el suport del joc amb el comprovant de pagament."
+      }
+    ]
+  }
+};
+
+export const translationsHelpSecurity = {
+  en: {
+    title: "Security Description",
+    description: "Online security is essential to protect your personal information and prevent unauthorized access.",
+    recommended_measures: "Recommended Security Measures",
+    measures_list: [
+      "Use strong and unique passwords for each account",
+      "Enable two-factor authentication (2FA) whenever possible",
+      "Do not share confidential information in emails or messages",
+      "Always verify the authenticity of websites before entering credentials"
+    ],
+    faq_title: "Questions and Answers",
+    faq_list: [
+      {
+        question: "Question 1: How do I protect my account from unauthorized access?",
+        answer: "Use strong passwords, enable two-factor authentication, and keep your devices updated."
+      },
+      {
+        question: "Question 2: Is it safe to use public Wi-Fi networks?",
+        answer: "It is not recommended. If you need to use them, employ a VPN to encrypt your connection."
+      },
+      {
+        question: "Question 3: What should I do if I suspect my account has been compromised?",
+        answer: "Change your password immediately, review recent activity, and contact technical support."
+      }
+    ]
+  },
+  es: {
+    title: "Descripción de la Seguridad",
+    description: "La seguridad en línea es fundamental para proteger tu información personal y evitar accesos no autorizados.",
+    recommended_measures: "Medidas de Seguridad Recomendadas",
+    measures_list: [
+      "Usa contraseñas seguras y únicas para cada cuenta",
+      "Habilita la autenticación en dos pasos (2FA) cuando sea posible",
+      "No compartas información confidencial en correos electrónicos o mensajes",
+      "Verifica siempre la autenticidad de los sitios web antes de ingresar credenciales"
+    ],
+    faq_title: "Preguntas y Respuestas",
+    faq_list: [
+      {
+        question: "Pregunta 1: ¿Cómo protejo mi cuenta de accesos no autorizados?",
+        answer: "Usa contraseñas fuertes, habilita la autenticación en dos pasos y mantén actualizados tus dispositivos."
+      },
+      {
+        question: "Pregunta 2: ¿Es seguro utilizar redes Wi-Fi públicas?",
+        answer: "No es recomendable. Si necesitas usarlas, emplea una VPN para cifrar tu conexión."
+      },
+      {
+        question: "Pregunta 3: ¿Qué hacer si sospecho que mi cuenta ha sido comprometida?",
+        answer: "Cambia tu contraseña de inmediato, revisa la actividad reciente y contacta al soporte técnico."
+      }
+    ]
+  },
+  ca: {
+    title: "Descripció de la Seguretat",
+    description: "La seguretat en línia és fonamental per protegir la teva informació personal i evitar accessos no autoritzats.",
+    recommended_measures: "Mesures de Seguretat Recomanades",
+    measures_list: [
+      "Utilitza contrasenyes segures i úniques per a cada compte",
+      "Habilita l'autenticació en dos passos (2FA) sempre que sigui possible",
+      "No comparteixis informació confidencial en correus electrònics o missatges",
+      "Verifica sempre l'autenticitat dels llocs web abans d'introduir credencials"
+    ],
+    faq_title: "Preguntes i Respostes",
+    faq_list: [
+      {
+        question: "Pregunta 1: Com protegeixo el meu compte d'accessos no autoritzats?",
+        answer: "Utilitza contrasenyes fortes, habilita l'autenticació en dos passos i mantén actualitzats els teus dispositius."
+      },
+      {
+        question: "Pregunta 2: És segur utilitzar xarxes Wi-Fi públiques?",
+        answer: "No és recomanable. Si necessites utilitzar-les, empra una VPN per xifrar la teva connexió."
+      },
+      {
+        question: "Pregunta 3: Què faig si sospito que el meu compte ha estat compromès?",
+        answer: "Canvia la teva contrasenya immediatament, revisa l'activitat recent i contacta amb el suport tècnic."
+      }
+    ]
+  }
+};
+
+export const translationsHelpProblems = {
+  en: {
+    title: "Description of Common Problems",
+    description: "Here you will find information about the most common problems and how to solve them effectively.",
+    common_problems: "Common Problems",
+    problems_list: [
+      "I can't access my account",
+      "I didn't receive my skin or pass purchase",
+      "The game crashes unexpectedly"
+    ],
+    faq_title: "Questions and Solutions",
+    faq_list: [
+      {
+        question: "Problem 1: I can't access my account",
+        answer: "Solution: Make sure your credentials are correct. If you forgot your password, use the account recovery option."
+      },
+      {
+        question: "Problem 2: I didn't receive my skin or pass purchase",
+        answer: "Solution: Verify that the payment was processed correctly and check your purchase history. If the problem persists, contact support."
+      },
+      {
+        question: "Problem 3: The game crashes unexpectedly",
+        answer: "Solution: Ensure your device meets the game's requirements and that you have the latest version installed. If the problem continues, try reinstalling the game."
+      }
+    ]
+  },
+  es: {
+    title: "Descripción de Problemas Comunes",
+    description: "Aquí encontrarás información sobre los problemas más comunes y cómo resolverlos de manera efectiva.",
+    common_problems: "Problemas Frecuentes",
+    problems_list: [
+      "No puedo acceder a mi cuenta",
+      "No recibí mi compra de skins o pases",
+      "El juego se cierra inesperadamente"
+    ],
+    faq_title: "Preguntas y Soluciones",
+    faq_list: [
+      {
+        question: "Problema 1: No puedo acceder a mi cuenta",
+        answer: "Solución: Asegúrate de que tus credenciales sean correctas. Si olvidaste tu contraseña, usa la opción de recuperación de cuenta."
+      },
+      {
+        question: "Problema 2: No recibí mi compra de skins o pases",
+        answer: "Solución: Verifica que el pago haya sido procesado correctamente y revisa tu historial de compras. Si el problema persiste, contacta al soporte."
+      },
+      {
+        question: "Problema 3: El juego se cierra inesperadamente",
+        answer: "Solución: Asegúrate de que tu dispositivo cumple con los requisitos del juego y que tienes la última versión instalada. Si el problema continúa, prueba reinstalar el juego."
+      }
+    ]
+  },
+  ca: {
+    title: "Descripció de Problemes Comuns",
+    description: "Aquí trobaràs informació sobre els problemes més comuns i com resoldre'ls de manera efectiva.",
+    common_problems: "Problemes Freqüents",
+    problems_list: [
+      "No puc accedir al meu compte",
+      "No he rebut la meva compra de skins o passis",
+      "El joc es tanca inesperadament"
+    ],
+    faq_title: "Preguntes i Solucions",
+    faq_list: [
+      {
+        question: "Problema 1: No puc accedir al meu compte",
+        answer: "Solució: Assegura't que les teves credencials siguin correctes. Si has oblidat la teva contrasenya, utilitza l'opció de recuperació de compte."
+      },
+      {
+        question: "Problema 2: No he rebut la meva compra de skins o passis",
+        answer: "Solució: Verifica que el pagament s'hagi processat correctament i revisa el teu historial de compres. Si el problema persisteix, contacta amb el suport."
+      },
+      {
+        question: "Problema 3: El joc es tanca inesperadament",
+        answer: "Solució: Assegura't que el teu dispositiu compleix amb els requisits del joc i que tens l'última versió instal·lada. Si el problema continua, prova de reinstal·lar el joc."
+      }
+    ]
+  }
+};
+
+export const translationsHelpBans = {
+  en: {
+    title: "Help with Bans and Blocks",
+    description: "Here you will find information about bans and blocks in the game, their possible causes, and how to resolve them.",
+    common_reasons: "Common Reasons for Bans",
+    reasons_list: [
+      "Use of unauthorized software or hacks",
+      "Toxic behavior or inappropriate language",
+      "Violation of community rules",
+      "Exploitation of game bugs or glitches"
+    ],
+    faq_title: "Questions and Solutions",
+    faq_list: [
+      {
+        question: "Problem 1: Why was I banned?",
+        answer: "Solution: Review the ban notification email and the game rules to understand the specific reason for the sanction."
+      },
+      {
+        question: "Problem 2: Can I appeal a ban?",
+        answer: "Solution: Yes, if you believe the ban was a mistake, contact game support and provide all relevant information."
+      },
+      {
+        question: "Problem 3: How long does a ban last?",
+        answer: "Solution: Depending on the severity of the violation, it can be temporary or permanent. Check the game terms for more details."
+      }
+    ]
+  },
+  es: {
+    title: "Ayuda con Bloqueos y Baneos",
+    description: "Aquí encontrarás información sobre bloqueos y baneos en el juego, sus posibles causas y cómo solucionarlos.",
+    common_reasons: "Motivos Comunes de Baneos",
+    reasons_list: [
+      "Uso de software no autorizado o hacks",
+      "Conducta tóxica o lenguaje inapropiado",
+      "Incumplimiento de las normas de la comunidad",
+      "Abuso de errores o glitches del juego"
+    ],
+    faq_title: "Preguntas y Soluciones",
+    faq_list: [
+      {
+        question: "Problema 1: ¿Por qué me han baneado?",
+        answer: "Solución: Revisa el correo de notificación del baneo y las reglas del juego para entender la razón específica de la sanción."
+      },
+      {
+        question: "Problema 2: ¿Puedo apelar un baneo?",
+        answer: "Solución: Sí, si consideras que el baneo fue un error, contacta al soporte del juego y proporciona toda la información relevante."
+      },
+      {
+        question: "Problema 3: ¿Cuánto dura un baneo?",
+        answer: "Solución: Dependiendo de la gravedad de la infracción, puede ser temporal o permanente. Consulta los términos del juego para más detalles."
+      }
+    ]
+  },
+  ca: {
+    title: "Ajuda amb Bloquejos i Bans",
+    description: "Aquí trobaràs informació sobre bloquejos i bans en el joc, les seves possibles causes i com solucionar-los.",
+    common_reasons: "Motivos Comuns de Bans",
+    reasons_list: [
+      "Ús de programari no autoritzat o hacks",
+      "Conducta tòxica o llenguatge inapropiat",
+      "Incompliment de les normes de la comunitat",
+      "Abús d'errors o glitches del joc"
+    ],
+    faq_title: "Preguntes i Solucions",
+    faq_list: [
+      {
+        question: "Problema 1: Per què m'han banejat?",
+        answer: "Solució: Revisa el correu de notificació del ban i les regles del joc per entendre la raó específica de la sanció."
+      },
+      {
+        question: "Problema 2: Puc apel·lar un ban?",
+        answer: "Solució: Sí, si consideres que el ban va ser un error, contacta amb el suport del joc i proporciona tota la informació rellevant."
+      },
+      {
+        question: "Problema 3: Quant dura un ban?",
+        answer: "Solució: Depenent de la gravetat de la infracció, pot ser temporal o permanent. Consulta els termes del joc per a més detalls."
+      }
+    ]
+  }
+};
+
+export const translationsHelpPassword = {
+  en: {
+    title: "Password Help",
+    description: "Here you will find useful information about password security and recovery.",
+    security_tips: "Security Tips",
+    tips_list: [
+      "Do not share your password with anyone",
+      "Avoid using personal information in your password",
+      "Use combinations of letters, numbers, and symbols"
+    ],
+    faq_title: "Questions and Answers",
+    faq_list: [
+      {
+        question: "Question 1: How can I reset my password?",
+        answer: "Go to your account settings and follow the instructions to reset your password."
+      },
+      {
+        question: "Question 2: How can I change my password?",
+        answer: "Access your account settings and choose the option to change your password."
+      },
+      {
+        question: "Question 3: What should I do if I forgot my password?",
+        answer: "Use the password recovery option in the login page."
+      }
+    ]
+  },
+  es: {
+    title: "Ayuda con la Contraseña",
+    description: "Aquí encontrarás información útil sobre la seguridad y recuperación de tu contraseña.",
+    security_tips: "Consejos de seguridad",
+    tips_list: [
+      "No compartas tu contraseña con nadie",
+      "Evita usar información personal en tu contraseña",
+      "Usa combinaciones de letras, números y símbolos"
+    ],
+    faq_title: "Preguntas y Respuestas",
+    faq_list: [
+      {
+        question: "Pregunta 1: ¿Cómo puedo restablecer mi contraseña?",
+        answer: "Ve a la configuración de tu cuenta y sigue las instrucciones para restablecer tu contraseña."
+      },
+      {
+        question: "Pregunta 2: ¿Cómo puedo cambiar mi contraseña?",
+        answer: "Accede a la configuración de tu cuenta y elige la opción para cambiar tu contraseña."
+      },
+      {
+        question: "Pregunta 3: ¿Qué debo hacer si olvidé mi contraseña?",
+        answer: "Usa la opción de recuperación de contraseña en la página de inicio de sesión."
+      }
+    ]
+  },
+  ca: {
+    title: "Ajuda amb la Contrasenya",
+    description: "Aquí trobaràs informació útil sobre la seguretat i recuperació de la teva contrasenya.",
+    security_tips: "Consells de seguretat",
+    tips_list: [
+      "No comparteixis la teva contrasenya amb ningú",
+      "Evita utilitzar informació personal en la teva contrasenya",
+      "Utilitza combinacions de lletres, números i símbols"
+    ],
+    faq_title: "Preguntes i Respostes",
+    faq_list: [
+      {
+        question: "Pregunta 1: Com puc restablir la meva contrasenya?",
+        answer: "Ves a la configuració del teu compte i segueix les instruccions per restablir la teva contrasenya."
+      },
+      {
+        question: "Pregunta 2: Com puc canviar la meva contrasenya?",
+        answer: "Accedeix a la configuració del teu compte i tria l'opció per canviar la teva contrasenya."
+      },
+      {
+        question: "Pregunta 3: Què he de fer si he oblidat la meva contrasenya?",
+        answer: "Utilitza l'opció de recuperació de contrasenya a la pàgina d'inici de sessió."
+      }
+    ]
+  }
+};

@@ -4,22 +4,28 @@ import { Header, Footer } from "@/components/ui";
 import { Card } from "@/components/material-components";
 import { FaKey, FaEnvelope, FaUser, FaShieldAlt, FaShoppingCart, FaQrcode, FaFolderOpen, FaHandPaper } from "react-icons/fa";
 import Link from "next/link";
+import { translationsHelp } from "@/lang/translations";
+import { useState } from "react";
 
 export default function HelpPage() {
+  const [currentLanguage, setCurrentLanguage] = useState("es");
+  const translation = translationsHelp[currentLanguage] || translationsHelp["es"];
+  const changeLanguage = (newLanguage) => setCurrentLanguage( newLanguage);
+  
   const helpOptions = [
-    { icon: <FaKey className="text-red-500 text-2xl" />, title: "Contraseña", description: "Descripción sobre la contraseña", link: "/help/help-contrasena" },
-    { icon: <FaEnvelope className="text-red-500 text-2xl" />, title: "Correo Electrónico", description: "Descripción sobre el correo electrónico", link: "/help/help-email" },
-    { icon: <FaShieldAlt className="text-red-500 text-2xl" />, title: "Seguridad", description: "Descripción sobre la seguridad", link: "/help/help-seguridad" },
-    { icon: <FaShoppingCart className="text-red-500 text-2xl" />, title: "Pedidos", description: "Descripción sobre los pedidos", link: "/help/help-pedidos" },
-    { icon: <FaFolderOpen className="text-red-500 text-2xl" />, title: "Problemas", description: "Descripción sobre problemas", link: "/help/help-problemas" },
-    { icon: <FaHandPaper className="text-red-500 text-2xl" />, title: "Historial de Bloqueos", description: "Descripción sobre el historial de bloqueos", link: "/help/help-bloqueos" },
+    { icon: <FaKey className="text-red-500 text-2xl" />, title: translation.password, description: translation.password_description, link: "/help/help-contrasena" },
+    { icon: <FaEnvelope className="text-red-500 text-2xl" />, title: translation.email, description: translation.email_description, link: "/help/help-email" },
+    { icon: <FaShieldAlt className="text-red-500 text-2xl" />, title: translation.security, description: translation.security_description, link: "/help/help-seguridad" },
+    { icon: <FaShoppingCart className="text-red-500 text-2xl" />, title: translation.orders, description: translation.orders_description, link: "/help/help-pedidos" },
+    { icon: <FaFolderOpen className="text-red-500 text-2xl" />, title: translation.issues, description: translation.issues_description, link: "/help/help-problemas" },
+    { icon: <FaHandPaper className="text-red-500 text-2xl" />, title: translation.block_history, description: translation.block_history_description, link: "/help/help-bloqueos" },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header language={currentLanguage} changeLanguage={changeLanguage}/>
       <main className="container mx-auto px-4 py-8 mt-60 mb-60">
-        <h1 className="text-3xl font-bold mb-6">Gestionar Cuenta</h1>
+        <h1 className="text-3xl font-bold mb-6">{translation.manage_account}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {helpOptions.map((option, index) => (
             <Link key={index} href={option.link || "#"} passHref>
@@ -32,7 +38,7 @@ export default function HelpPage() {
           ))}
         </div>
       </main>
-      <Footer />
+      <Footer language={currentLanguage}/>
     </div>
   );
 }
