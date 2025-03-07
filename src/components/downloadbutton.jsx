@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Button } from "@/components/material-components";
+import { Button } from "@/components/Material-Components";
 import { translations } from '@/lang/translations';
  
 export function ButtonColors({ language }) {

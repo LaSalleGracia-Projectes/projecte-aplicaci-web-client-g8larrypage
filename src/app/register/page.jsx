@@ -10,7 +10,7 @@ import {
     CardBody,
     Typography,
     Checkbox
-} from "@/components/material-components";
+} from "@/components/Material-Components";
 
 export default function Register() {
     const [email, setEmail] = useState("");

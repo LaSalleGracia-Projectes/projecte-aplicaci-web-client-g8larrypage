@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Typography } from "@/components/material-components"; 
+import { Typography } from "@/components/Material-Components"; 
 import { translations } from '@/lang/translations';
 
 export function CopyRight({ language }) {

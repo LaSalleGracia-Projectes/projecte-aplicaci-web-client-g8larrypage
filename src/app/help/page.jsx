@@ -1,7 +1,7 @@
 'use client';
 
 import { Header, Footer } from "@/components/ui";
-import { Card } from "@/components/material-components";
+import { Card } from "@/components/Material-Components";
 import { FaKey, FaEnvelope, FaUser, FaShieldAlt, FaShoppingCart, FaQrcode, FaFolderOpen, FaHandPaper } from "react-icons/fa";
 import Link from "next/link";
 import { translationsHelp } from "@/lang/translations";

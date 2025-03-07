@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel } from "@/components/material-components";
+import { Carousel } from "@/components/Material-Components";
  
 export function GalleryWithCarousel() {
   return (
