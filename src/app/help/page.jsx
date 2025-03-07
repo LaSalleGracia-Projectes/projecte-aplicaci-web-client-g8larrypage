@@ -5,12 +5,25 @@ import { Card } from "@/components/Material-Components";
 import { FaKey, FaEnvelope, FaUser, FaShieldAlt, FaShoppingCart, FaQrcode, FaFolderOpen, FaHandPaper } from "react-icons/fa";
 import Link from "next/link";
 import { translationsHelp } from "@/lang/translations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "@/helpers/supabaseClient";
 
 export default function HelpPage() {
+
   const [currentLanguage, setCurrentLanguage] = useState("es");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const translation = translationsHelp[currentLanguage] || translationsHelp["es"];
   const changeLanguage = (newLanguage) => setCurrentLanguage( newLanguage);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        setIsLoggedIn(true);
+      }
+    };
+    checkSession();
+  }, []);
   
   const helpOptions = [
     { icon: <FaKey className="text-red-500 text-2xl" />, title: translation.password, description: translation.password_description, link: "/help/help-contrasena" },
@@ -23,7 +36,7 @@ export default function HelpPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={changeLanguage}/>
+      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} />
       <main className="container mx-auto px-4 py-8 mt-60 mb-60">
         <h1 className="text-3xl font-bold mb-6">{translation.manage_account}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
