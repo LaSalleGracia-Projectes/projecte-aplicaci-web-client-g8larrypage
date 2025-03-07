@@ -3,18 +3,31 @@
 import { useState } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
+import { useEffect } from 'react';
+import supabase from '@/helpers/supabaseClient';
+
 
 export default function AboutUs() {
   const [currentLanguage, setCurrentLanguage] = useState('es');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
   const changeLanguage = (newLanguage) => {
     setCurrentLanguage(newLanguage);
   };
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        setIsLoggedIn(true);
+      }
+    };
+    checkSession();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} />
+      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
       <div className="flex-grow overflow-y-auto p-4 mt-40">
         <div className="text-center">
           <h2 className="text-4xl font-bold mt-8 mb-4">{translation.title}</h2>

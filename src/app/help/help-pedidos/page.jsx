@@ -4,14 +4,27 @@ import { Header, Footer } from '@/components/ui';
 import { FaShoppingCart } from 'react-icons/fa';
 import { translationsHelpOrders } from '@/lang/translations';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import supabase from '@/helpers/supabaseClient';
 
 export default function OrderHelp() {
   const [currentLanguage, setCurrentLanguage] = useState("es");
   const translation = translationsHelpOrders[currentLanguage] || translationsHelpOrders["es"];
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        setIsLoggedIn(true);
+      }
+    };
+    checkSession();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} />
+      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn} />
       <main className="flex-grow container mx-auto px-4 mt-40">
         <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center mb-4">
