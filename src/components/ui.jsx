@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { NavList } from '@/components/navbar';
-import { CopyRight } from './copyrightfooter';
+import { ProfileMenu } from '@/components/ProfileMenu';
+import { CopyRight } from './CopyrightFooter';
 import { translations } from '@/lang/translations';
 
-export function Header({ language, changeLanguage }) {
+export function Header({ language, changeLanguage, isLoggedIn }) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center">
@@ -20,18 +21,22 @@ export function Header({ language, changeLanguage }) {
         <button><Image src="/assets/img/clan.png" alt="Clan" width={40} height={40} className="hover:bg-purple-200" /></button>
         <button><Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40} className="hover:bg-purple-400" /></button>
         <button><Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40} className="hover:bg-purple-400" /></button>
-        <button>
-          <Link href="/register">
-            <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40} className="hover:bg-purple-400" />
-          </Link>
-        </button>
+        {isLoggedIn ? (
+          <ProfileMenu />
+        ) : (
+          <button>
+            <Link href="/register">
+              <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40} className="hover:bg-purple-400" />
+            </Link>
+          </button>
+        )}
       </div>
     </header>
   );
 }
 
 export function Footer({ language }) {
-  const translation = translations[language] || translations['en'];
+  const translation = translations[language] || translations['es'];
 
   return (
     <footer className="bg-black text-white text-center py-6 mt-10">

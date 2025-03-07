@@ -1,8 +1,8 @@
 'use client';
 
 import React from "react";
-import { Typography } from "@/components/material-components";
-import { Language } from "./language";
+import { Typography } from "@/components/Material-Components";
+import { Language } from "./Language";
 import { translations } from '@/lang/translations';
 
 export function NavList({ language, changeLanguage }) {

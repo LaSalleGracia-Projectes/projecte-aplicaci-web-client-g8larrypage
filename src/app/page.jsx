@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/ui";
-import { ButtonColors } from "@/components/downloadbutton";
-import { GalleryWithCarousel } from "@/components/carrusel";
+import { ButtonColors } from "@/components/DownloadButton";
+import { GalleryWithCarousel } from "@/components/Carrusel";
 import supabase from "@/helpers/supabaseClient";
 import { translations } from '@/lang/translations';
 
@@ -36,7 +36,8 @@ export default function Home() {
 
   return (
     <div>
-      <Header language={language} changeLanguage={changeLanguage} />
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} />
+      
       {/* Main Image */}
       <section className="w-full h-[90vh] relative">
         <Image
