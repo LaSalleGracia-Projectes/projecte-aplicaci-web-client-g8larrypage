@@ -17,10 +17,17 @@ export default function Register() {
     const [fullName, setName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
     const handleEmailSignUp = async (event) => {
         event.preventDefault();
         setMessage("");
+
+        if (!termsAccepted || !privacyAccepted) {
+            setMessage("Debes aceptar los términos y condiciones y la política de privacidad.");
+            return;
+        }
 
         const { data, error } = await supabase.auth.signUp({
             email: email,
@@ -33,7 +40,13 @@ export default function Register() {
         });
 
         if (error) {
-            setMessage(error.message);
+            if (error.message.includes("Password should be at least 10 characters")) {
+                setMessage("La contraseña debe tener al menos 10 caracteres.");
+            } else if (error.message.includes("Password should contain at least one character")) {
+                setMessage("La contraseña debe incluir minúsculas, mayúsculas, números y símbolos.");
+            } else {
+                setMessage(error.message);
+            }
             return;
         }
 
@@ -79,11 +92,17 @@ export default function Register() {
     return (
         <div className="flex justify-center items-center h-screen">
             <Card className="w-full max-w-sm p-4">
-                <Typography variant="h4" className="text-xl font-bold text-center mb-4">
+                <Typography variant="h4" className="text-xl font-bold text-center mt-10">
                     Create your Account
                 </Typography>
                 <CardBody>
-                    {message && <Typography color="red">{message}</Typography>}
+                    {message && (
+                        <Typography
+                            className={`text-center mb-8 ${message.includes("Registro exitoso") ? "text-green-600" : "text-red-600"}`}
+                        >
+                            {message}
+                        </Typography>
+                    )}
                     <form onSubmit={handleEmailSignUp} className="space-y-3">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
@@ -143,28 +162,27 @@ export default function Register() {
                         Sign up with Facebook
                     </Button>
                     
-                    
                     <div className="mt-4 flex items-center gap-2">
-                        <Checkbox />
+                        <Checkbox checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} />
                         <Typography color="blue-gray" className="text-sm font-medium">
                             I agree with the{" "}
-                            <a href="#" className="text-blue-500 hover:text-blue-700">
-                             terms and conditions
-                            </a>.
+                            <Link href="/terms-service" className="text-blue-500 hover:text-blue-700">
+                                terms and conditions
+                            </Link>
                         </Typography>
                     </div>
 
                     <div className="mt-1 flex items-center gap-2">
-                        <Checkbox />
+                        <Checkbox checked={privacyAccepted} onChange={(e) => setPrivacyAccepted(e.target.checked)} />
                         <Typography color="blue-gray" className="text-sm font-medium">
                             I agree with the{" "}
-                            <a href="#" className="text-blue-500 hover:text-blue-700">
-                            privacy policy
-                             </a>.
+                            <Link href="/privacy-policy" className="text-blue-500 hover:text-blue-700">
+                                privacy policy
+                            </Link>
                         </Typography>
                     </div>
 
-                    <Typography className="mt-3 text-center text-sm">
+                    <Typography className="mt-4 text-center text-base">
                         Already have an account? {" "}
                         <Link href="/login" className="text-blue-500">
                             Log In

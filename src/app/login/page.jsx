@@ -140,16 +140,16 @@ export default function Login() {
                         </Button>
                         <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600">
                             Upon signing in, you consent to abide by our{" "}
-                            <a href="#" className="text-blue-500 hover:text-blue-700">
+                            <Link href="/terms-service" className="text-blue-500 hover:text-blue-700">
                                 Terms of Service
-                            </a>{" "}
+                            </Link>{" "}
                             &{" "}
-                            <a href="#" className="text-blue-500 hover:text-blue-700">
-                                Privacy Policy.
-                            </a>
+                            <Link href="/privacy-policy" className="text-blue-500 hover:text-blue-700">
+                                Privacy Policy
+                            </Link>
                         </Typography>
                     </form>
-                    <Typography className="mt-4 text-center text-md">
+                    <Typography className="mt-4 text-center text-base">
                         Don't have an account yet?{" "}
                         <Link href="/register" className="text-blue-500">
                             Sign Up
