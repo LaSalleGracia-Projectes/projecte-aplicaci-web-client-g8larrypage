@@ -27,12 +27,15 @@ export function Language({ language, changeLanguage }) {
         onClick={toggleDropdown} 
         className="flex items-center gap-2 text-white hover:text-purple-500 transition-colors"
       >
-        <img src={selectedLang.flag} alt={selectedLang.label} className="w-4 h-4 rounded" />
-        {selectedLang.label}
+        <img 
+          src={selectedLang.flag} 
+          alt={selectedLang.label} 
+          className="w-6 h-6 rounded"
+        />
       </button>
 
       {open && (
-        <ul className="absolute top-10 left-0 w-40 bg-white text-black shadow-lg rounded-lg p-2">
+        <ul className="absolute top-10 right-[-70px] w-40 bg-white text-black shadow-lg rounded-lg p-2 z-50">
           {languages.map((lang) => (
             <li 
               key={lang.code} 
