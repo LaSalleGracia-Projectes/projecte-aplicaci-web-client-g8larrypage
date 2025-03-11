@@ -36,6 +36,16 @@ export function NavList({ language, changeLanguage }) {
         color="white"
         className="p-1 font-[Electrolize]"
       >
+        <a href="/contact" className="flex items-center hover:text-purple-500 transition-colors">
+          {translation.contact}
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="medium"
+        color="white"
+        className="p-1 font-[Electrolize]"
+      >
         <a className="flex items-center hover:text-purple-500 transition-colors">
           <Language language={language} changeLanguage={changeLanguage} />
         </a>

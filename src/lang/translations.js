@@ -2,6 +2,7 @@ export const translations = {
   en: {
     about_us: "About us",
     help: "Help",
+    contact: "Contact",
     download_title: "LEAD YOUR CLAN TO VICTORY!",
     download_description: "Download the app and start earning steps for your clan. Build your city and compete against other clans to be the best! Track your progress, unlock new buildings, and participate in exciting weekly competitions. Stay active, stay engaged, and watch your city grow as you contribute to your clan's success. Don't miss out on exclusive rewards and special events!",
     news: "NEWS",
@@ -14,6 +15,7 @@ export const translations = {
   es: {
     about_us: "Sobre nosotros",
     help: "Ayuda",
+    contact: "Contacto",
     download_title: "LLEVA TU CLAN A LA VICTORIA!",
     download_description: "Descarga la aplicación y comienza a ganar pasos para tu clan. ¡Construye tu ciudad y compite contra otros clanes para ser el mejor! Sigue tu progreso, desbloquea nuevos edificios y participa en emocionantes competiciones semanales. Mantente activo, comprometido y observa cómo tu ciudad crece mientras contribuyes al éxito de tu clan. ¡No te pierdas las recompensas exclusivas y eventos especiales!",
     news: "NOTICIAS",
@@ -26,6 +28,7 @@ export const translations = {
   ca: {
     about_us: "Sobre nosaltres",
     help: "Ajuda",
+    contact: "Contacte",
     download_title: "PORTA EL TEU CLAN A LA VICTÒRIA!",
     download_description: "Descarrega l'aplicació i comença a guanyar passos per al teu clan. Construeix la teva ciutat i competeix contra altres clans per ser el millor! Segueix el teu progrés, desbloqueja nous edificis i participa en emocionants competicions setmanals. Mantén-te actiu, compromès i observa com la teva ciutat creix mentre contribueixes a l'èxit del teu clan. No et perdis les recompenses exclusives i esdeveniments especials!",
     news: "NOTÍCIES",
