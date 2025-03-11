@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/ui";
-import { ButtonColors } from "@/components/DownloadButton";
 import { GalleryWithCarousel } from "@/components/Carrusel";
 import supabase from "@/helpers/supabaseClient";
 import { translations } from '@/lang/translations';
+import { Slide } from "react-awesome-reveal";
 
 export default function Home() {
   const router = useRouter();
@@ -40,26 +40,39 @@ export default function Home() {
       
       {/* Main Image */}
       <section className="w-full h-[90vh] relative">
-        <Image
-          src="/assets/img/preview.png"
-          alt="Imagen Principal"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          priority
-        />
+          <Image
+            src="/assets/img/preview.png"
+            alt="Imagen Principal"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            priority
+          />
       </section>
 
       {/* Download Section */}
-      <section className="text-center py-10 bg-white-100">
-        <h2 className="font-[Electrolize] text-2xl font-bold lg:mb-12">{translations[language].download}</h2>
-        <Image src="/assets/img/anuncio-app.png" alt="Imagen juego" width={400} height={300} className="mx-auto" />
-        <ButtonColors language={language}/>
-      </section>
+      <Slide>
+        <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10">
+          <div className="w-3/5">
+            <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} />
+          </div>
+          <div className="w-3/5 text-left">
+            <h2 className="text-4xl font-bold mb-4">{translations[language].download_title}</h2>
+            <p className="max-w-lg text-black-700 mb-6">{translations[language].download_description}</p>
+            <div className="flex">
+              <a href="#" className="ml-40 mt-4">
+                <Image src="/assets/img/googleplay.png" alt="Google Play" width={180} height={60} />
+              </a>
+            </div>
+          </div>
+        </section>
+      </Slide>
 
       {/* News Section */}
       <section className="py-10">
-        <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
+        <Slide direction="up">
+          <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
+        </Slide>
         <GalleryWithCarousel />
       </section>
 

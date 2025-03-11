@@ -9,10 +9,10 @@ import { translations } from '@/lang/translations';
 
 export function Header({ language, changeLanguage, isLoggedIn }) {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-4 px-6 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-3 px-6 flex justify-between items-center">
       <div className="flex items-center">
         <Link href="/">
-          <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={100} height={100} />
+          <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={80} height={80} />
         </Link>
         <NavList language={language} changeLanguage={changeLanguage} />
       </div>
