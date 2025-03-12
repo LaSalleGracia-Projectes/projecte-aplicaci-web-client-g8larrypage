@@ -28,52 +28,63 @@ export default function AboutUs() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
-      <div className="flex-grow overflow-y-auto p-4 mt-40">
+      <div className="flex-grow overflow-y-auto p-4 mt-44">
+        {/* Título y descripción principal */}
         <div className="text-center">
-          <h2 className="text-4xl font-bold mt-8 mb-4">{translation.title}</h2>
-          <p className="text-lg mb-16 max-w-2xl mx-auto">{translation.description}</p>
+          <h2 className="text-4xl font-bold mt-8 mb-8">{translation.title}</h2>
+          <p className="text-lg mb-20 max-w-2xl mx-auto">{translation.description}</p>
         </div>
-        <h2 className="text-2xl font-semibold text-center mb-4">{translation.key_elements}</h2>
+
+        {/* Elementos clave */}
+        <h2 className="text-2xl font-semibold text-center mb-8">{translation.key_elements}</h2>
         <div className="text-left max-w-2xl mx-auto">
-          <h3 className="text-xl font-semibold mb-1">{translation.currency}</h3>
-          <ul className="list-disc list-inside mb-4">
+          {/* Divisas de pasos */}
+          <h3 className="text-xl font-semibold mb-4">{translation.currency}</h3>
+          <ul className="list-disc list-inside mb-8">
             {translation.currency_details.map((detail, index) => (
               <li key={index}>{detail}</li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.building_construction}</h3>
-            <ul className="list-disc list-inside mb-4">
+          {/* Construcción y Mejoras de Edificios */}
+          <h3 className="text-xl font-semibold mb-4">{translation.building_construction}</h3>
+            <ul className="list-disc list-inside mb-8">
               {translation.building_details.map((detail, index) => (
                 <li key={index}>{detail}</li>
               ))}
             </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.weekly_competitions}</h3>
-          <ul className="list-disc list-inside mb-4">
+          {/* Competencias Semanales de Grupos */}
+          <h3 className="text-xl font-semibold mb-4">{translation.weekly_competitions}</h3>
+          <ul className="list-disc list-inside mb-8">
             {translation.weekly_competitions_details.map((detail, index) => (
               <li key={index}>{detail}</li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.area_unlocking}</h3>
+          {/* Desbloqueo de Áreas y construcciones */}
+          <h3 className="text-xl font-semibold mb-4">{translation.area_unlocking}</h3>
           <p className="mb-4">{translation.area_unlocking_details}</p>
-          <h3 className="text-xl font-semibold mb-1">{translation.lucky_boxes}</h3>
+          {/* Tienda de Lucky Boxes y Potenciadores */}
+          <h3 className="text-xl font-semibold mb-4">{translation.lucky_boxes}</h3>
           <ul className="list-disc list-inside mb-4">
             {translation.lucky_boxes_details.map((detail, index) => (
               <li key={index}>{detail}</li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.global_stats}</h3>
+          {/* Estadísticas y Clasificación Global */}
+          <h3 className="text-xl font-semibold mb-4">{translation.global_stats}</h3>
           <ul className="list-disc list-inside mb-4">
             {translation.global_stats_details.map((detail, index) => (
               <li key={index}>{detail}</li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.raids}</h3>
+          {/* Raids */}
+          <h3 className="text-xl font-semibold mb-4">{translation.raids}</h3>
           <ul className="list-disc list-inside mb-4">
             {translation.raids_details.map((detail, index) => (
               <li key={index}>{detail}</li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-1">{translation.summary_experience}</h3>
+          {/* Resumen de la experiencia */}
+          <h3 className="text-xl font-semibold mb-4">{translation.summary_experience}</h3>
           <p>{translation.summary_experience_details}</p>
         </div>
       </div>
