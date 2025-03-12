@@ -25,7 +25,7 @@ export default function Register() {
         setMessage("");
 
         if (!termsAccepted || !privacyAccepted) {
-            setMessage("Debes aceptar los términos y condiciones y la política de privacidad.");
+            setMessage("You must accept the terms and conditions and the privacy policy.");
             return;
         }
 
@@ -41,9 +41,9 @@ export default function Register() {
 
         if (error) {
             if (error.message.includes("Password should be at least 10 characters")) {
-                setMessage("La contraseña debe tener al menos 10 caracteres.");
+                setMessage("The password must be at least 10 characters long.");
             } else if (error.message.includes("Password should contain at least one character")) {
-                setMessage("La contraseña debe incluir minúsculas, mayúsculas, números y símbolos.");
+                setMessage("The password must include lowercase, uppercase, numbers, and symbols.");
             } else {
                 setMessage(error.message);
             }
@@ -51,7 +51,7 @@ export default function Register() {
         }
 
         if (data) {
-            setMessage("Registro exitoso! Revisa tu correo electrónico para confirmar tu cuenta.");
+            setMessage("Registration successful! Check your email to confirm your account.");
         }
 
         setEmail("");
@@ -92,13 +92,14 @@ export default function Register() {
     return (
         <div className="flex justify-center items-center h-screen">
             <Card className="w-full max-w-sm p-4">
-                <Typography variant="h4" className="text-xl font-bold text-center mt-10">
+                <Typography variant="h4" className="text-xl font-bold text-center mt-10" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                     Create your Account
                 </Typography>
                 <CardBody>
                     {message && (
                         <Typography
-                            className={`text-center mb-8 ${message.includes("Registro exitoso") ? "text-green-600" : "text-red-600"}`}
+                            className={`text-center mb-8 ${message.includes("Registration successful") ? "text-green-600" : "text-red-600"}`}
+                            style={{ fontFamily: 'Electrolize, sans-serif' }}
                         >
                             {message}
                         </Typography>
@@ -111,6 +112,7 @@ export default function Register() {
                             label="Your email"
                             size="sm"
                             required
+                            style={{ fontFamily: 'Electrolize, sans-serif' }}
                         />
                         <Input
                             onChange={(e) => setName(e.target.value)}
@@ -119,6 +121,7 @@ export default function Register() {
                             label="Full name"
                             size="sm"
                             required
+                            style={{ fontFamily: 'Electrolize, sans-serif' }}
                         />
                         <Input
                             onChange={(e) => setPassword(e.target.value)}
@@ -127,18 +130,20 @@ export default function Register() {
                             label="Password"
                             size="sm"
                             required
+                            style={{ fontFamily: 'Electrolize, sans-serif' }}
                         />
-                        <Button type="submit" fullWidth size="sm">
+                        <Button type="submit" fullWidth size="sm" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                             Create an account
                         </Button>
                     </form>
-                    <div className="my-3 text-center">or</div>
+                    <div className="my-3 text-center" style={{ fontFamily: 'Electrolize, sans-serif' }}>or</div>
                     <Button
                         variant="outlined"
                         size="lg"
                         className="flex h-12 border-blue-gray-200 items-center justify-center gap-2 mb-2"
                         fullWidth
                         onClick={handleGoogleSignUp}
+                        style={{ fontFamily: 'Electrolize, sans-serif' }}
                     >
                         <img
                             src={`https://www.material-tailwind.com/logos/logo-google.png`}
@@ -153,10 +158,11 @@ export default function Register() {
                         className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
                         fullWidth
                         onClick={handleFacebookSignUp}
+                        style={{ fontFamily: 'Electrolize, sans-serif' }}
                     >
                         <img
                             src={`https://www.material-tailwind.com/logos/logo-facebook.png`}
-                            alt="google"
+                            alt="facebook"
                             className="h-6 w-6"
                         />{" "}
                         Sign up with Facebook
@@ -164,7 +170,7 @@ export default function Register() {
                     
                     <div className="mt-4 flex items-center gap-2">
                         <Checkbox checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} />
-                        <Typography color="blue-gray" className="text-sm font-medium">
+                        <Typography color="blue-gray" className="text-sm font-medium" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                             I agree with the{" "}
                             <Link href="/terms-service" className="text-blue-500 hover:text-blue-700">
                                 terms and conditions
@@ -174,7 +180,7 @@ export default function Register() {
 
                     <div className="mt-1 flex items-center gap-2">
                         <Checkbox checked={privacyAccepted} onChange={(e) => setPrivacyAccepted(e.target.checked)} />
-                        <Typography color="blue-gray" className="text-sm font-medium">
+                        <Typography color="blue-gray" className="text-sm font-medium" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                             I agree with the{" "}
                             <Link href="/privacy-policy" className="text-blue-500 hover:text-blue-700">
                                 privacy policy
@@ -182,7 +188,7 @@ export default function Register() {
                         </Typography>
                     </div>
 
-                    <Typography className="mt-4 text-center text-base">
+                    <Typography className="mt-4 text-center text-base" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                         Already have an account? {" "}
                         <Link href="/login" className="text-blue-500">
                             Log In

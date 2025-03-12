@@ -43,8 +43,8 @@ export default function Home() {
           <Image
             src="/assets/img/preview.png"
             alt="Imagen Principal"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             quality={100}
             priority
           />
@@ -54,7 +54,7 @@ export default function Home() {
       <Slide>
         <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10">
           <div className="w-3/5">
-            <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} />
+            <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} quality={100} />
           </div>
           <div className="w-3/5 text-left">
             <h2 className="text-4xl font-bold mb-4">{translations[language].download_title}</h2>
@@ -71,7 +71,7 @@ export default function Home() {
       {/* News Section */}
       <section className="py-4">
         <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
-        <GalleryWithCarousel />
+        <GalleryWithCarousel language={language}/>
       </section>
 
       <Footer language={language}/>

@@ -40,6 +40,60 @@ export const translations = {
   },
 };
 
+export const translationsNews = {
+  en: [
+    {
+      title: "New Season: Gold and Topaz Royalty",
+      description: "Discover the new royalty structure with gold and topaz details, available in version 2.0 of our app.",
+      version: "Update 2.0",
+    },
+    {
+      title: "Special Event: Citadel Challenge",
+      description: "Participate in the citadel challenge and win exclusive rewards. Available for a limited time!",
+      version: "Special Event",
+    },
+    {
+      title: "New Season: New Skins for Your Towers!",
+      description: "Customize your towers with the new skins available in the store. Download update 3.5 now!",
+      version: "Update 2.5",
+    },
+  ],
+  es: [
+    {
+      title: "Nueva Temporada: Realeza de Oro y Topacio",
+      description: "Descubre la nueva estructura de la realeza con detalles en oro y topacio, disponible en la versión 2.0 de nuestra aplicación.",
+      version: "Actualización 2.0",
+    },
+    {
+      title: "Evento Especial: Desafío de la Ciudadela",
+      description: "Participa en el desafío de la ciudadela y gana recompensas exclusivas. ¡Disponible por tiempo limitado!",
+      version: "Evento Especial",
+    },
+    {
+      title: "Nueva temporada: Nuevos aspectos para tus torres!",
+      description: "Personaliza tus torres con los nuevos aspectos disponibles en la tienda. ¡Descarga la actualización 3.5 ahora!",
+      version: "Actualización 2.5",
+    },
+  ],
+  ca: [
+    {
+      title: "Nova Temporada: Reialesa d'Or i Topazi",
+      description: "Descobreix la nova estructura de la reialesa amb detalls en or i topazi, disponible a la versió 2.0 de la nostra aplicació.",
+      version: "Actualització 2.0",
+    },
+    {
+      title: "Esdeveniment Especial: Desafiament de la Ciutadella",
+      description: "Participa en el desafiament de la ciutadella i guanya recompenses exclusives. Disponible per temps limitat!",
+      version: "Esdeveniment Especial",
+    },
+    {
+      title: "Nova temporada: Nous aspectes per a les teves torres!",
+      description: "Personalitza les teves torres amb els nous aspectes disponibles a la botiga. Descarrega l'actualització 3.5 ara!",
+      version: "Actualització 2.5",
+    },
+  ],
+};
+
 export const translationsAboutUs = {
   en: {
       title: "⚔️ City of Legends ⚔️",

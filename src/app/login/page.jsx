@@ -89,7 +89,7 @@ export default function Login() {
                     </div>
                 </CardHeader>
                 <CardBody>
-                    {message && <Typography color="red">{message}</Typography>}
+                    {message && <Typography color="red" className="font-electrolize">{message}</Typography>}
                     <form onSubmit={handleEmailLogin} className="flex flex-col gap-3 md:mt-4">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
@@ -98,6 +98,7 @@ export default function Login() {
                             label="Your email"
                             size="sm"
                             required
+                            className="font-electrolize"
                         />
                         <Input
                             onChange={(e) => setPassword(e.target.value)}
@@ -106,14 +107,15 @@ export default function Login() {
                             label="Password"
                             size="sm"
                             required
+                            className="font-electrolize"
                         />
-                        <Button type="submit" size="md" color="gray" fullWidth>
+                        <Button type="submit" size="md" color="gray" fullWidth className="font-electrolize">
                             Log In
                         </Button>
                         <Button
                             variant="outlined"
                             size="md"
-                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2"
+                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2 font-electrolize"
                             fullWidth
                             onClick={handleGoogleLogin}
                         >
@@ -127,7 +129,7 @@ export default function Login() {
                         <Button
                             variant="outlined"
                             size="md"
-                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2"
+                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2 font-electrolize"
                             fullWidth
                             onClick={handleFacebookLogin}
                         >
@@ -138,7 +140,7 @@ export default function Login() {
                             />{" "}
                             Log in with Facebook
                         </Button>
-                        <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600 mt-4">
+                        <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600 mt-4 font-electrolize">
                             Upon signing in, you consent to abide by our{" "}
                             <Link href="/terms-service" className="text-blue-500 hover:text-blue-700">
                                 Terms of Service
@@ -149,7 +151,7 @@ export default function Login() {
                             </Link>
                         </Typography>
                     </form>
-                    <Typography className="mt-4 text-center text-base">
+                    <Typography className="mt-4 text-center text-base font-electrolize">
                         Don't have an account yet?{" "}
                         <Link href="/register" className="text-blue-500">
                             Sign Up
