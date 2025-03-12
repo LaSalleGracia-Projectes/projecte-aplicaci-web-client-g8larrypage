@@ -80,17 +80,17 @@ export default function Login() {
 
     return (
         <div className="flex justify-center items-center h-screen">
-            <Card shadow={false} className="md:px-10 md:py-8 py-6 border border-gray-300">
+            <Card shadow={false} className="md:px-8 md:py-6 py-4 border border-gray-300 max-w-md">
                 <CardHeader shadow={false} floated={false} className="text-center">
                     <div className="flex items-center justify-center">
                         <Link href="/">
-                            <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={240} height={200} />
+                            <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={200} height={160} />
                         </Link>
                     </div>
                 </CardHeader>
                 <CardBody>
                     {message && <Typography color="red">{message}</Typography>}
-                    <form onSubmit={handleEmailLogin} className="flex flex-col gap-4 md:mt-6">
+                    <form onSubmit={handleEmailLogin} className="flex flex-col gap-3 md:mt-4">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
@@ -107,38 +107,38 @@ export default function Login() {
                             size="sm"
                             required
                         />
-                        <Button type="submit" size="lg" color="gray" fullWidth>
+                        <Button type="submit" size="md" color="gray" fullWidth>
                             Log In
                         </Button>
                         <Button
                             variant="outlined"
-                            size="lg"
-                            className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
+                            size="md"
+                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2"
                             fullWidth
                             onClick={handleGoogleLogin}
                         >
                             <img
                                 src={`https://www.material-tailwind.com/logos/logo-google.png`}
                                 alt="google"
-                                className="h-6 w-6"
+                                className="h-5 w-5"
                             />{" "}
                             Log in with Google
                         </Button>
                         <Button
                             variant="outlined"
-                            size="lg"
-                            className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
+                            size="md"
+                            className="flex h-10 border-blue-gray-200 items-center justify-center gap-2"
                             fullWidth
                             onClick={handleFacebookLogin}
                         >
                             <img
                                 src={`https://www.material-tailwind.com/logos/logo-facebook.png`}
                                 alt="facebook"
-                                className="h-8 w-8"
+                                className="h-6 w-6"
                             />{" "}
                             Log in with Facebook
                         </Button>
-                        <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600">
+                        <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600 mt-4">
                             Upon signing in, you consent to abide by our{" "}
                             <Link href="/terms-service" className="text-blue-500 hover:text-blue-700">
                                 Terms of Service

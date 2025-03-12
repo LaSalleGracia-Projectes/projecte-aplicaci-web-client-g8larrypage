@@ -1,11 +1,11 @@
 'use client';
 
 import Image from "next/image";
+import supabase from "@/helpers/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/ui";
 import { GalleryWithCarousel } from "@/components/Carrusel";
-import supabase from "@/helpers/supabaseClient";
 import { translations } from '@/lang/translations';
 import { Slide } from "react-awesome-reveal";
 
@@ -69,10 +69,8 @@ export default function Home() {
       </Slide>
 
       {/* News Section */}
-      <section className="py-10">
-        <Slide direction="up">
-          <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
-        </Slide>
+      <section className="py-4">
+        <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
         <GalleryWithCarousel />
       </section>
 
