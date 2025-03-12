@@ -11,6 +11,7 @@ export default withMT({
   theme: {
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
+      electrolize: ["Electrolize", "sans-serif"],
     },
     extend: {
       colors: {

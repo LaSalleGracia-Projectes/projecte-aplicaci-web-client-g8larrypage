@@ -2,38 +2,19 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
+import { translationsNews } from "@/lang/translations"
 
-export function GalleryWithCarousel() {
+export function GalleryWithCarousel({ language }) {
+  const newsData = translationsNews[language] || translationsNews['es']
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const images = [
     { src: "/assets/img/noticia1.png", alt: "Slide 1" },
     { src: "/assets/img/noticia2.png", alt: "Slide 2" },
     { src: "/assets/img/noticia3.jpeg", alt: "Slide 3" },
   ]
-
-  const newsData = [
-    {
-      title: "Nueva Temporada: Realeza de Oro y Topacio",
-      description:
-        "Descubre la nueva estructura de la realeza con detalles en oro y topacio, disponible en la versión 2.0 de nuestra aplicación.",
-      version: "Actualización 2.0",
-    },
-    {
-      title: "Evento Especial: Desafío de la Ciudadela",
-      description:
-        "Participa en el desafío de la ciudadela y gana recompensas exclusivas. ¡Disponible por tiempo limitado!",
-      version: "Evento Especial",
-    },
-    {
-      title: "Nueva temporada: Nuevos aspectos para tus torres!",
-      description:
-        "Personaliza tus torres con los nuevos aspectos disponibles en la tienda. ¡Descarga la actualización 3.5 ahora!",
-      version: "Actualización 2.5",
-    },
-  ]
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const nextSlide = useCallback(() => {
     if (isTransitioning) return
@@ -118,7 +99,7 @@ export function GalleryWithCarousel() {
                   (currentImageIndex === index ? "opacity-100 z-10" : "opacity-0 z-0")
                 }
               >
-                <img src={image.src || "/placeholder.svg"} alt={image.alt} className="w-full h-full object-cover" />
+                <img src={image.src} alt={image.alt} className="w-full h-full object-cover"/>
               </div>
             ))}
 
