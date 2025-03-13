@@ -5,8 +5,10 @@ import { Header, Footer } from "@/components/ui";
 import { translationsTermsService } from '@/lang/translations';
 import { useEffect } from 'react';
 import supabase from '@/helpers/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function TermsService() {
+  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState('es');
   const translation = translationsTermsService[currentLanguage] || translationsTermsService['es'];
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,10 +26,15 @@ export default function TermsService() {
     };
     checkSession();
   }, []);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsLoggedIn(false);
+    router.push('/');
+  };
 
   return (
     <div>
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
+      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <section className="text-center py-10 bg-white-100 mt-40">
         <h2 className="font-[Electrolize] text-4xl font-bold lg:mb-12">{translation.title}</h2>
         <div className="text-lg text-black-600 px-4 lg:px-0 text-left max-w-4xl mx-auto space-y-6">

@@ -7,7 +7,7 @@ import { ProfileMenu } from '@/components/ProfileMenu';
 import { CopyRight } from './CopyrightFooter';
 import { translations } from '@/lang/translations';
 
-export function Header({ language, changeLanguage, isLoggedIn }) {
+export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-3 px-6 flex justify-between items-center">
       <div className="flex items-center">
@@ -22,7 +22,7 @@ export function Header({ language, changeLanguage, isLoggedIn }) {
         <button><Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40} className="hover:bg-purple-400" /></button>
         <button><Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40} className="hover:bg-purple-400" /></button>
         {isLoggedIn ? (
-          <ProfileMenu />
+          <ProfileMenu onLogout={onLogout}/>
         ) : (
           <button>
             <Link href="/register">

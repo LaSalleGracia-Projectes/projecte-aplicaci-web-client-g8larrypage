@@ -2,7 +2,7 @@
 
 import { Menu, MenuHandler, MenuList, MenuItem, Avatar, Typography } from "@/components/Material-Components";
    
-export function ProfileMenu() {
+export function ProfileMenu({ onLogout }) {
     return (
       <Menu placement="bottom-end">
         <MenuHandler>
@@ -33,7 +33,7 @@ export function ProfileMenu() {
               Mi Perfil
             </Typography>
           </MenuItem>
-          <MenuItem className="flex items-center gap-2">
+          <MenuItem className="flex items-center gap-2" onClick={onLogout}>
           <svg
             width="16"
             height="14"

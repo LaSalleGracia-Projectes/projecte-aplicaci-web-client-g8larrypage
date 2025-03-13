@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} />
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       
       {/* Main Image */}
       <section className="w-full h-[90vh] relative">
@@ -75,15 +75,6 @@ export default function Home() {
       </section>
 
       <Footer language={language}/>
-
-      {/* Botón de cierre de sesión */}
-      {isLoggedIn && (
-        <div className="fixed bottom-4 right-4">
-          <button onClick={handleLogout} className="bg-red-500 text-white p-4 rounded">
-            Cerrar sesión
-          </button>
-        </div>
-      )}
     </div>
   );
 }

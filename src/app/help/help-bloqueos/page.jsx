@@ -6,8 +6,10 @@ import { translationsHelpBans } from '@/lang/translations';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import supabase from '@/helpers/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function BanHelp() {
+  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState("es");
   const translation = translationsHelpBans[currentLanguage] || translationsHelpBans["es"];
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,10 +23,15 @@ export default function BanHelp() {
     };
     checkSession();
   }, []);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsLoggedIn(false);
+    router.push('/');
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn} />
+      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <main className="flex-grow container mx-auto px-4 mt-40">
         <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center mb-4">
