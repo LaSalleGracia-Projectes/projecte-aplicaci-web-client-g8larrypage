@@ -27,6 +27,12 @@ export default function ContactPage() {
     };
     checkSession();
   }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsLoggedIn(false);
+    router.push('/');
+  };
   
   const changeLanguage = (lang) => {
     setLanguage(lang);
@@ -56,7 +62,7 @@ export default function ContactPage() {
 
   return (
     <div>
-      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} />
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
 
       <div className="pt-32"></div>
 

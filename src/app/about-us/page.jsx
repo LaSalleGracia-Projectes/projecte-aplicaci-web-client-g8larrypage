@@ -5,9 +5,11 @@ import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
 import { useEffect } from 'react';
 import supabase from '@/helpers/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 
 export default function AboutUs() {
+  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
@@ -24,10 +26,15 @@ export default function AboutUs() {
     };
     checkSession();
   }, []);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsLoggedIn(false);
+    router.push('/');
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
+      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <div className="flex-grow overflow-y-auto p-4 mt-44">
         {/* Título y descripción principal */}
         <div className="text-center">
