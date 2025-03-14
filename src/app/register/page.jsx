@@ -1,16 +1,10 @@
 'use client';
 
-import { useState } from "react";
-import Link from "next/link";
 import supabase from "@/helpers/supabaseClient";
-import {
-    Card,
-    Input,
-    Button,
-    CardBody,
-    Typography,
-    Checkbox
-} from "@/components/Material-Components";
+import Link from "next/link";
+import { useState } from "react";
+import { Card, Input, Button, CardBody, Typography, Checkbox } from "@/components/Material-Components";
+import { insertUsers } from "@/supabase/insertUsers";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -51,6 +45,7 @@ export default function Register() {
         }
 
         if (data) {
+            await insertUsers(data.user.id, fullName);
             setMessage("Registration successful! Check your email to confirm your account.");
         }
 
@@ -92,7 +87,7 @@ export default function Register() {
     return (
         <div className="flex justify-center items-center h-screen">
             <Card className="w-full max-w-sm p-4">
-                <Typography variant="h4" className="text-xl font-bold text-center mt-10" style={{ fontFamily: 'Electrolize, sans-serif' }}>
+                <Typography variant="h4" className="text-xl font-bold text-center mt-10 mb-4" style={{ fontFamily: 'Electrolize, sans-serif' }}>
                     Create your Account
                 </Typography>
                 <CardBody>

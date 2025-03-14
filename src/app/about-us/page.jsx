@@ -1,22 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import supabase from '@/helpers/supabaseClient';
+import { useState, useEffect } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
-import { useEffect } from 'react';
-import supabase from '@/helpers/supabaseClient';
-import { useRouter } from 'next/navigation';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 
 export default function AboutUs() {
-  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
   const changeLanguage = (newLanguage) => {
     setCurrentLanguage(newLanguage);
   };
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
+      
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+
+      return newMode;
+    });
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -26,15 +43,24 @@ export default function AboutUs() {
     };
     checkSession();
   }, []);
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsLoggedIn(false);
-    router.push('/');
-  };
+
+  // Verifica el tema guardado al cargar la página
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDarkMode(savedTheme === 'dark');
+
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
+    <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
+      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
       <div className="flex-grow overflow-y-auto p-4 mt-44">
         {/* Título y descripción principal */}
         <div className="text-center">
@@ -96,6 +122,13 @@ export default function AboutUs() {
         </div>
       </div>
       <Footer language={currentLanguage} />
+
+      {/* Botón de tema */}
+      <div className="fixed bottom-4 right-4">
+        <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </button>
+      </div>
     </div>
   );
 }
