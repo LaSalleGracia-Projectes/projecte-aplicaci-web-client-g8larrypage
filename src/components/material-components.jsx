@@ -1,12 +1,11 @@
 'use client';
 
 import {
-    Carousel, 
-    Card,
-    Input,
+    Carousel,
+    Card, 
+    CardBody, 
+    Input, 
     Button,
-    CardBody,
-    CardHeader,
     Typography,
     Checkbox,
     Menu,
@@ -17,12 +16,11 @@ import {
 } from '@material-tailwind/react';
 
 export {
-    Carousel, 
-    Card,
-    Input,
+    Carousel,
+    Card, 
+    CardBody, 
+    Input, 
     Button,
-    CardBody,
-    CardHeader,
     Typography,
     Checkbox,
     Menu,

@@ -2,17 +2,20 @@
 
 import Image from "next/image";
 import supabase from "@/helpers/supabaseClient";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/ui";
 import { GalleryWithCarousel } from "@/components/Carrusel";
 import { translations } from '@/lang/translations';
 import { Slide } from "react-awesome-reveal";
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 export default function Home() {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [language, setLanguage] = useState('es');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -24,6 +27,20 @@ export default function Home() {
     checkSession();
   }, []);
 
+  // Verifica el tema guardado al cargar la página
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDarkMode(savedTheme === 'dark');
+
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setIsLoggedIn(false);
@@ -32,6 +49,23 @@ export default function Home() {
 
   const changeLanguage = (lang) => {
     setLanguage(lang);
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
+      
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+
+      return newMode;
+    });
   };
 
   return (
@@ -75,6 +109,18 @@ export default function Home() {
       </section>
 
       <Footer language={language}/>
+
+      {/* Botón de tema */}
+      <div className="fixed bottom-4 right-4">
+        {/* <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </button> */}
+        <Link href="/admin-panel">
+          <button className="bg-gray-800 text-white p-4 rounded-full">
+            Panel Admin
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
