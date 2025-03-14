@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
+import { insertContactMessage } from "@/supabase/insertContact";
 
 export default function ContactPage() {
   const router = useRouter();
@@ -46,19 +47,36 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEnviando(true);
+    setMensajeEnvio({ tipo: '', texto: '' });
     
-    // TODO: Implementar lógica de envío del formulario
+    const result = await insertContactMessage(formData);
     
-    // Simulación temporal del envío
-    setTimeout(() => {
+    if (result.success) {
       setMensajeEnvio({ 
         tipo: 'exito', 
         texto: '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.' 
       });
       setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
-      setEnviando(false);
-    }, 1000);
+    } else {
+      setMensajeEnvio({ 
+        tipo: 'error', 
+        texto: 'Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.' 
+      });
+    }
+    
+    setEnviando(false);
   };
+    
+  //   // Simulación temporal del envío
+  //   setTimeout(() => {
+  //     setMensajeEnvio({ 
+  //       tipo: 'exito', 
+  //       texto: '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.' 
+  //     });
+  //     setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
+  //     setEnviando(false);
+  //   }, 1000);
+  // };
 
   return (
     <div>

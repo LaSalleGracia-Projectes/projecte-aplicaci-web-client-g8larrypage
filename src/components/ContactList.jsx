@@ -20,7 +20,7 @@ export default function ContactPanel() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {contacts.map((contact) => (
           <div
-            key={contact.id_usuario}
+            key={contact.id}
             className="bg-white p-6 rounded-lg shadow-md border border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
             <h2 className="text-xl font-bold text-gray-800 mb-4">{contact.nombre}</h2>

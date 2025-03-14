@@ -4,7 +4,7 @@ import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Card, CardBody, Input, Button, Typography } from "@/components/Material-Components";
-import { FaSearch, FaHome, FaUser, FaTable, FaBell, FaBars } from "react-icons/fa";
+import { FaSearch, FaHome, FaUser, FaBars, FaMailBulk } from "react-icons/fa";
 import ContactPanel from "@/components/ContactList";
 
 export default function DashboardPage() {
@@ -42,16 +42,10 @@ export default function DashboardPage() {
               <h2 className="text-lg font-semibold mb-4">Admin Panel</h2>
               <nav className="space-y-1">
                 <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
-                  <FaHome className="h-4 w-4" /><span>Dashboard</span>
+                  <FaUser className="h-4 w-4" /><span>Users</span>
                 </Link>
                 <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
-                  <FaUser className="h-4 w-4" /><span>Profile</span>
-                </Link>
-                <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
-                  <FaTable className="h-4 w-4" /><span>Tables</span>
-                </Link>
-                <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
-                  <FaBell className="h-4 w-4" /><span>Notifications</span>
+                  <FaMailBulk className="h-4 w-4" /><span>Emails</span>
                 </Link>
               </nav>
             </div>
