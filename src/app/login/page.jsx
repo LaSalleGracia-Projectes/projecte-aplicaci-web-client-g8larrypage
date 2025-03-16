@@ -1,24 +1,19 @@
 'use client';
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
 import Image from "next/image";
-import {
-  Card,
-  Input,
-  Button,
-  CardBody,
-  CardHeader,
-  Typography,
-} from "@material-tailwind/react";
+import Link from "next/link";
+import React, { useState, useContext } from "react";
+import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/UserContext";
+import { Card, Input, Button, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 
 export default function Login() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const router = useRouter();
+    const { setUserRole, setIsLoggedIn } = useContext(UserContext);
 
     const handleEmailLogin = async (event) => {
         event.preventDefault();
@@ -37,10 +32,32 @@ export default function Login() {
         }
 
         if (data) {
-            console.log(data);
-            setMessage("¡Log In exitoso!");
-            // Redirigir al usuario a la página principal
-            router.push('/');
+            console.log("User data:", data);
+            const { user } = data;
+
+            const { data: userData, error: userError } = await supabase
+                .from('Usuario')
+                .select('role')
+                .eq('id', user.id)
+                .single();
+
+            if (userError) {
+                console.error('Error fetching user role:', userError);
+                setMessage('Error fetching user role');
+                return;
+            }
+
+            if (userData) {
+                console.log("User role data:", userData);
+                setUserRole(userData.role);
+                setIsLoggedIn(true);
+
+                // Redirigir al usuario a la página principal
+                router.push('/');
+            } else {
+                console.error('User role data is null');
+                setMessage('User role data is null');
+            }
         }
     }
 

@@ -4,28 +4,19 @@ import Image from "next/image";
 import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Header, Footer } from "@/components/ui";
 import { GalleryWithCarousel } from "@/components/Carrusel";
 import { translations } from '@/lang/translations';
 import { Slide } from "react-awesome-reveal";
 import { FaSun, FaMoon } from 'react-icons/fa';
+import { UserContext } from '@/context/UserContext';
 
 export default function Home() {
   const router = useRouter();
+  const { userRole, isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
   const [language, setLanguage] = useState('es');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        setIsLoggedIn(true);
-      }
-    };
-    checkSession();
-  }, []);
 
   // Verifica el tema guardado al cargar la página
   useEffect(() => {
@@ -44,6 +35,7 @@ export default function Home() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setIsLoggedIn(false);
+    setUserRole(null);
     router.push('/');
   };
 
@@ -69,11 +61,21 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-      
-      {/* Main Image */}
-      <section className="w-full h-[90vh] relative">
+    <div className="flex min-h-screen">
+      {userRole === 'admin' && (
+        <div className="fixed bottom-4 left-4 z-50">
+          <Link href="/admin-panel">
+            <button className="bg-gray-800 text-white p-4 rounded-full">
+              Panel Admin
+            </button>
+          </Link>
+        </div>
+      )}
+      <div className="flex-1">
+        <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        
+        {/* Imagen principal */}
+        <section className="w-full h-[90vh] relative">
           <Image
             src="/assets/img/preview.png"
             alt="Imagen Principal"
@@ -82,44 +84,40 @@ export default function Home() {
             quality={100}
             priority
           />
-      </section>
-
-      {/* Download Section */}
-      <Slide>
-        <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10">
-          <div className="w-3/5">
-            <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} quality={100} />
-          </div>
-          <div className="w-3/5 text-left">
-            <h2 className="text-4xl font-bold mb-4">{translations[language].download_title}</h2>
-            <p className="max-w-lg text-black-700 mb-6">{translations[language].download_description}</p>
-            <div className="flex">
-              <a href="#" className="ml-40 mt-4">
-                <Image src="/assets/img/googleplay.png" alt="Google Play" width={180} height={60} />
-              </a>
-            </div>
-          </div>
         </section>
-      </Slide>
 
-      {/* News Section */}
-      <section className="py-4">
-        <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
-        <GalleryWithCarousel language={language}/>
-      </section>
+        {/* Descarga */}
+        <Slide>
+          <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10">
+            <div className="w-3/5">
+              <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} quality={100} />
+            </div>
+            <div className="w-3/5 text-left">
+              <h2 className="text-4xl font-bold mb-4">{translations[language].download_title}</h2>
+              <p className="max-w-lg text-black-700 mb-6">{translations[language].download_description}</p>
+              <div className="flex">
+                <a href="#" className="ml-40 mt-4">
+                  <Image src="/assets/img/googleplay.png" alt="Google Play" width={180} height={60} />
+                </a>
+              </div>
+            </div>
+          </section>
+        </Slide>
 
-      <Footer language={language}/>
+        {/* Noticias */}
+        <section className="py-4">
+          <h2 className="text-2xl font-bold text-center mb-12">{translations[language].news}</h2>
+          <GalleryWithCarousel language={language}/>
+        </section>
 
-      {/* Botón de tema */}
-      <div className="fixed bottom-4 right-4">
-        {/* <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">
-          {isDarkMode ? <FaSun /> : <FaMoon />}
-        </button> */}
-        <Link href="/admin-panel">
-          <button className="bg-gray-800 text-white p-4 rounded-full">
-            Panel Admin
+        <Footer language={language}/>
+
+        {/* Botón de tema */}
+        <div className="fixed bottom-4 right-4 flex flex-col items-end space-y-2">
+          <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">
+            {isDarkMode ? <FaSun /> : <FaMoon />}
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   );
