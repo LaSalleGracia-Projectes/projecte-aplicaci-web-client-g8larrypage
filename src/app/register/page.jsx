@@ -2,7 +2,7 @@
 
 import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Input, Button, CardBody, Typography, Checkbox } from "@/components/Material-Components";
 import { insertUsers } from "@/supabase/insertUsers";
 
@@ -13,6 +13,14 @@ export default function Register() {
     const [message, setMessage] = useState("");
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [privacyAccepted, setPrivacyAccepted] = useState(false);
+
+    useEffect(() => {
+        const fetchAuth = async () => {
+            await useCheckAuth();
+        };
+
+        fetchAuth();
+    }, []);
 
     const handleEmailSignUp = async (event) => {
         event.preventDefault();
@@ -45,8 +53,12 @@ export default function Register() {
         }
 
         if (data) {
-            await insertUsers(data.user.id, fullName);
-            setMessage("Registration successful! Check your email to confirm your account.");
+            try {
+                await insertUsers(data.user.id, fullName, email);
+                setMessage("Registration successful! Check your email to confirm your account.");
+            } catch (error) {
+                setMessage("Error inserting user data: " + error.message);
+            }
         }
 
         setEmail("");
@@ -55,34 +67,52 @@ export default function Register() {
     };
 
     const handleGoogleSignUp = async () => {
-        const { user, error } = await supabase.auth.signInWithOAuth({
-            provider: "google"
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: { redirectTo: "http://localhost:3000/register" } // Redirige aquí tras el login
         });
+    
+        if (error) {
+            console.error("Error al autenticar con Google:", error);
+            return;
+        }
+    
+        console.log("Redirigiendo a Google para autenticación...");
+    };
+
+    const useCheckAuth = async () => {    
+        const { data, error } = await supabase.auth.getSession();
 
         if (error) {
-            setMessage(error.message);
+            console.error("Error al obtener la sesión:", error);
             return;
         }
 
+        const user = data?.session?.user;
+
         if (user) {
-            setMessage("Registro exitoso! Revisa tu correo electrónico para confirmar tu cuenta.");
+            console.log("Usuario autenticado:", user);
+
+            try {
+                await insertUsers(user.id, user.user_metadata?.full_name || "", user.email);
+            } catch (error) {
+                console.error("Error al insertar usuario en BD:", error);
+            }
         }
     };
 
     const handleFacebookSignUp = async () => {
-        const { user, error } = await supabase.auth.signInWithOAuth({
-            provider: "facebook"
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "facebook",
+            options: { redirectTo: "http://localhost:3000/register" } // Redirige aquí tras el login
         });
 
         if (error) {
-            setMessage(error.message);
+            console.error("Error al autenticar con Facebook:", error);
             return;
         }
-
-        if (user) {
-            setMessage("Registro exitoso! Revisa tu correo electrónico para confirmar tu cuenta.");
-        }
     }
+    
 
     return (
         <div className="flex justify-center items-center h-screen">

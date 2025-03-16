@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
 import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Card, CardBody, Input, Typography } from "@/components/Material-Components";
 import { FaSearch, FaHome, FaUser, FaMailBulk } from "react-icons/fa";
-import ContactPanel from "@/components/ContactList";
+import UserList from "@/app/admin-panel/users/components/UserList";
 
-export default function DashboardPage() {
+export default function UsersPage() {
   const [userRole, setUserRole] = useState("null");
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function DashboardPage() {
         </aside>
         <main className="flex-1 overflow-auto">
           <div className="border-b bg-background p-4 flex justify-between items-center">
-            <h1 className="text-lg font-semibold ml-4">Ciudad de las Leyendas / Admin Panel / Emails</h1>
+            <h1 className="text-lg font-semibold ml-4">Ciudad de las Leyendas / Admin Panel / Users</h1>
             <div className="relative">
               <FaSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input type="search" placeholder="Search..." className="w-[200px] pl-8 md:w-[300px]" />
@@ -60,8 +60,8 @@ export default function DashboardPage() {
           <div className="p-6">
             <Card>
               <CardBody>
-                <Typography variant="h6" className="mb-4">Emails</Typography>
-                <ContactPanel />
+                <Typography variant="h6" className="mb-4">Users Panel</Typography>
+                <UserList />
               </CardBody>
             </Card>
           </div>
