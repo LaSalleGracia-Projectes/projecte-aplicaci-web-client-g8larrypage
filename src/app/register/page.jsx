@@ -40,6 +40,7 @@ export default function Register() {
                 }
             }
         });
+        console.log("Data:", data);
 
         if (error) {
             if (error.message.includes("Password should be at least 10 characters")) {
@@ -54,7 +55,7 @@ export default function Register() {
 
         if (data) {
             try {
-                await insertUsers(data.user.id, fullName, email);
+                await insertUsers(data.user.id, fullName, email, data.user.updated_at);
                 setMessage("Registration successful! Check your email to confirm your account.");
             } catch (error) {
                 setMessage("Error inserting user data: " + error.message);
@@ -94,7 +95,7 @@ export default function Register() {
             console.log("Usuario autenticado:", user);
 
             try {
-                await insertUsers(user.id, user.user_metadata?.full_name || "", user.email);
+                await insertUsers(user.id, user.user_metadata?.full_name || "", user.email, user.last_sign_in_at);
             } catch (error) {
                 console.error("Error al insertar usuario en BD:", error);
             }

@@ -1,9 +1,9 @@
 import supabase from "@/helpers/supabaseClient";
 
-export const insertUsers = async (userId, fullName, email) => {
+export const insertUsers = async (userId, fullName, email, last_connexion) => {
     try {
         console.log("Checking if user exists:", { userId });
-        
+
         // Verificar si el usuario ya existe
         const { data: existingUser, error: fetchError } = await supabase
             .from("Usuario")
@@ -21,11 +21,12 @@ export const insertUsers = async (userId, fullName, email) => {
             return;
         }
 
-        console.log("Inserting user:", { userId, fullName, email });
+        console.log("Inserting user:", { userId, fullName, email, last_connexion });
+
         const { data, error } = await supabase
             .from("Usuario")
             .insert([
-                { id: userId, nombre: fullName, role: "user", correo: email }  // Incluyendo el campo 'correo'
+                { id: userId, nombre: fullName, role: "user", correo: email, last_connexion: last_connexion }  // Corregido aquí
             ]);
 
         if (error) {
