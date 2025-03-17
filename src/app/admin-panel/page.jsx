@@ -4,7 +4,7 @@ import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Card, CardBody, Input, Typography } from "@/components/Material-Components";
-import { FaSearch, FaHome, FaUser, FaMailBulk } from "react-icons/fa";
+import { FaSearch, FaHome, FaUser, FaMailBulk, FaChartBar } from "react-icons/fa";
 import ContactPanel from "@/components/ContactList";
 
 export default function DashboardPage() {
@@ -41,6 +41,9 @@ export default function DashboardPage() {
                 </Link>
                 <Link href="/admin-panel/users" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
                   <FaUser className="h-4 w-4" /><span>Users</span>
+                </Link>
+                <Link href="/admin-panel/analytics" className="flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-zinc-700 transition-colors">
+                  <FaChartBar className="h-4 w-4" /><span>Analytics</span>
                 </Link>
               </nav>
             </div>
