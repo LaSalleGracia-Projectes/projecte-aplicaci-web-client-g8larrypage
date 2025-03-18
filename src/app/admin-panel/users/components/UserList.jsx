@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { selectUsers } from "@/supabase/selectUsers";
 import { removeUser, sendPasswordResetEmail } from "@/supabase/userActions";
 import { formatDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -91,12 +92,13 @@ export default function UserList() {
                 >
                   Eliminar
                 </button>
+                <Link href={`/admin-panel/users/${user.id}`}>
                 <button
-                  onClick={() => alert("Edit user")} // Falta implementar funcionalidad
                   className="text-gray-600 hover:text-gray-900 mx-1"
                 >
                   Editar
                 </button>
+                </Link>
               </td>
             </tr>
           ))}

@@ -12,7 +12,15 @@ import {
     MenuHandler,
     MenuList,
     MenuItem,
-    Avatar
+    Avatar,
+    Dialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    Textarea,
+    Option,
+    Select,
+    Spinner
 } from '@material-tailwind/react';
 
 export {
@@ -27,5 +35,13 @@ export {
     MenuHandler,
     MenuList,
     MenuItem,
-    Avatar
+    Avatar,
+    Dialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    Textarea,
+    Option,
+    Select,
+    Spinner
 };
