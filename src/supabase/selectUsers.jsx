@@ -1,10 +1,10 @@
 import supabase from "@/helpers/supabaseClient";
 
 export const selectUsers = async() => {
-    const { data, error } = await supabase.from('Usuario').select();
+    const { data, error } = await supabase.from('Usuario').select("id, role, nombre, correo, last_connexion");
     if (error) {
-        console.error("ERROR", error);
-        return [];
+        throw new Error("Error fetching users: " + error.message);
     }
+
     return data;
 }

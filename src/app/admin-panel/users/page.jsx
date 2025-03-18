@@ -13,16 +13,28 @@ export default function UsersPage() {
   useEffect(() => {
     const fetchUserRole = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-
+  
       if (session) {
-        const { data: user, error } = await supabase.from('Usuario').select('role').eq('id', session.user.id).single();
+        const { data: user } = await supabase
+          .from("Usuario")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+  
         if (user) {
           setUserRole(user.role);
+  
+          // Actualizar last_connexion con updated_at
+          await supabase
+          .from("Usuario")
+          .update({ last_connexion: session.user.updated_at })
+          .eq("id", session.user.id);
         }
       }
-    }
+    };
+  
     fetchUserRole();
-  }, [])
+  }, []);
 
   if (userRole !== 'admin') {
     return <p>Access Denied</p>;
