@@ -3,30 +3,47 @@
 import { Header, Footer } from '@/components/ui';
 import { FaBan } from 'react-icons/fa';
 import { translationsHelpBans } from '@/lang/translations';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import supabase from '@/helpers/supabaseClient';
 import { useRouter } from 'next/navigation';
+import { UserContext } from '@/context/UserContext';
 
 export default function BanHelp() {
   const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState("es");
   const translation = translationsHelpBans[currentLanguage] || translationsHelpBans["es"];
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
+  
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsLoggedIn(false);
-    router.push('/');
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+      
+      localStorage.removeItem('supabase.auth.token');
+      
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
   };
 
   return (

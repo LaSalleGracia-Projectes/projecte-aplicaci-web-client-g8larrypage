@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
 import { insertContactMessage } from "@/supabase/insertContact";
+import { UserContext } from '@/context/UserContext';
 
 export default function ContactPage() {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
   const [language, setLanguage] = useState('es');
   const [formData, setFormData] = useState({
     nombre: '',
@@ -24,15 +25,31 @@ export default function ContactPage() {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsLoggedIn(false);
-    router.push('/');
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+      
+      localStorage.removeItem('supabase.auth.token');
+      
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
   };
   
   const changeLanguage = (lang) => {

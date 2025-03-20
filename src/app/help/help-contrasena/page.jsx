@@ -3,28 +3,52 @@
 import { Header, Footer } from '@/components/ui';
 import { FaKey } from 'react-icons/fa';
 import { translationsHelpPassword } from '@/lang/translations';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import supabase from '@/helpers/supabaseClient';
+import { useRouter } from 'next/navigation';
+import { UserContext } from '@/context/UserContext';
 
 export default function PasswordHelp() {
+  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState("es");
   const translation = translationsHelpPassword[currentLanguage] || translationsHelpPassword["es"];
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
+  
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+      
+      localStorage.removeItem('supabase.auth.token');
+      
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn}/>
+      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <main className="flex-grow container mx-auto px-4 mt-40">
         <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center mb-4">
@@ -43,7 +67,7 @@ export default function PasswordHelp() {
           <h3 className="text-lg font-semibold mb-2">{translation.faq_title}</h3>
           <div className="text-gray-600 mb-4">
             {translation.faq_list.map((faq, index) => (
-              <div key={index}>
+              <div key={index} className="mb-3">
                 <p className="font-semibold">{faq.question}</p>
                 <p>{faq.answer}</p>
               </div>

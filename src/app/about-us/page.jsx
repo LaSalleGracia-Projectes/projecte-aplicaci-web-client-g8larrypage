@@ -1,16 +1,18 @@
 'use client';
 
 import supabase from '@/helpers/supabaseClient';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
 import { FaSun, FaMoon } from 'react-icons/fa';
-
+import { UserContext } from '@/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 export default function AboutUs() {
+  const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState('es');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
   const changeLanguage = (newLanguage) => {
@@ -34,17 +36,39 @@ export default function AboutUs() {
     });
   };
 
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+
+      localStorage.removeItem('supabase.auth.token');
+      
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
 
-  // Verifica el tema guardado al cargar la página
+  // Verificar tema al cargar
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setIsDarkMode(savedTheme === 'dark');
@@ -60,7 +84,12 @@ export default function AboutUs() {
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn}/>
+      <Header 
+        language={currentLanguage} 
+        changeLanguage={changeLanguage} 
+        isLoggedIn={isLoggedIn} 
+        onLogout={handleLogout}
+      />
       <div className="flex-grow overflow-y-auto p-4 mt-44">
         {/* Título y descripción principal */}
         <div className="text-center">
