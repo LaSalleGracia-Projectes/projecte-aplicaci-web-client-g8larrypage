@@ -1,8 +1,9 @@
 'use client';
 
+import supabaseAdmin from "@/helpers/supabaseAdmin";
 import { useEffect, useState } from "react";
 import { selectUsers } from "@/supabase/selectUsers";
-import { removeUser, sendPasswordResetEmail } from "@/supabase/userActions";
+import { sendPasswordResetEmail } from "@/supabase/userActions";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 
@@ -39,11 +40,50 @@ export default function UserList() {
 
   const handleRemoveUser = async (id) => {
     try {
-      await removeUser(id);
-      alert("Usuario eliminado");
+      // Obtener el auth_id del usuario desde la tabla "Usuario" relacionada con "auth/users"
+      const { data: user, error: fetchUserError } = await supabaseAdmin
+        .from('Usuario')
+        .select('correo') // Selecciona el correo del usuario
+        .eq('id', id)
+        .single();
+  
+      if (fetchUserError) throw fetchUserError;
+  
+      if (!user || !user.correo) {
+        throw new Error("No se encontró el correo para este usuario.");
+      }
+  
+      const userEmail = user.correo;
+  
+      // Buscar el auth_id en la tabla auth/users usando el correo
+      const { data: authUser, error: fetchAuthUserError } = await supabaseAdmin.auth.admin.listUsers();
+  
+      if (fetchAuthUserError) throw fetchAuthUserError;
+  
+      const authId = authUser.users.find((u) => u.email === userEmail)?.id;
+  
+      if (!authId) {
+        throw new Error("No se encontró el auth_id para este usuario.");
+      }
+  
+      // Eliminar el usuario de la tabla "Usuario"
+      const { error: deleteTableError } = await supabaseAdmin
+        .from('Usuario')
+        .delete()
+        .eq('id', id);
+  
+      if (deleteTableError) throw deleteTableError;
+  
+      // Eliminar los metadatos del usuario registrado en auth
+      const { error: deleteAuthError } = await supabaseAdmin.auth.admin.deleteUser(authId);
+  
+      if (deleteAuthError) throw deleteAuthError;
+  
+      alert("Usuario eliminado correctamente");
       setUsers(users.filter(user => user.id !== id));
     } catch (err) {
       console.error("Error al eliminar usuario:", err);
+      alert("Error al eliminar el usuario: " + err.message);
     }
   };
 

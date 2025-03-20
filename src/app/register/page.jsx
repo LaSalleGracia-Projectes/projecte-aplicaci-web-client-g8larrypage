@@ -25,46 +25,82 @@ export default function Register() {
     const handleEmailSignUp = async (event) => {
         event.preventDefault();
         setMessage("");
-
+    
         if (!termsAccepted || !privacyAccepted) {
             setMessage("You must accept the terms and conditions and the privacy policy.");
             return;
         }
-
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                data: {
-                    display_name: fullName
+    
+        try {
+            // Verificar si el correo ya está registrado en la tabla Usuario
+            const { data: existingUser, error: userError } = await supabase
+                .from('Usuario')
+                .select('correo')
+                .eq('correo', email)
+                .single();
+    
+            if (userError && userError.code !== 'PGRST116') {
+                // Si ocurre un error que no sea "no rows found", manejarlo
+                throw userError;
+            }
+    
+            if (existingUser) {
+                setMessage("Correo ya registrado. Por favor, inicia sesión.");
+                return;
+            }
+    
+            // Verificar si el correo ya está registrado en auth/users
+            const { data: authUsers, error: authError } = await supabase.auth.admin.listUsers();
+    
+            if (authError) {
+                throw authError;
+            }
+    
+            const authUser = authUsers.users.find((u) => u.email === email);
+    
+            if (authUser) {
+                setMessage("Correo ya registrado con otro proveedor. Por favor, inicia sesión.");
+                return;
+            }
+    
+            // Registrar al usuario si el correo no está registrado
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        display_name: fullName
+                    }
+                }
+            });
+    
+            if (error) {
+                if (error.message.includes("Password should be at least 10 characters")) {
+                    setMessage("The password must be at least 10 characters long.");
+                } else if (error.message.includes("Password should contain at least one character")) {
+                    setMessage("The password must include lowercase, uppercase, numbers, and symbols.");
+                } else {
+                    setMessage(error.message);
+                }
+                return;
+            }
+    
+            if (data) {
+                try {
+                    await insertUsers(data.user.id, fullName, email, data.user.updated_at);
+                    setMessage("Registration successful! Check your email to confirm your account.");
+                } catch (error) {
+                    setMessage("Error inserting user data: " + error.message);
                 }
             }
-        });
-        console.log("Data:", data);
-
-        if (error) {
-            if (error.message.includes("Password should be at least 10 characters")) {
-                setMessage("The password must be at least 10 characters long.");
-            } else if (error.message.includes("Password should contain at least one character")) {
-                setMessage("The password must include lowercase, uppercase, numbers, and symbols.");
-            } else {
-                setMessage(error.message);
-            }
-            return;
+    
+            setEmail("");
+            setName("");
+            setPassword("");
+        } catch (error) {
+            console.error("Error during registration:", error);
+            setMessage("An error occurred during registration. Please try again.");
         }
-
-        if (data) {
-            try {
-                await insertUsers(data.user.id, fullName, email, data.user.updated_at);
-                setMessage("Registration successful! Check your email to confirm your account.");
-            } catch (error) {
-                setMessage("Error inserting user data: " + error.message);
-            }
-        }
-
-        setEmail("");
-        setName("");
-        setPassword("");
     };
 
     const handleGoogleSignUp = async () => {
@@ -77,8 +113,6 @@ export default function Register() {
             console.error("Error al autenticar con Google:", error);
             return;
         }
-    
-        console.log("Redirigiendo a Google para autenticación...");
     };
 
     const useCheckAuth = async () => {    
@@ -92,7 +126,6 @@ export default function Register() {
         const user = data?.session?.user;
 
         if (user) {
-            console.log("Usuario autenticado:", user);
 
             try {
                 await insertUsers(user.id, user.user_metadata?.full_name || "", user.email, user.last_sign_in_at);

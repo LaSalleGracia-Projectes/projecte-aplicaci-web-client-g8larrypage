@@ -17,7 +17,6 @@ import { FaArrowLeft, FaSave, FaTimes, FaUserEdit } from "react-icons/fa";
 
 export default function EditUserPage({ params }) {
   const router = useRouter();
-  // Usar React.use para desenvolver los params
   const unwrappedParams = React.use(params);
   const id = unwrappedParams.id;
   
@@ -79,25 +78,26 @@ export default function EditUserPage({ params }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     try {
       setSaving(true);
-      
-      const { error } = await supabase
+  
+      // Actualizar la tabla "Usuario"
+      const { error: updateTableError } = await supabase
         .from('Usuario')
         .update({
           nombre: formData.nombre,
           correo: formData.correo,
           role: formData.role,
         })
-        .eq('id', id);
-      
-      if (error) throw error;
-      
+        .eq('id', id); // Asegúrate de usar el ID del usuario que estás editando
+  
+      if (updateTableError) throw updateTableError;
+  
       alert('Usuario actualizado correctamente');
       router.push('/admin-panel/users');
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error("Error al actualizar el usuario:", error);
       setError("Error al actualizar el usuario: " + error.message);
     } finally {
       setSaving(false);

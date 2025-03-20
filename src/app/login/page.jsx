@@ -32,7 +32,6 @@ export default function Login() {
         }
 
         if (data) {
-            console.log("User data:", data);
             const { user } = data;
 
             const { data: userData, error: userError } = await supabase
@@ -48,7 +47,6 @@ export default function Login() {
             }
 
             if (userData) {
-                console.log("User role data:", userData);
                 setUserRole(userData.role);
                 setIsLoggedIn(true);
 
