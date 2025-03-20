@@ -18,15 +18,21 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
       </div>
 
       <div className="flex gap-4">
-        <button><Image src="/assets/img/clan.png" alt="Clan" width={40} height={40} className="hover:bg-purple-200" /></button>
-        <button><Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40} className="hover:bg-purple-400" /></button>
-        <button><Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40} className="hover:bg-purple-400" /></button>
+        <button>
+          <Image src="/assets/img/clan.png" alt="Clan" width={40} height={40}/>
+        </button>
+        <button>
+          <Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40}/>
+        </button>
+        <button>
+          <Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40}/>
+        </button>
         {isLoggedIn ? (
           <ProfileMenu onLogout={onLogout}/>
         ) : (
           <button>
             <Link href="/register">
-              <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40} className="hover:bg-purple-400" />
+              <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40}/>
             </Link>
           </button>
         )}
