@@ -5,30 +5,50 @@ import { Card } from "@/components/Material-Components";
 import { FaKey, FaEnvelope, FaUser, FaShieldAlt, FaShoppingCart, FaQrcode, FaFolderOpen, FaHandPaper } from "react-icons/fa";
 import Link from "next/link";
 import { translationsHelp } from "@/lang/translations";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import supabase from "@/helpers/supabaseClient";
 import { useRouter } from "next/navigation";
+import { UserContext } from '@/context/UserContext';
 
 export default function HelpPage() {
   const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState("es");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
   const translation = translationsHelp[currentLanguage] || translationsHelp["es"];
-  const changeLanguage = (newLanguage) => setCurrentLanguage( newLanguage);
+  const changeLanguage = (newLanguage) => setCurrentLanguage(newLanguage);
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
+
+  // Actualiza la función de cierre de sesión para que sea compatible con la del home
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsLoggedIn(false);
-    router.push('/');
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+      
+      localStorage.removeItem('supabase.auth.token');
+      
+      // Redirige al home
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
   };
   
   const helpOptions = [

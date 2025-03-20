@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsPrivacyPolicy } from '@/lang/translations';
-import { useEffect } from 'react';
 import supabase from '@/helpers/supabaseClient';
 import { useRouter } from 'next/navigation';
+import { UserContext } from '@/context/UserContext';
 
 export default function PrivacyPolicy() {
   const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState('es');
   const translation = translationsPrivacyPolicy[currentLanguage] || translationsPrivacyPolicy['es'];
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
 
   const changeLanguage = (newLanguage) => {
     setCurrentLanguage(newLanguage);
@@ -22,14 +22,31 @@ export default function PrivacyPolicy() {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [setIsLoggedIn]);
+  
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsLoggedIn(false);
-    router.push('/');
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+        return;
+      }
+      
+      setIsLoggedIn(false);
+      setUserRole(null);
+      
+      localStorage.removeItem('supabase.auth.token');
+      
+      router.push('/');
+    } catch (err) {
+      console.error("Error en el proceso de cierre de sesión:", err);
+    }
   };
 
   return (
