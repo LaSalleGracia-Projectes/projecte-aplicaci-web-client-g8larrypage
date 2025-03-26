@@ -14,8 +14,20 @@ export const selectUserById = async (id) => {
 };
 
 export const sendPasswordResetEmail = async (email) => {
-  // Implementa la lógica para enviar un correo de recuperación de contraseña
-  // Esto puede variar dependiendo de cómo manejes la autenticación y los correos en tu aplicación
+  if (!email) {
+    throw new Error("El correo electrónico es requerido");
+  }
+
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
+
+  if (error) {
+    console.error("Error al enviar el correo de recuperación:", error.message);
+    throw new Error("No se pudo enviar el correo de recuperación. Por favor, verifica el correo ingresado.");
+  }
+
+  return data;
 };
 
 export const removeUser = async (id) => {
