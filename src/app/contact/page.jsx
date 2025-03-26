@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import supabase from "@/helpers/supabaseClient";
 import { insertContactMessage } from "@/supabase/insertContact";
 import { UserContext } from '@/context/UserContext';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 export default function ContactPage() {
   const router = useRouter();
@@ -19,41 +20,43 @@ export default function ContactPage() {
   });
   const [enviando, setEnviando] = useState(false);
   const [mensajeEnvio, setMensajeEnvio] = useState({ tipo: '', texto: '' });
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
+      setIsLoggedIn(!!data.session);
     };
     checkSession();
   }, [setIsLoggedIn]);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDarkMode(savedTheme === 'dark');
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', newMode);
+      return newMode;
+    });
+  };
+
   const handleLogout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
-      
-      if (error) {
-        console.error("Error al cerrar sesión:", error.message);
-        return;
+      if (!error) {
+        setIsLoggedIn(false);
+        setUserRole(null);
+        localStorage.removeItem('supabase.auth.token');
+        router.push('/');
       }
-      
-      setIsLoggedIn(false);
-      setUserRole(null);
-      
-      localStorage.removeItem('supabase.auth.token');
-      
-      router.push('/');
     } catch (err) {
       console.error("Error en el proceso de cierre de sesión:", err);
     }
-  };
-  
-  const changeLanguage = (lang) => {
-    setLanguage(lang);
   };
 
   const handleChange = (e) => {
@@ -65,134 +68,47 @@ export default function ContactPage() {
     e.preventDefault();
     setEnviando(true);
     setMensajeEnvio({ tipo: '', texto: '' });
-    
+
     const result = await insertContactMessage(formData);
-    
-    if (result.success) {
-      setMensajeEnvio({ 
-        tipo: 'exito', 
-        texto: '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.' 
-      });
-      setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
-    } else {
-      setMensajeEnvio({ 
-        tipo: 'error', 
-        texto: 'Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.' 
-      });
-    }
-    
+    setMensajeEnvio({
+      tipo: result.success ? 'exito' : 'error',
+      texto: result.success
+        ? '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.'
+        : 'Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.'
+    });
+
+    if (result.success) setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
     setEnviando(false);
   };
-    
-  //   // Simulación temporal del envío
-  //   setTimeout(() => {
-  //     setMensajeEnvio({ 
-  //       tipo: 'exito', 
-  //       texto: '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.' 
-  //     });
-  //     setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
-  //     setEnviando(false);
-  //   }, 1000);
-  // };
 
   return (
-    <div>
-      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-
-      <div className="pt-32"></div>
-
-      <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">Contacto</h1>
-            <p className="text-gray-600">Si en la página de ayuda no encuentras tu respuesta, rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
+      <Header language={language} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <div className="bg-gray-100 dark:bg-gray-900 min-h-screen py-16 px-6 flex justify-center items-center mt-36">
+        <div className="relative w-full max-w-2xl">
+          <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 rounded-lg shadow-xl transform scale-110"></div>
+          <div className="relative bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">Contacto</h1>
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-8">
+              Si en la página de ayuda no encuentras tu respuesta, rellena el formulario y nos pondremos en contacto contigo lo antes posible.
+            </p>
+            {mensajeEnvio.texto && (
+              <div className={`p-4 mb-6 rounded-md ${mensajeEnvio.tipo === 'exito' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'}`}>{mensajeEnvio.texto}</div>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <input type="text" name="nombre" placeholder="Tu nombre" value={formData.nombre} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <input type="text" name="asunto" placeholder="Asunto" value={formData.asunto} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <textarea name="mensaje" placeholder="Escribe tu mensaje..." value={formData.mensaje} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" rows="5"></textarea>
+              <button type="submit" disabled={enviando} className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-70">{enviando ? 'Enviando...' : 'Enviar mensaje'}</button>
+            </form>
           </div>
-
-          {mensajeEnvio.texto && (
-            <div className={`p-4 mb-6 rounded-md ${mensajeEnvio.tipo === 'exito' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-              {mensajeEnvio.texto}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                Nombre completo
-              </label>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Tu nombre"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Correo electrónico
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="tucorreo@ejemplo.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="asunto" className="block text-sm font-medium text-gray-700 mb-1">
-                Asunto
-              </label>
-              <input
-                type="text"
-                id="asunto"
-                name="asunto"
-                value={formData.asunto}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Asunto de tu mensaje"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
-                Mensaje
-              </label>
-              <textarea
-                id="mensaje"
-                name="mensaje"
-                value={formData.mensaje}
-                onChange={handleChange}
-                required
-                rows="5"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Escribe tu mensaje aquí..."
-              ></textarea>
-            </div>
-
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                disabled={enviando}
-                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {enviando ? 'Enviando...' : 'Enviar mensaje'}
-              </button>
-            </div>
-          </form>
         </div>
       </div>
-
       <Footer language={language} />
+      <div className="fixed bottom-4 right-4">
+        <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">{isDarkMode ? <FaSun /> : <FaMoon />}</button>
+      </div>
     </div>
   );
 }

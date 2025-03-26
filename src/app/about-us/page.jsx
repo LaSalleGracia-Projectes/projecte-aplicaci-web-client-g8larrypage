@@ -15,6 +15,32 @@ export default function AboutUs() {
   const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
   const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
 
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    checkSession();
+  }, [setIsLoggedIn]);
+
+  // Verificar tema al cargar
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDarkMode(savedTheme === 'dark');
+
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   const changeLanguage = (newLanguage) => {
     setCurrentLanguage(newLanguage);
   };
@@ -56,41 +82,15 @@ export default function AboutUs() {
     }
   };
 
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
-    checkSession();
-  }, [setIsLoggedIn]);
-
-  // Verificar tema al cargar
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setIsDarkMode(savedTheme === 'dark');
-
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-    } else {
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
   return (
-    <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
+    <div className="flex flex-col min-h-screen dark:bg-gray-900">
       <Header 
         language={currentLanguage} 
         changeLanguage={changeLanguage} 
         isLoggedIn={isLoggedIn} 
         onLogout={handleLogout}
       />
-      <div className="flex-grow overflow-y-auto p-4 mt-44">
+      <div className="flex-grow overflow-y-auto p-4 mt-44 text-black dark:text-white">
         {/* Título y descripción principal */}
         <div className="text-center">
           <h2 className="text-4xl font-bold mt-8 mb-8">{translation.title}</h2>

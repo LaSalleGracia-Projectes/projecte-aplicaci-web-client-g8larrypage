@@ -1,6 +1,7 @@
 'use client';
 
-import supabase from "@/helpers/supabaseClient";
+import supabaseAdmin from "@/helpers/supabaseAdmin";
+import { sendPasswordResetEmail } from "@/supabase/userActions";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useContext } from "react";
@@ -19,7 +20,7 @@ export default function Login() {
         event.preventDefault();
         setMessage("");
 
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabaseAdmin.auth.signInWithPassword({
             email: email,
             password: password,
         });
@@ -34,7 +35,7 @@ export default function Login() {
         if (data) {
             const { user } = data;
 
-            const { data: userData, error: userError } = await supabase
+            const { data: userData, error: userError } = await supabaseAdmin
                 .from('Usuario')
                 .select('role')
                 .eq('id', user.id)
@@ -60,7 +61,7 @@ export default function Login() {
     }
 
     const handleGoogleLogin = async () => {
-        const { user, error } = await supabase.auth.signInWithOAuth({
+        const { user, error } = await supabaseAdmin.auth.signInWithOAuth({
             provider: "google",
         });
 
@@ -77,7 +78,7 @@ export default function Login() {
     }
 
     const handleFacebookLogin = async () => {
-        const { user, error } = await supabase.auth.signInWithOAuth({
+        const { user, error } = await supabaseAdmin.auth.signInWithOAuth({
             provider: "facebook",
         });
 
@@ -93,6 +94,20 @@ export default function Login() {
         }
     }
 
+    const handlePasswordReset = async () => {
+        if (!email) {
+            setMessage("Por favor, ingresa tu correo electrónico para recuperar tu contraseña.");
+            return;
+        }
+        
+        try {
+            await sendPasswordResetEmail(email);
+            setMessage("Se ha enviado un correo de recuperación. Por favor, revisa tu bandeja de entrada.");
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
+
     return (
         <div className="flex justify-center items-center h-screen">
             <Card shadow={false} className="md:px-8 md:py-6 py-4 border border-gray-300 max-w-md">
@@ -104,7 +119,14 @@ export default function Login() {
                     </div>
                 </CardHeader>
                 <CardBody>
-                    {message && <Typography color="red" className="font-electrolize">{message}</Typography>}
+                    {message && (
+                    <Typography
+                        color={message.includes("Se ha enviado un correo de recuperación") ? "green" : "red"}
+                        className="font-electrolize"
+                    >
+                        {message}
+                    </Typography>
+                    )}
                     <form onSubmit={handleEmailLogin} className="flex flex-col gap-3 md:mt-4">
                         <Input
                             onChange={(e) => setEmail(e.target.value)}
@@ -154,6 +176,14 @@ export default function Login() {
                                 className="h-6 w-6"
                             />{" "}
                             Log in with Facebook
+                        </Button>
+                        <Button
+                            variant="text"
+                            size="sm"
+                            className="text-blue-500 hover:text-blue-700 font-electrolize"
+                            onClick={handlePasswordReset}
+                        >
+                            Forgot your password?
                         </Button>
                         <Typography variant="small" className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600 mt-4 font-electrolize">
                             Upon signing in, you consent to abide by our{" "}

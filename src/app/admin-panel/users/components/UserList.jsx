@@ -6,6 +6,7 @@ import { selectUsers } from "@/supabase/selectUsers";
 import { sendPasswordResetEmail } from "@/supabase/userActions";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
+import { FaEdit, FaEnvelope, FaTrash } from "react-icons/fa";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -35,6 +36,7 @@ export default function UserList() {
       alert("Correo de recuperación enviado");
     } catch (err) {
       console.error("Error al enviar correo de recuperación:", err);
+      alert("Error al enviar el correo de recuperación: " + err.message);
     }
   };
 
@@ -120,25 +122,35 @@ export default function UserList() {
                 </span>
               </td>
               <td className="py-4 px-4 text-center">
-                <button
-                  onClick={() => handlePasswordReset(user.correo)}
-                  className="text-blue-600 hover:text-blue-900 mx-1"
-                >
-                  Enviar Correo
-                </button>
-                <button
-                  onClick={() => handleRemoveUser(user.id)}
-                  className="text-red-600 hover:text-red-900 mx-1"
-                >
-                  Eliminar
-                </button>
-                <Link href={`/admin-panel/users/${user.id}`}>
-                <button
-                  className="text-gray-600 hover:text-gray-900 mx-1"
-                >
-                  Editar
-                </button>
-                </Link>
+                <div className="space-x-4">
+                  {/* Icono para enviar correo */}
+                  <button
+                    onClick={() => handlePasswordReset(user.correo)}
+                    className="text-blue-600 hover:text-blue-900"
+                    title="Enviar Correo"
+                  >
+                    <FaEnvelope size={18} />
+                  </button>
+
+                  {/* Icono para eliminar usuario */}
+                  <button
+                    onClick={() => handleRemoveUser(user.id)}
+                    className="text-red-600 hover:text-red-900"
+                    title="Eliminar Usuario"
+                  >
+                    <FaTrash size={18} />
+                  </button>
+
+                  {/* Icono para editar usuario */}
+                  <Link href={`/admin-panel/users/${user.id}`}>
+                    <button
+                      className="text-gray-600 hover:text-gray-900"
+                      title="Editar Usuario"
+                    >
+                      <FaEdit size={18} />
+                    </button>
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}

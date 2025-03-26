@@ -1,10 +1,10 @@
 'use client';
 
-import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Card, Input, Button, CardBody, Typography, Checkbox } from "@/components/Material-Components";
 import { insertUsers } from "@/supabase/insertUsers";
+import supabaseAdmin from "@/helpers/supabaseAdmin";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ export default function Register() {
     
         try {
             // Verificar si el correo ya está registrado en la tabla Usuario
-            const { data: existingUser, error: userError } = await supabase
+            const { data: existingUser, error: userError } = await supabaseAdmin
                 .from('Usuario')
                 .select('correo')
                 .eq('correo', email)
@@ -50,7 +50,7 @@ export default function Register() {
             }
     
             // Verificar si el correo ya está registrado en auth/users
-            const { data: authUsers, error: authError } = await supabase.auth.admin.listUsers();
+            const { data: authUsers, error: authError } = await supabaseAdmin.auth.admin.listUsers();
     
             if (authError) {
                 throw authError;
@@ -64,7 +64,7 @@ export default function Register() {
             }
     
             // Registrar al usuario si el correo no está registrado
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await supabaseAdmin.auth.signUp({
                 email: email,
                 password: password,
                 options: {
@@ -104,7 +104,7 @@ export default function Register() {
     };
 
     const handleGoogleSignUp = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
+        const { error } = await supabaseAdmin.auth.signInWithOAuth({
             provider: "google",
             options: { redirectTo: "http://localhost:3000/register" } // Redirige aquí tras el login
         });
@@ -116,7 +116,7 @@ export default function Register() {
     };
 
     const useCheckAuth = async () => {    
-        const { data, error } = await supabase.auth.getSession();
+        const { data, error } = await supabaseAdmin.auth.getSession();
 
         if (error) {
             console.error("Error al obtener la sesión:", error);
@@ -136,7 +136,7 @@ export default function Register() {
     };
 
     const handleFacebookSignUp = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
+        const { error } = await supabaseAdmin.auth.signInWithOAuth({
             provider: "facebook",
             options: { redirectTo: "http://localhost:3000/register" } // Redirige aquí tras el login
         });
