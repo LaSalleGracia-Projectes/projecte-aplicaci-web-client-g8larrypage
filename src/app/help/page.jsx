@@ -14,9 +14,8 @@ export default function HelpPage() {
   const router = useRouter();
   const [currentLanguage, setCurrentLanguage] = useState("es");
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
-  const translation = translationsHelp[currentLanguage] || translationsHelp["es"];
-  const changeLanguage = (newLanguage) => setCurrentLanguage(newLanguage);
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsHelp[language] || translationsHelp["es"];
 
   // Manejar el cambio de tema
   const toggleTheme = () => {
@@ -95,7 +94,7 @@ export default function HelpPage() {
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <main className="container mx-auto px-4 py-8 mt-60 mb-60">
         <h1 className="text-3xl font-bold mb-6">{translation.manage_account}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
@@ -114,7 +113,7 @@ export default function HelpPage() {
         ))}
       </div>
       </main>
-      <Footer language={currentLanguage}/>
+      <Footer language={language}/>
 
       {/* Botón de tema */}
       <div className="fixed bottom-4 right-4">

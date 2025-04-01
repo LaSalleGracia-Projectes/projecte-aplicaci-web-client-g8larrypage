@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { Menu, MenuHandler, MenuList, MenuItem, Avatar, Typography } from "@/components/Material-Components";
+import { translationsProfileMenu } from "@/lang/translations";
    
-export function ProfileMenu({ onLogout }) {
+export function ProfileMenu({ onLogout, language = 'es' }) {
+    const translation = translationsProfileMenu[language] || translationsProfileMenu['es'];
     return (
       <Menu placement="bottom-end">
         <MenuHandler>
@@ -33,7 +35,7 @@ export function ProfileMenu({ onLogout }) {
                 />
               </svg>
               <Typography variant="small" className="font-medium">
-                Mi Perfil
+                {translation.profile}
               </Typography>
             </MenuItem>
           </Link>
@@ -55,7 +57,7 @@ export function ProfileMenu({ onLogout }) {
           </svg>
    
             <Typography variant="small" className="font-medium">
-              Cerrar sesión
+              {translation.logout}
             </Typography>
           </MenuItem>
         </MenuList>

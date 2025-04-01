@@ -10,10 +10,9 @@ import { useRouter } from 'next/navigation';
 
 export default function AboutUs() {
   const router = useRouter();
-  const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
-  const translation = translationsAboutUs[currentLanguage] || translationsAboutUs['es'];
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsAboutUs[language] || translationsAboutUs['es'];
 
   useEffect(() => {
     const checkSession = async () => {
@@ -40,11 +39,7 @@ export default function AboutUs() {
       document.documentElement.classList.remove('dark');
     }
   }, []);
-
-  const changeLanguage = (newLanguage) => {
-    setCurrentLanguage(newLanguage);
-  };
-
+  
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
@@ -85,7 +80,7 @@ export default function AboutUs() {
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900">
       <Header 
-        language={currentLanguage} 
+        language={language} 
         changeLanguage={changeLanguage} 
         isLoggedIn={isLoggedIn} 
         onLogout={handleLogout}
@@ -150,7 +145,7 @@ export default function AboutUs() {
           <p>{translation.summary_experience_details}</p>
         </div>
       </div>
-      <Footer language={currentLanguage} />
+      <Footer language={language} />
 
       {/* Botón de tema */}
       <div className="fixed bottom-4 right-4">

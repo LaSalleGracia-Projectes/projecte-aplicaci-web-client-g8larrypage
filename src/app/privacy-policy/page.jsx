@@ -10,10 +10,9 @@ import { FaSun, FaMoon } from 'react-icons/fa';
 
 export default function PrivacyPolicy() {
   const router = useRouter();
-  const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const translation = translationsPrivacyPolicy[currentLanguage] || translationsPrivacyPolicy['es'];
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsPrivacyPolicy[language] || translationsPrivacyPolicy['es'];
 
   // Verificar si el usuario tiene una sesión activa
   useEffect(() => {
@@ -34,11 +33,6 @@ export default function PrivacyPolicy() {
     setIsDarkMode(savedTheme === 'dark');
     document.documentElement.classList.toggle('dark', savedTheme === 'dark');
   }, [])
-
-  // Cambiar el idioma de la página
-  const changeLanguage = (newLanguage) => {
-    setCurrentLanguage(newLanguage);
-  };
 
   // Cambiar el tema de la página
   const toggleTheme = () => {
@@ -70,7 +64,7 @@ export default function PrivacyPolicy() {
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
-      <Header language={currentLanguage} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <section className="text-center py-10 bg-white-100 mt-40 dark:bg-gray-900">
         <h2 className="font-[Electrolize] text-4xl font-bold lg:mb-12">{translation.title}</h2>
         <div className="text-lg text-black-600 px-4 lg:px-0 text-left max-w-4xl mx-auto space-y-6">
@@ -85,7 +79,7 @@ export default function PrivacyPolicy() {
           ))}
         </div>
       </section>
-      <Footer language={currentLanguage} />
+      <Footer language={language} />
 
       {/* Botón de tema */}
       <div className="fixed bottom-4 right-4">

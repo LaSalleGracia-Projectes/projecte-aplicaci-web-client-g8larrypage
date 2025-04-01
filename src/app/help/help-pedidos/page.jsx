@@ -10,10 +10,9 @@ import { UserContext } from '@/context/UserContext';
 
 export default function OrderHelp() {
   const router = useRouter();
-  const [currentLanguage, setCurrentLanguage] = useState("es");
-  const translation = translationsHelpOrders[currentLanguage] || translationsHelpOrders["es"];
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
-
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsHelpOrders[language] || translationsHelpOrders["es"];
+  
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -48,7 +47,7 @@ export default function OrderHelp() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header language={currentLanguage} changeLanguage={setCurrentLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <main className="flex-grow container mx-auto px-4 mt-40">
         <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center mb-4">
@@ -75,7 +74,7 @@ export default function OrderHelp() {
           </div>
         </div>
       </main>
-      <Footer language={currentLanguage} />
+      <Footer language={language} />
     </div>
   );
 }

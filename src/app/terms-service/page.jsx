@@ -10,10 +10,9 @@ import { FaSun, FaMoon } from 'react-icons/fa';
 
 export default function TermsService() {
   const router = useRouter();
-  const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const translation = translationsTermsService[currentLanguage] || translationsTermsService['es'];
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsTermsService[language] || translationsTermsService['es'];
 
   // Verificar si el usuario tiene una sesión activa
   useEffect(() => {
@@ -30,11 +29,6 @@ export default function TermsService() {
     setIsDarkMode(savedTheme === 'dark');
     document.documentElement.classList.toggle('dark', savedTheme === 'dark');
   }, []);
-
-  // Cambiar el idioma de la página
-  const changeLanguage = (newLanguage) => {
-    setCurrentLanguage(newLanguage);
-  };
 
   // Cambiar el tema de la página
   const toggleTheme = () => {
@@ -66,7 +60,7 @@ export default function TermsService() {
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-white">
       <Header 
-        language={currentLanguage} 
+        language={language} 
         changeLanguage={changeLanguage} 
         isLoggedIn={isLoggedIn} 
         onLogout={handleLogout} 
@@ -87,7 +81,7 @@ export default function TermsService() {
           <p className="mt-6">{translation.contact} <strong>{translation.contact_email}</strong></p>
         </div>
       </section>
-      <Footer language={currentLanguage} />
+      <Footer language={language} />
   
       {/* Botón de tema */}
       <div className="fixed bottom-4 right-4">
