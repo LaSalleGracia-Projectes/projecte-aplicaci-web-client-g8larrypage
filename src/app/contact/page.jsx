@@ -7,11 +7,12 @@ import supabase from "@/helpers/supabaseClient";
 import { insertContactMessage } from "@/supabase/insertContact";
 import { UserContext } from '@/context/UserContext';
 import { FaSun, FaMoon } from 'react-icons/fa';
+import { translationsContact } from '@/lang/translations';
 
 export default function ContactPage() {
   const router = useRouter();
-  const { isLoggedIn, setIsLoggedIn, setUserRole } = useContext(UserContext);
-  const [language, setLanguage] = useState('es');
+  const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
+  const translation = translationsContact[language] || translationsContact['es'];
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -73,8 +74,8 @@ export default function ContactPage() {
     setMensajeEnvio({
       tipo: result.success ? 'exito' : 'error',
       texto: result.success
-        ? '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.'
-        : 'Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.'
+        ? translation.success_message
+        : translation.error_message
     });
 
     if (result.success) setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
@@ -83,24 +84,24 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
-      <Header language={language} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <div className="bg-gray-100 dark:bg-gray-900 min-h-screen py-16 px-6 flex justify-center items-center mt-36">
         <div className="relative w-full max-w-2xl">
           <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 rounded-lg shadow-xl transform scale-110"></div>
           <div className="relative bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">Contacto</h1>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">{translation.title}</h1>
             <p className="text-gray-600 dark:text-gray-400 text-center mb-8">
-              Si en la página de ayuda no encuentras tu respuesta, rellena el formulario y nos pondremos en contacto contigo lo antes posible.
+              {translation.description}
             </p>
             {mensajeEnvio.texto && (
               <div className={`p-4 mb-6 rounded-md ${mensajeEnvio.tipo === 'exito' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'}`}>{mensajeEnvio.texto}</div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
-              <input type="text" name="nombre" placeholder="Tu nombre" value={formData.nombre} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
-              <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
-              <input type="text" name="asunto" placeholder="Asunto" value={formData.asunto} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
-              <textarea name="mensaje" placeholder="Escribe tu mensaje..." value={formData.mensaje} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" rows="5"></textarea>
-              <button type="submit" disabled={enviando} className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-70">{enviando ? 'Enviando...' : 'Enviar mensaje'}</button>
+              <input type="text" name="nombre" placeholder={translation.name_placeholder} value={formData.nombre} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <input type="email" name="email" placeholder={translation.email_placeholder} value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <input type="text" name="asunto" placeholder={translation.subject_placeholder} value={formData.asunto} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" />
+              <textarea name="mensaje" placeholder={translation.message_placeholder} value={formData.mensaje} onChange={handleChange} required className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:text-white" rows="5"></textarea>
+              <button type="submit" disabled={enviando} className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-70">{enviando ? translation.sending : translation.send_button}</button>
             </form>
           </div>
         </div>

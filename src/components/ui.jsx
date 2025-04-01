@@ -28,7 +28,7 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
           <Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40}/>
         </button>
         {isLoggedIn ? (
-          <ProfileMenu onLogout={onLogout}/>
+          <ProfileMenu onLogout={onLogout} language={language}/>
         ) : (
           <button>
             <Link href="/register">

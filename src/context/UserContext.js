@@ -9,8 +9,11 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [language, setLanguage] = useState(null);
 
   useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') || 'es';
+    setLanguage(savedLanguage);
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
@@ -29,8 +32,13 @@ export const UserProvider = ({ children }) => {
     checkSession();
   }, []);
 
+  const changeLanguage = (newLanguage) => {
+    setLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage);
+  };
+
   return (
-    <UserContext.Provider value={{ user, userRole, isLoggedIn, setUser, setUserRole, setIsLoggedIn }}>
+    <UserContext.Provider value={{ user, userRole, isLoggedIn, setUser, setUserRole, setIsLoggedIn, changeLanguage, language }}>
       {children}
     </UserContext.Provider>
   );

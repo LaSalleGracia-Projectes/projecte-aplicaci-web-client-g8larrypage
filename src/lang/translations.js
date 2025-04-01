@@ -1317,3 +1317,93 @@ export const translationsHelpPassword = {
     ]
   }
 };
+
+export const translationsContact = {
+  en: {
+    title: "Contact",
+    description: "If you can't find your answer on the help page, fill out the form and we'll get back to you as soon as possible.",
+    name_placeholder: "Your name",
+    email_placeholder: "Email",
+    subject_placeholder: "Subject",
+    message_placeholder: "Write your message...",
+    send_button: "Send message",
+    sending: "Sending...",
+    success_message: "Message sent successfully! We will contact you soon.",
+    error_message: "An error occurred while sending the message. Please try again later."
+  },
+  es: {
+    title: "Contacto",
+    description: "Si en la página de ayuda no encuentras tu respuesta, rellena el formulario y nos pondremos en contacto contigo lo antes posible.",
+    name_placeholder: "Tu nombre",
+    email_placeholder: "Correo electrónico",
+    subject_placeholder: "Asunto",
+    message_placeholder: "Escribe tu mensaje...",
+    send_button: "Enviar mensaje",
+    sending: "Enviando...",
+    success_message: "¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.",
+    error_message: "Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde."
+  },
+  ca: {
+    title: "Contacte",
+    description: "Si a la pàgina d'ajuda no trobes la teva resposta, omple el formulari i ens posarem en contacte amb tu el més aviat possible.",
+    name_placeholder: "El teu nom",
+    email_placeholder: "Correu electrònic",
+    subject_placeholder: "Assumpte",
+    message_placeholder: "Escriu el teu missatge...",
+    send_button: "Enviar missatge",
+    sending: "Enviant...",
+    success_message: "Missatge enviat correctament! Ens posarem en contacte amb tu aviat.",
+    error_message: "Hi ha hagut un error en enviar el missatge. Si us plau, intenta-ho de nou més tard."
+  }
+};
+
+export const translationsProfileMenu = {
+  en: {
+    profile: "My Profile",
+    logout: "Sign out"
+  },
+  es: {
+    profile: "Mi Perfil",
+    logout: "Cerrar sesión"
+  },
+  ca: {
+    profile: "El meu Perfil",
+    logout: "Tancar sessió"
+  }
+};
+
+export const translationsProfile = {
+  en: {
+    title: "PROFILE",
+    home: "Home",
+    name: "Name",
+    email: "Email",
+    provider: "Provider",
+    saving: "Saving...",
+    save_changes: "Save Changes",
+    update_success: "Information updated successfully",
+    update_error: "There was an error updating the information",
+  },
+  es: {
+    title: "PERFIL",
+    home: "Inicio",
+    name: "Nombre",
+    email: "Correo Electrónico",
+    provider: "Proveedor",
+    saving: "Guardando...",
+    save_changes: "Guardar Cambios",
+    update_success: "Información actualizada correctamente",
+    update_error: "Hubo un error al actualizar la información",
+  },
+  ca: {
+    title: "PERFIL",
+    home: "Inici",
+    name: "Nom",
+    email: "Correu Electrònic",
+    provider: "Proveïdor",
+    saving: "Desant...",
+    save_changes: "Desar Canvis",
+    update_success: "Informació actualitzada correctament",
+    update_error: "Hi ha hagut un error en actualitzar la informació",
+  }
+};
