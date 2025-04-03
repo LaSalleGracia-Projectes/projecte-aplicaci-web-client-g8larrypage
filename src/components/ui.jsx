@@ -9,7 +9,7 @@ import { translations } from '@/lang/translations';
 
 export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-3 px-6 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-3 px-4 md:px-6 flex justify-between items-center">
       <div className="flex items-center">
         <Link href="/">
           <Image src="/assets/img/logo-principal.png" alt="Logo Principal" width={80} height={80} />
@@ -17,22 +17,47 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
         <NavList language={language} changeLanguage={changeLanguage} />
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-2 md:gap-4">
+        {/* Botones siempre visibles, pero más pequeños en móvil */}
         <button>
-          <Image src="/assets/img/clan.png" alt="Clan" width={40} height={40}/>
+          <Image 
+            src="/assets/img/clan.png" 
+            alt="Clan" 
+            width={40} 
+            height={40}
+            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+          />
         </button>
         <button>
-          <Image src="/assets/img/tienda.png" alt="Tienda" width={40} height={40}/>
+          <Image 
+            src="/assets/img/tienda.png" 
+            alt="Tienda" 
+            width={40} 
+            height={40}
+            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+          />
         </button>
         <button>
-          <Image src="/assets/img/trofeo.png" alt="Ranking" width={40} height={40}/>
+          <Image 
+            src="/assets/img/trofeo.png" 
+            alt="Ranking" 
+            width={40} 
+            height={40}
+            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+          />
         </button>
         {isLoggedIn ? (
           <ProfileMenu onLogout={onLogout} language={language}/>
         ) : (
           <button>
             <Link href="/register">
-              <Image src="/assets/img/usuario.png" alt="Perfil" width={40} height={40}/>
+              <Image 
+                src="/assets/img/usuario.png" 
+                alt="Perfil" 
+                width={40} 
+                height={40}
+                className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+              />
             </Link>
           </button>
         )}
@@ -46,7 +71,7 @@ export function Footer({ language }) {
 
   return (
     <footer className="bg-black text-white text-center py-6 mt-10">
-      <div className="flex justify-between items-center mb-4 mx-10">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 mx-4 md:mx-10 gap-4">
         <div className="flex gap-4">
           <a href="#"><Image src="/assets/img/youtube.png" alt="YouTube" width={35} height={40} /></a>
           <a href="#"><Image src="/assets/img/instagram.png" alt="Instagram" width={30} height={30} /></a>
@@ -56,9 +81,9 @@ export function Footer({ language }) {
       </div>
         
       <div className="flex justify-center gap-4 mt-4 text-sm">
-      <CopyRight language={language} />
+        <CopyRight language={language} />
       </div>
-      <p className="text-gray-500 mt-4">&copy; 2025 {translation.copyright_text}</p>
+      <p className="text-gray-500 mt-4 px-4">&copy; 2025 {translation.copyright_text}</p>
     </footer>
   );
 }
