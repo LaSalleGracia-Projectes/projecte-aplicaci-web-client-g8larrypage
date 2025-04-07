@@ -23,18 +23,41 @@ export const insertUsers = async (userId, fullName, email, last_connexion) => {
 
         console.log("Inserting user:", { userId, fullName, email, last_connexion });
 
-        const { data, error } = await supabase
+        // Insertar el usuario en la tabla 'Usuario'
+        const { data: insertedUser, error: userInsertError } = await supabase
             .from("Usuario")
             .insert([
-                { id: userId, nombre: fullName, role: "user", correo: email, last_connexion: last_connexion }  // Corregido aquí
-            ]);
+                { id: userId, nombre: fullName, role: "user", correo: email, last_connexion: last_connexion }
+            ])
+            .select();
 
-        if (error) {
-            console.error("Error inserting user data: ", error);
+        if (userInsertError) {
+            console.error("Error inserting user data: ", userInsertError);
             throw new Error("Error inserting user into the 'Usuario' table");
         }
 
-        console.log("User inserted successfully into 'Usuario' table:", data);
+        console.log("User inserted successfully into 'Usuario' table:", insertedUser);
+
+        // Insertar el jugador en la tabla 'Jugador'
+        const { data: insertedPlayer, error: playerInsertError } = await supabase
+            .from("Jugador")
+            .insert([
+                {
+                    id_jugador: Math.floor(Math.random() * 1000000), // Generar un ID único para el jugador
+                    nombre: fullName, // Usar el nombre del usuario
+                    pasos_totales: 0, // Inicializar con 0 pasos
+                    id_usuario: userId, // Relacionar con el ID del usuario
+                    id_clan: null // Sin clan por defecto
+                }
+            ])
+            .select();
+
+        if (playerInsertError) {
+            console.error("Error inserting player data: ", playerInsertError);
+            throw new Error("Error inserting player into the 'Jugador' table");
+        }
+
+        console.log("Player inserted successfully into 'Jugador' table:", insertedPlayer);
     } catch (error) {
         console.error("Unexpected error:", error);
         throw error;

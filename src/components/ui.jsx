@@ -38,13 +38,15 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
           />
         </button>
         <button>
-          <Image 
-            src="/assets/img/trofeo.png" 
-            alt="Ranking" 
-            width={40} 
-            height={40}
-            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
-          />
+          <Link href="/ranking">
+            <Image
+              src="/assets/img/trofeo.png" 
+              alt="Ranking" 
+              width={40} 
+              height={40}
+              className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+            />
+          </Link>
         </button>
         {isLoggedIn ? (
           <ProfileMenu onLogout={onLogout} language={language}/>
