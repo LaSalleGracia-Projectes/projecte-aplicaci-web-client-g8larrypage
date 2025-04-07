@@ -1,8 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
+import supabase from "@/helpers/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext, useState } from "react";
 import { Header, Footer } from "@/components/ui";
@@ -70,8 +70,8 @@ export default function Home() {
       <div className="flex-1">
         <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         
-        {/* Imagen principal - Ahora responsive */}
-        <section className="w-full h-[50vh] md:h-[70vh] lg:h-[90vh] relative">
+        {/* Imagen principal */}
+        <section className="w-full h-[90vh] relative">
           <Image
             src="/assets/img/preview.png"
             alt="Imagen Principal"
@@ -82,40 +82,27 @@ export default function Home() {
           />
         </section>
 
-        {/* Descarga - Ahora responsive */}
+        {/* Descarga */}
         <Slide>
-          <section className="text-center py-12 md:py-20 lg:py-40 bg-white-100 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 px-4">
-            <div className="w-full md:w-1/2 lg:w-2/5">
-              <Image 
-                src="/assets/img/anuncio-app.png" 
-                alt="Imagen Descarga" 
-                width={700} 
-                height={400} 
-                quality={100}
-                className="max-w-full h-auto" 
-              />
+          <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10">
+            <div className="w-3/5">
+              <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} quality={100} />
             </div>
-            <div className="w-full md:w-1/2 lg:w-2/5 text-left mt-6 md:mt-0">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-4">{translation.download_title}</h2>
-              <p className="text-sm md:text-base lg:text-lg text-black-700 mb-4 md:mb-6">{translation.download_description}</p>
-              <div className="flex justify-center md:justify-start">
-                <a href="#" className="mt-2 md:mt-4">
-                  <Image 
-                    src="/assets/img/googleplay.png" 
-                    alt="Google Play" 
-                    width={140} 
-                    height={46}
-                    className="w-32 md:w-36 lg:w-44 h-auto" 
-                  />
+            <div className="w-3/5 text-left">
+              <h2 className="text-4xl font-bold mb-4">{translation.download_title}</h2>
+              <p className="max-w-lg text-black-700 mb-6">{translation.download_description}</p>
+              <div className="flex">
+                <a href="#" className="ml-40 mt-4">
+                  <Image src="/assets/img/googleplay.png" alt="Google Play" width={180} height={60} />
                 </a>
               </div>
             </div>
           </section>
         </Slide>
 
-        {/* Noticias - Corregir el acceso a translation */}
-        <section className="py-4 px-4">
-          <h2 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-12">{translation.news}</h2>
+        {/* Noticias */}
+        <section className="py-4">
+          <h2 className="text-2xl font-bold text-center mb-12">{translations.news}</h2>
           <GalleryWithCarousel language={language}/>
         </section>
 
@@ -123,7 +110,7 @@ export default function Home() {
 
         {/* Botón de tema */}
         <div className="fixed bottom-4 right-4 flex flex-col items-end space-y-2">
-          <button onClick={toggleTheme} className="bg-gray-800 text-white p-3 md:p-4 rounded-full">
+          <button onClick={toggleTheme} className="bg-gray-800 text-white p-4 rounded-full">
             {isDarkMode ? <FaSun /> : <FaMoon />}
           </button>
         </div>
