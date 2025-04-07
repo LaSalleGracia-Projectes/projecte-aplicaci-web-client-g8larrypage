@@ -27,10 +27,11 @@ export default function ProfileUser() {
 
       if (data) {
         setUserData({
-          legendId: data.user.user_metadata.full_name || data.user.user_metadata.full_name || "",
+          legendId: data.user.user_metadata.full_name || data.user.user_metadata.full_name || data.user.user_metadata.display_name || "",
           email: data.user.email || "",
           provider: data.user.app_metadata.provider || "",
         });
+        console.log("User data fetched successfully:", data.user);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);

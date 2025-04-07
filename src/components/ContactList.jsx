@@ -4,17 +4,23 @@ import { useEffect, useState } from "react";
 import { selectContact } from "@/supabase/selectContact";
 import { formatDate } from "@/utils/formatDate";
 
-export default function ContactPanel() {
+export default function ContactPanel({ contacts: propContacts }) {
   const [contacts, setContacts] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
-    const fetchContacts = async () => {
-      const contactsData = await selectContact();
-      setContacts(contactsData);
-    };
-    fetchContacts();
-  }, []);
+    // Si no se pasan contactos por props, cargamos todos
+    if (!propContacts) {
+      const fetchContacts = async () => {
+        const contactsData = await selectContact();
+        setContacts(contactsData);
+      };
+      fetchContacts();
+    } else {
+      // Si hay contactos en las props (resultados de búsqueda), los usamos
+      setContacts(propContacts);
+    }
+  }, [propContacts]);
 
   // Función para truncar texto
   const truncateText = (text, maxLength = 80) => {

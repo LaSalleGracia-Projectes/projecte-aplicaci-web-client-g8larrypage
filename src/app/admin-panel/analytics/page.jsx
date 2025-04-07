@@ -6,7 +6,17 @@ import { useState, useEffect } from "react";
 import { Card, CardBody, Typography } from "@/components/Material-Components";
 import { Line, Pie, Doughnut } from "react-chartjs-2";
 import { FaHome, FaUser, FaMailBulk, FaChartBar } from "react-icons/fa";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
 
@@ -14,6 +24,7 @@ export default function AnalyticsPage() {
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState("null");
 
+  // Obtener rol del usuario actual
   useEffect(() => {
     const fetchUserRole = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -27,6 +38,7 @@ export default function AnalyticsPage() {
     fetchUserRole();
   }, []);
 
+  // Obtener datos para las gráficas
   useEffect(() => {
     const fetchData = async () => {
       const { data: users, error } = await supabase.from("Usuario").select("id, role, last_connexion");
@@ -36,6 +48,7 @@ export default function AnalyticsPage() {
         return;
       }
 
+      // Conteo de roles
       const roleCounts = users.reduce((acc, user) => {
         acc[user.role] = (acc[user.role] || 0) + 1;
         return acc;
@@ -77,7 +90,7 @@ export default function AnalyticsPage() {
           uptime: "195 Días, 8 horas",
           usedMemory: "168.3GB",
           totalMemory: "256GB",
-          ramUsage: 65, // % de memoria usada
+          ramUsage: 65,
         },
       });
     };
@@ -85,15 +98,17 @@ export default function AnalyticsPage() {
     fetchData();
   }, []);
 
-
+  // Si el usuario no es administrador
   if (userRole !== "admin") {
     return <p>Access Denied</p>;
   }
 
+  // Si no tenemos los datos
   if (!data || !data.usersByRole || !data.activeUsers) {
     return <div className="flex justify-center items-center h-screen">Cargando datos...</div>;
   }
 
+  // Si no tenemos el estado del dispositivo
   if (!data.deviceStatus) {
     return <div className="flex justify-center items-center h-screen">Cargando estado del dispositivo...</div>;
   }

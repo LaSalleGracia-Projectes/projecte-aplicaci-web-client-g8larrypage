@@ -2,13 +2,16 @@
 
 import supabase from "@/helpers/supabaseClient";
 import Link from "next/link";
+import ContactPanel from "@/components/ContactList";
+import { searchEmailsByName } from "@/supabase/emailsManagement";
 import { useState, useEffect } from "react";
 import { Card, CardBody, Input, Typography } from "@/components/Material-Components";
 import { FaSearch, FaHome, FaUser, FaMailBulk, FaChartBar } from "react-icons/fa";
-import ContactPanel from "@/components/ContactList";
 
 export default function DashboardPage() {
   const [userRole, setUserRole] = useState("null");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [emails, setEmails] = useState([]);
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -23,6 +26,23 @@ export default function DashboardPage() {
     }
     fetchUserRole();
   }, [])
+
+  const handleSearch = async (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    if (term.trim() === '') {
+      setEmails([]);
+      return;
+    }
+
+    try {
+      const results = await searchEmailsByName(term);
+      setEmails(results);
+    } catch (error) {
+      console.error("Error searching emails:", error);
+    }
+  };
 
   if (userRole !== 'admin') {
     return <p>Access Denied</p>;
@@ -57,14 +77,20 @@ export default function DashboardPage() {
             <h1 className="text-lg font-semibold ml-4">Ciudad de las Leyendas / Admin Panel / Emails</h1>
             <div className="relative">
               <FaSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder="Search..." className="w-[200px] pl-8 md:w-[300px]" />
+              <Input 
+                type="search" 
+                placeholder="Search by name..." 
+                className="w-[200px] pl-8 md:w-[300px]"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
             </div>
           </div>
           <div className="p-6">
             <Card>
               <CardBody>
                 <Typography variant="h6" className="mb-4">Emails</Typography>
-                <ContactPanel />
+                <ContactPanel contacts={searchTerm ? emails : null}/>
               </CardBody>
             </Card>
           </div>

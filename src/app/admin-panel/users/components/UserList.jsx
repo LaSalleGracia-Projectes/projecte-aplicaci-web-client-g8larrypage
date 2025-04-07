@@ -1,15 +1,16 @@
 'use client';
 
 import supabaseAdmin from "@/helpers/supabaseAdmin";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { selectUsers } from "@/supabase/selectUsers";
 import { sendPasswordResetEmail } from "@/supabase/userActions";
 import { formatDate } from "@/utils/formatDate";
-import Link from "next/link";
 import { FaEdit, FaEnvelope, FaTrash } from "react-icons/fa";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
+export default function UserList({ filteredUsers, searchActive }) {
+  const [allUsers, setAllUsers] = useState([]);
+  const [displayedUsers, setDisplayedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -18,7 +19,8 @@ export default function UserList() {
       try {
         setLoading(true);
         const usersData = await selectUsers();
-        setUsers(usersData);
+        setAllUsers(usersData);
+        setDisplayedUsers(usersData);
       } catch (err) {
         setError("Failed to load users");
         console.error(err);
@@ -30,29 +32,39 @@ export default function UserList() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    if (searchActive && filteredUsers) {
+      setDisplayedUsers(filteredUsers);
+    } else if (!searchActive) {
+      setDisplayedUsers(allUsers);
+    }
+  }, [filteredUsers, searchActive, allUsers]);
+
   const handlePasswordReset = async (email) => {
     try {
       await sendPasswordResetEmail(email);
-      alert("Correo de recuperación enviado");
+      alert("Password reset email sent successfully");
     } catch (err) {
-      console.error("Error al enviar correo de recuperación:", err);
-      alert("Error al enviar el correo de recuperación: " + err.message);
+      console.error("Error sending password reset email:", err);
+      alert("Error sending password reset email: " + err.message);
     }
   };
 
   const handleRemoveUser = async (id) => {
+    if (!confirm("Are you sure you want to delete this user?")) return;
+    
     try {
       // Obtener el auth_id del usuario desde la tabla "Usuario" relacionada con "auth/users"
       const { data: user, error: fetchUserError } = await supabaseAdmin
         .from('Usuario')
-        .select('correo') // Selecciona el correo del usuario
+        .select('correo')
         .eq('id', id)
         .single();
   
       if (fetchUserError) throw fetchUserError;
   
       if (!user || !user.correo) {
-        throw new Error("No se encontró el correo para este usuario.");
+        throw new Error("No email found for this user.");
       }
   
       const userEmail = user.correo;
@@ -65,7 +77,7 @@ export default function UserList() {
       const authId = authUser.users.find((u) => u.email === userEmail)?.id;
   
       if (!authId) {
-        throw new Error("No se encontró el auth_id para este usuario.");
+        throw new Error("No auth_id found for this user.");
       }
   
       // Eliminar el usuario de la tabla "Usuario"
@@ -81,17 +93,20 @@ export default function UserList() {
   
       if (deleteAuthError) throw deleteAuthError;
   
-      alert("Usuario eliminado correctamente");
-      setUsers(users.filter(user => user.id !== id));
+      alert("User deleted successfully");
+      setAllUsers(allUsers.filter(user => user.id !== id));
+      setDisplayedUsers(displayedUsers.filter(user => user.id !== id));
     } catch (err) {
-      console.error("Error al eliminar usuario:", err);
-      alert("Error al eliminar el usuario: " + err.message);
+      console.error("Error deleting user:", err);
+      alert("Error deleting user: " + err.message);
     }
   };
 
   if (loading) return <div className="text-center py-10">Loading users...</div>;
   if (error) return <div className="text-center text-red-500 py-10">{error}</div>;
-  if (users.length === 0) return <div className="text-center py-10">No users found</div>;
+  if (displayedUsers.length === 0) return <div className="text-center py-10">
+    {searchActive ? "No users match your search" : "No users found"}
+  </div>;
 
   return (
     <div className="overflow-x-auto">
@@ -106,7 +121,7 @@ export default function UserList() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {users.map((user) => (
+          {displayedUsers.map((user) => (
             <tr key={user.id} className="hover:bg-gray-50">
               <td className="py-4 px-4">{user.nombre || 'N/A'}</td>
               <td className="py-4 px-4">{user.correo || 'N/A'}</td>
@@ -122,30 +137,27 @@ export default function UserList() {
                 </span>
               </td>
               <td className="py-4 px-4 text-center">
-                <div className="space-x-4">
-                  {/* Icono para enviar correo */}
+                <div className="flex justify-center space-x-4">
                   <button
                     onClick={() => handlePasswordReset(user.correo)}
-                    className="text-blue-600 hover:text-blue-900"
-                    title="Enviar Correo"
+                    className="text-blue-600 hover:text-blue-900 transition-colors"
+                    title="Send Password Reset"
                   >
                     <FaEnvelope size={18} />
                   </button>
 
-                  {/* Icono para eliminar usuario */}
                   <button
                     onClick={() => handleRemoveUser(user.id)}
-                    className="text-red-600 hover:text-red-900"
-                    title="Eliminar Usuario"
+                    className="text-red-600 hover:text-red-900 transition-colors"
+                    title="Delete User"
                   >
                     <FaTrash size={18} />
                   </button>
 
-                  {/* Icono para editar usuario */}
                   <Link href={`/admin-panel/users/${user.id}`}>
                     <button
-                      className="text-gray-600 hover:text-gray-900"
-                      title="Editar Usuario"
+                      className="text-gray-600 hover:text-gray-900 transition-colors mt-2"
+                      title="Edit User"
                     >
                       <FaEdit size={18} />
                     </button>
