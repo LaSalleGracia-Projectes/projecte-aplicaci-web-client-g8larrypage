@@ -20,6 +20,7 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
       <div className="flex gap-2 md:gap-4">
         {/* Botones siempre visibles, pero más pequeños en móvil */}
         <button>
+          <Link href="/clan">
           <Image 
             src="/assets/img/clan.png" 
             alt="Clan" 
@@ -27,6 +28,7 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
             height={40}
             className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
           />
+          </Link>
         </button>
         <button>
           <Image 
