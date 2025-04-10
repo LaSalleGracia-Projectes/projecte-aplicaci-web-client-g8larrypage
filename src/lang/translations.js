@@ -1407,3 +1407,75 @@ export const translationsProfile = {
     update_error: "Hi ha hagut un error en actualitzar la informació",
   }
 };
+
+export const translationsRanking = {
+  en: {
+    title: "Hall of Legends",
+    description: "The most legendary adventurers of Ciudad de las Leyendas",
+    empty_message: "The Hall of Legends is empty...",
+    empty_submessage: "Be the first to leave your mark in history",
+    view_stats: "View My Stats",
+    player: "Player",
+    total_steps: "Total Steps",
+  },
+  es: {
+    title: "Salón de los Leyendas",
+    description: "Los aventureros más legendarios de Ciudad de las Leyendas",
+    empty_message: "El salón de las Leyendas está vacío...",
+    empty_submessage: "Sé el primero en dejar tu marca en la historia",
+    view_stats: "Ver mis estadísticas",
+    player: "Jugador",
+    total_steps: "Pasos Totales",
+  },
+  ca: {
+    title: "Saló de les Llegendes",
+    description: "Els aventurers més llegendaris de la Ciutat de les Llegendes",
+    empty_message: "El saló de les Llegendes està buit...",
+    empty_submessage: "Sigues el primer a deixar la teva empremta a la història",
+    view_stats: "Veure les meves estadístiques",
+    player: "Jugador",
+    total_steps: "Passos Totals",
+  },
+};
+
+export const translationsClan = {
+  en: {
+    title: "Legendary Clans",
+    description: "The most powerful groups in Ciudad de las Leyendas",
+    no_clans: "No clans registered yet...",
+    create_first_clan: "Create the first clan and write your legend",
+    insert_sample_clans: "Insert Sample Clans",
+    inserting: "Inserting...",
+    create_clan: "Create My Clan",
+    rank: "Rank",
+    clan_name: "Clan Name",
+    leader: "Leader",
+    foundation: "Foundation",
+  },
+  es: {
+    title: "Clanes Legendarios",
+    description: "Las agrupaciones más poderosas de Ciudad de las Leyendas",
+    no_clans: "No hay clanes registrados aún...",
+    create_first_clan: "Crea el primer clan y escribe tu leyenda",
+    insert_sample_clans: "Insertar Clanes de Prueba",
+    inserting: "Insertando...",
+    create_clan: "Crear Mi Clan",
+    rank: "Rank",
+    clan_name: "Nombre del Clan",
+    leader: "Líder",
+    foundation: "Fundación",
+  },
+  ca: {
+    title: "Clans Llegendaris",
+    description: "Els grups més poderosos de la Ciutat de les Llegendes",
+    no_clans: "Encara no hi ha clans registrats...",
+    create_first_clan: "Crea el primer clan i escriu la teva llegenda",
+    insert_sample_clans: "Inserir Clans de Prova",
+    inserting: "Inserint...",
+    create_clan: "Crear el Meu Clan",
+    rank: "Rang",
+    clan_name: "Nom del Clan",
+    leader: "Líder",
+    foundation: "Fundació",
+  },
+};

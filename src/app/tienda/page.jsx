@@ -62,13 +62,13 @@ export default function ShopPage() {
 
     // Imágenes de ejemplo (reemplazar con tus propias imágenes)
     const skinImages = [
-        { id: 1, src: "/images/skins/skin1.jpg", alt: "Skin Épica", price: "10000 pasos" },
+        { id: 1, src: "https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9ibWtSOVJ0ek1SejdpRlNTUGtHWi5wbmcifQ:supercell:gAVHMW6FXbQ8pudBGC0aB8DIkxOkhgzLU5cA5IXkODo?width=2400", alt: "Skin Épica", price: "10000 pasos" },
         { id: 2, src: "/images/skins/skin2.jpg", alt: "Skin Legendaria", price: "15000 pasos" },
         { id: 3, src: "/images/skins/skin3.jpg", alt: "Skin Rara", price: "8000 pasos" },
     ];
 
     const buildingImages = [
-        { id: 1, src: "/images/buildings/building1.jpg", alt: "Castillo", price: "12000 pasos" },
+        { id: 1, src: "https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9Oek1qZGJHTTE1VXRQQVNQYnRFdS5wbmcifQ:supercell:PXm5pJv7aKrgM0STguSRuMyegtrAgNDGOzS5mde1k94?width=2400", alt: "Cannon", price: "12000 pasos" },
         { id: 2, src: "/images/buildings/building2.jpg", alt: "Torre", price: "9000 pasos" },
         { id: 3, src: "/images/buildings/building3.jpg", alt: "Fortaleza", price: "15000 pasos" },
     ];
