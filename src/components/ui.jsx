@@ -21,23 +21,25 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
         {/* Botones siempre visibles, pero más pequeños en móvil */}
         <button>
           <Link href="/clan">
-          <Image 
-            src="/assets/img/clan.png" 
-            alt="Clan" 
-            width={40} 
-            height={40}
-            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
-          />
+            <Image 
+              src="/assets/img/clan.png" 
+              alt="Clan" 
+              width={40} 
+              height={40}
+              className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+            />
           </Link>
         </button>
         <button>
-          <Image 
-            src="/assets/img/tienda.png" 
-            alt="Tienda" 
-            width={40} 
-            height={40}
-            className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
-          />
+          <Link href="/tienda">
+            <Image 
+              src="/assets/img/tienda.png" 
+              alt="Tienda" 
+              width={40} 
+              height={40}
+              className="w-8 h-8 md:w-10 md:h-10" // Más pequeños en móvil
+            />
+          </Link>
         </button>
         <button>
           <Link href="/ranking">

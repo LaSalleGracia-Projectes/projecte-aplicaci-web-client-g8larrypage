@@ -73,7 +73,7 @@ export default function Home() {
         {/* Imagen principal */}
         <section className="w-full h-[90vh] relative">
           <Image
-            src="/assets/img/preview.png"
+            src="/assets/img/imagen-principal2.png"
             alt="Imagen Principal"
             fill
             style={{ objectFit: "cover" }}
