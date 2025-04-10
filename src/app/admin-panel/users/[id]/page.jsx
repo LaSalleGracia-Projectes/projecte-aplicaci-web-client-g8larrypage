@@ -127,8 +127,8 @@ export default function EditUserPage({ params }) {
 
   return (
     <div className="flex justify-center items-start min-h-screen bg-gray-50 p-6">
-      <Card className="w-full max-w-xl shadow-lg">
-        <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
+      <Card className="w-full max-w-xl shadow-lg mt-16">
+        <div className="bg-black p-4 text-white flex justify-between items-center">
           <Typography variant="h5" className="flex items-center gap-2">
             <FaUserEdit size={20} /> Editar Usuario
           </Typography>
@@ -201,7 +201,7 @@ export default function EditUserPage({ params }) {
               
               <Button 
                 type="submit" 
-                color="blue" 
+                color="black" 
                 className="flex-1 inline-flex items-center justify-center gap-2"
                 disabled={saving}
               >

@@ -7,9 +7,10 @@ import { Button, Input, Card, CardBody, Typography } from "@/components/Material
 import { FaGoogle, FaFacebook, FaEnvelope, FaArrowLeft } from "react-icons/fa";
 import { UserContext } from "@/context/UserContext";
 import { translationsProfile } from "@/lang/translations";
+import { Header } from "@/components/ui";
 
 export default function ProfileUser() {
-  const {language} = useContext(UserContext);
+  const { language, isLoggedIn, setIsLoggedIn, changeLanguage } = useContext(UserContext);
   const translation = translationsProfile[language] || translationsProfile['es'];
 
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function ProfileUser() {
 
       if (data) {
         setUserData({
-          legendId: data.user.user_metadata.full_name || data.user.user_metadata.full_name || data.user.user_metadata.display_name || "",
+          legendId: data.user.user_metadata.full_name || data.user.user_metadata.display_name || "",
           email: data.user.email || "",
           provider: data.user.app_metadata.provider || "",
         });
@@ -112,57 +113,68 @@ export default function ProfileUser() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-indigo-500 to-teal-400 p-6">
-      <Card className="w-full max-w-md shadow-2xl">
-        <CardBody>
-          <div className="flex justify-between items-center mb-6">
-            <Typography variant="h4" color="blue-gray" className="text-center font-electrolize ml-1">
-              {translation.title}
-            </Typography>
-            <Button
-              variant="text"
-              color="blue"
-              onClick={() => router.push("/")}
-              className="flex items-center gap-2"
-            >
-              <FaArrowLeft /> {translation.home}
-            </Button>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <Input
-                type="text"
-                name="legendId"
-                label={translation.name}
-                value={userData.legendId}
-                onChange={handleChange}
-                size="lg"
-              />
-            </div>
-            <div>
-              <Input
-                type="email"
-                name="email"
-                label={translation.email}
-                value={userData.email}
-                onChange={handleChange}
-                size="lg"
-              />
-            </div>
-            <div>
-              <Typography variant="small" className="mb-2 font-medium">
-                {translation.provider}
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-indigo-900 to-purple-900 p-6">
+      {/* Header */}
+      <Header 
+        language={language} 
+        changeLanguage={changeLanguage} 
+        isLoggedIn={isLoggedIn} 
+        onLogout={() => supabase.auth.signOut().then(() => setIsLoggedIn(false))}
+      />
+
+      {/* Contenido principal */}
+      <div className="flex justify-center items-center flex-grow mt-20">
+        <Card className="w-full max-w-md shadow-2xl">
+          <CardBody>
+            <div className="flex justify-between items-center mb-6">
+              <Typography variant="h4" color="blue-gray" className="text-center font-electrolize ml-1">
+                {translation.title}
               </Typography>
-              <div className="bg-gray-200 p-3 rounded-md flex items-center">
-                {renderProvider()}
-              </div>
+              <Button
+                variant="text"
+                color="blue"
+                onClick={() => router.push("/")}
+                className="flex items-center gap-2"
+              >
+                <FaArrowLeft /> {translation.home}
+              </Button>
             </div>
-            <Button type="submit" color="blue" fullWidth disabled={loading}>
-              {loading ? translation.saving : translation.save_changes}
-            </Button>
-          </form>
-        </CardBody>
-      </Card>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Input
+                  type="text"
+                  name="legendId"
+                  label={translation.name}
+                  value={userData.legendId}
+                  onChange={handleChange}
+                  size="lg"
+                />
+              </div>
+              <div>
+                <Input
+                  type="email"
+                  name="email"
+                  label={translation.email}
+                  value={userData.email}
+                  onChange={handleChange}
+                  size="lg"
+                />
+              </div>
+              <div>
+                <Typography variant="small" className="mb-2 font-medium">
+                  {translation.provider}
+                </Typography>
+                <div className="bg-gray-200 p-3 rounded-md flex items-center">
+                  {renderProvider()}
+                </div>
+              </div>
+              <Button type="submit" color="blue" fullWidth disabled={loading}>
+                {loading ? translation.saving : translation.save_changes}
+              </Button>
+            </form>
+          </CardBody>
+        </Card>
+      </div>
     </div>
   );
 }
