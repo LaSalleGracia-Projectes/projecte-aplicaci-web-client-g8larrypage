@@ -1,6 +1,7 @@
 'use client';
 
 import supabase from "@/helpers/supabaseClient";
+import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Header, Footer } from "@/components/ui";
@@ -147,9 +148,11 @@ export default function RankingPage() {
 
                     {/* Elementos decorativos */}
                     <div className="mt-12 text-center">
-                        <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
-                            {translation.view_stats}
-                        </button>
+                        <Link href="/profile">
+                            <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
+                                {translation.view_stats}
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </main>
