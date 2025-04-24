@@ -1,13 +1,41 @@
 'use client';
 
+import supabase from '@/helpers/supabaseClient';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { NavList } from '@/components/navbar';
 import { ProfileMenu } from '@/components/ProfileMenu';
 import { CopyRight } from './CopyrightFooter';
 import { translations } from '@/lang/translations';
 
 export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
+  const [avatarUrl, setAvatarUrl] = useState('');
+
+  useEffect(() => {
+    const fetchAvatarUrl = async () => {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError || !sessionData.session) return;
+
+      const userId = sessionData.session.user.id;
+
+      const { data: userData, error: userError } = await supabase
+        .from("Usuario")
+        .select("avatar_url")
+        .eq("id", userId)
+        .single();
+
+      if (userError) {
+        console.error("Error fetching avatar URL:", userError);
+        return;
+      }
+
+      setAvatarUrl(userData.avatar_url || "");
+    };
+
+    fetchAvatarUrl();
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white py-3 px-4 md:px-6 flex justify-between items-center">
       <div className="flex items-center">
@@ -53,7 +81,7 @@ export function Header({ language, changeLanguage, isLoggedIn, onLogout }) {
           </Link>
         </button>
         {isLoggedIn ? (
-          <ProfileMenu onLogout={onLogout} language={language}/>
+          <ProfileMenu avatarUrl={avatarUrl} onLogout={onLogout} language={language}/>
         ) : (
           <button>
             <Link href="/register">
