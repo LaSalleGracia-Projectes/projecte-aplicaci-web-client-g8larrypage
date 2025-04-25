@@ -1,5 +1,6 @@
 'use client';
 
+
 import supabase from "@/helpers/supabaseClient";
 import { useEffect, useState, useContext } from "react";
 import { Header, Footer } from "@/components/ui";
@@ -7,12 +8,14 @@ import { UserContext } from "@/context/UserContext";
 import { translationsClan } from "@/lang/translations";
 import { useRouter } from "next/navigation";
 
+
 export default function ClanPage() {
     const [clans, setClans] = useState([]);
     const [loading, setLoading] = useState(true);
     const { isLoggedIn, setIsLoggedIn, language, changeLanguage } = useContext(UserContext);
     const translation = translationsClan[language] || translationsClan['es'];
     const router = useRouter();
+
 
     // Verificar sesión al cargar
     useEffect(() => {
@@ -22,6 +25,7 @@ export default function ClanPage() {
         };
         checkSession();
     }, [setIsLoggedIn]);
+
 
     // Obtener los clanes con información del líder
     useEffect(() => {
@@ -33,17 +37,19 @@ export default function ClanPage() {
                     .select(`
                         id_clan,
                         created_at,
-                        ranking_global,
+                        clan_code,
                         id_leader,
                         nombre,
                         jugador: id_leader (nombre)
                     `)
-                    .order("ranking_global", { ascending: true });
+                    .order("nombre", { ascending: true });
+
 
                 if (error) {
                     console.error("Error fetching clans:", error);
                     return;
                 }
+
 
                 setClans(data || []);
             } catch (error) {
@@ -53,8 +59,10 @@ export default function ClanPage() {
             }
         };
 
+
         fetchClans();
     }, []);
+
 
     const handleLogout = async () => {
         try {
@@ -68,10 +76,12 @@ export default function ClanPage() {
         }
     };
 
+
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(language === 'ca' ? 'ca-ES' : language === 'en' ? 'en-US' : 'es-ES', options);
     };
+
 
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-indigo-900 to-purple-900">
@@ -81,6 +91,7 @@ export default function ClanPage() {
                 isLoggedIn={isLoggedIn}
                 onLogout={handleLogout}
             />
+
 
             <main className="flex-1 py-12 mt-36">
                 <div className="container mx-auto px-4 max-w-4xl">
@@ -93,48 +104,41 @@ export default function ClanPage() {
                         </p>
                     </div>
 
+
                     {loading ? (
                         <div className="flex justify-center items-center h-64">
                             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-400"></div>
                         </div>
                     ) : clans.length > 0 ? (
                         <div className="bg-gray-900 bg-opacity-70 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-yellow-500 shadow-lg shadow-purple-500/20">
-                            <div className="grid grid-cols-12 bg-yellow-600 text-gray-900 font-bold p-4 items-center">
-                                <div className="col-span-1 text-center">{translation.rank}</div>
-                                <div className="col-span-5 pl-4">{translation.clan_name}</div>
-                                <div className="col-span-3">{translation.leader}</div>
-                                <div className="col-span-3 text-center">{translation.foundation}</div>
-                            </div>
-                            <div className="divide-y divide-purple-800">
-                                {clans.map((clan, index) => (
-                                    <div key={clan.id_clan} className={`grid grid-cols-12 p-4 items-center hover:bg-purple-900 hover:bg-opacity-50 transition-colors ${
-                                        index === 0 ? "bg-yellow-500 bg-opacity-10" : 
-                                        index % 2 === 0 ? "bg-gray-800 bg-opacity-30" : ""
-                                    }`}>
-                                        <div className="col-span-1 text-center">
-                                            <span className={`${
-                                                index === 0 ? "text-yellow-400 font-bold" : "text-white"
-                                            }`}>
-                                                {clan.ranking_global}
-                                            </span>
-                                        </div>
-                                        <div className="col-span-5 pl-4">
-                                            <span className={`${
-                                                index === 0 ? "text-yellow-400 font-bold text-lg" : 
-                                                index < 3 ? "text-white font-medium" : "text-gray-300"
-                                            }`}>
-                                                {clan.nombre}
-                                            </span>
-                                        </div>
-                                        <div className="col-span-3">
-                                            <span className="text-gray-300">{clan.jugador?.nombre || 'Desconocido'}</span>
-                                        </div>
-                                        <div className="col-span-3 text-center text-gray-300">
-                                            {clan.created_at ? formatDate(clan.created_at) : 'No registrada'}
-                                        </div>
+                        <div className="grid grid-cols-12 bg-yellow-600 text-gray-900 font-bold p-4 items-center">
+                            <div className="col-span-5 pl-4">{translation.clan_name}</div>
+                            <div className="col-span-3">{translation.leader}</div>
+                            <div className="col-span-3 text-center">{translation.foundation}</div>
+                        </div>
+                        <div className="divide-y divide-purple-800">
+                            {clans.map((clan, index) => (
+                                <div key={clan.id_clan} className={`grid grid-cols-12 p-4 items-center hover:bg-purple-900 hover:bg-opacity-50 transition-colors ${
+                                    index === 0 ? "bg-yellow-500 bg-opacity-10" :
+                                    index % 2 === 0 ? "bg-gray-800 bg-opacity-30" : ""
+                                }`}>
+                                    <div className="col-span-5 pl-4">
+                                        <span className={`${
+                                            index === 0 ? "text-yellow-400 font-bold text-lg" :
+                                            index < 3 ? "text-white font-medium" : "text-gray-300"
+                                        }`}>
+                                            {clan.nombre}
+                                        </span>
                                     </div>
-                                ))}
-                            </div>
+                                    <div className="col-span-3">
+                                        <span className="text-gray-300">{clan.jugador?.nombre || 'Desconocido'}</span>
+                                    </div>
+                                    <div className="col-span-3 text-center text-gray-300">
+                                        {clan.created_at ? formatDate(clan.created_at) : 'No registrada'}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                         </div>
                     ) : (
                         <div className="text-center py-16 bg-gray-900 bg-opacity-50 rounded-xl">
@@ -143,6 +147,7 @@ export default function ClanPage() {
                         </div>
                     )}
 
+
                     <div className="mt-12 text-center">
                         <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
                             {translation.create_clan}
@@ -150,6 +155,7 @@ export default function ClanPage() {
                     </div>
                 </div>
             </main>
+
 
             <Footer />
         </div>
