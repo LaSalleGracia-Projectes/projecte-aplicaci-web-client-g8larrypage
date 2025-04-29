@@ -122,19 +122,26 @@ export default function ClanPage() {
                                     index === 0 ? "bg-yellow-500 bg-opacity-10" :
                                     index % 2 === 0 ? "bg-gray-800 bg-opacity-30" : ""
                                 }`}>
-                                    <div className="col-span-5 pl-4">
-                                        <span className={`${
-                                            index === 0 ? "text-yellow-400 font-bold text-lg" :
-                                            index < 3 ? "text-white font-medium" : "text-gray-300"
-                                        }`}>
-                                            {clan.nombre}
-                                        </span>
+                                    <div className="col-span-5 pl-4 flex items-center gap-4">
+                                    {/* Avatar generado automáticamente */}
+                                    <img
+                                        src={`https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(clan.nombre)}`}
+                                        alt={`Avatar de ${clan.nombre}`}
+                                        className="w-10 h-10 rounded-full bg-gray-700 p-1"
+                                    />
+                                    {/* Nombre del clan */}
+                                    <span className={`${
+                                        index === 0 ? "text-yellow-400 font-bold text-lg" :
+                                        index < 3 ? "text-white font-medium" : "text-gray-300"
+                                    }`}>
+                                        {clan.nombre}
+                                    </span>
                                     </div>
                                     <div className="col-span-3">
-                                        <span className="text-gray-300">{clan.jugador?.nombre || 'Desconocido'}</span>
+                                    <span className="text-gray-300">{clan.jugador?.nombre || 'Desconocido'}</span>
                                     </div>
                                     <div className="col-span-3 text-center text-gray-300">
-                                        {clan.created_at ? formatDate(clan.created_at) : 'No registrada'}
+                                    {clan.created_at ? formatDate(clan.created_at) : 'No registrada'}
                                     </div>
                                 </div>
                             ))}
