@@ -76,8 +76,8 @@ export default function ShopPage() {
     const boosters = [
         { id: 1, name: "X2 Pasos", price: "5000 pasos", src: "/assets/img/boosters/vainilla_power.png" },
         { id: 2, name: "Defensa Nocturna", price: "15000 pasos", src: "/assets/img/boosters/asesino_noche.png" },
-        { id: 3, name: "+20 ataque", price: "2000 pasos", src: "/images/boosters/attack.jpg" },
-        { id: 4, name: "X20 30 minutos", price: "50000 pasos", src: "/images/boosters/x20.jpg" },
+        { id: 3, name: "+50 ataque", price: "2000 pasos", src: "/assets/img/boosters/50_ataque.png" },
+        { id: 4, name: "+200 defensa", price: "50000 pasos", src: "/assets/img/boosters/200_defensa.png" },
     ];
 
     return (
