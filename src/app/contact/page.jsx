@@ -1,9 +1,10 @@
 "use client";
 
+import supabase from "@/helpers/supabaseClient";
 import { useState, useEffect, useContext } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { useRouter } from "next/navigation";
-import supabase from "@/helpers/supabaseClient";
+import { insertContactToFirebase } from "@/firebase/insertContact";
 import { insertContactMessage } from "@/supabase/insertContact";
 import { UserContext } from '@/context/UserContext';
 import { FaSun, FaMoon } from 'react-icons/fa';
@@ -70,15 +71,23 @@ export default function ContactPage() {
     setEnviando(true);
     setMensajeEnvio({ tipo: '', texto: '' });
 
-    const result = await insertContactMessage(formData);
+    // Guardar en Supabase
+    const resultSupabase = await insertContactMessage(formData);
+
+    // Guardar en Firebase Firestore
+    await insertContactToFirebase(formData); // Puedes manejar errores si lo necesitas
+
     setMensajeEnvio({
-      tipo: result.success ? 'exito' : 'error',
-      texto: result.success
+      tipo: resultSupabase.success ? 'exito' : 'error',
+      texto: resultSupabase.success
         ? translation.success_message
         : translation.error_message
     });
 
-    if (result.success) setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
+    if (resultSupabase.success) {
+      setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
+    }
+
     setEnviando(false);
   };
 
