@@ -6,13 +6,17 @@ import { translationsProfileMenu } from "@/lang/translations";
 
 export function ProfileMenu({ onLogout, language = 'es', avatarUrl }) {
     const translation = translationsProfileMenu[language] || translationsProfileMenu['es'];
+
+    // URL de la imagen por defecto
+    const defaultAvatarUrl = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
+
     return (
       <Menu placement="bottom-end">
         <MenuHandler>
           <Avatar
             variant="circular"
             alt="Foto de perfil"
-            src={avatarUrl || null}
+            src={avatarUrl || defaultAvatarUrl}
             className="cursor-pointer"
           />
         </MenuHandler>

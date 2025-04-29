@@ -30,35 +30,71 @@ export default function ProfileUser() {
   const fetchUserData = async () => {
     try {
       setError(null);
-
-      // Verificar si hay una sesión activa
+  
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
       if (sessionError || !sessionData.session) {
         setError("¡Inicia sesión para acceder a tu perfil!");
         setInitialized(true);
         return;
       }
-
-      const userId = sessionData.session.user.id;
-
-      // Obtener datos del jugador de la tabla Jugador
-      const { data: playerData, error: playerError } = await supabase
+  
+      const user = sessionData.session.user;
+      const userId = user.id;
+  
+      // Verificar si existe en Jugador, si no crear
+      let { data: playerData, error: playerError } = await supabase
         .from("Jugador")
         .select("*")
         .eq("id_usuario", userId)
-        .single();
-
-      if (playerError) throw playerError;
-
+        .maybeSingle();
+  
+        if (!playerData) {
+          const nombreJugador =
+            user.user_metadata?.full_name ||
+            user.user_metadata?.display_name ||
+            "Jugador";
+        
+          const { error: insertError } = await supabase
+            .from("Jugador")
+            .insert([
+              {
+                id_usuario: userId,
+                nombre: nombreJugador,
+                pasos_totales: 0,
+              },
+            ]);        
+  
+        if (insertError) throw insertError;
+  
+        const { data: newPlayerData } = await supabase
+          .from("Jugador")
+          .select("*")
+          .eq("id_usuario", userId)
+          .maybeSingle();
+  
+        playerData = newPlayerData;
+      }
+  
+      // Obtener avatar_url desde la tabla Usuario
+      const { data: userInfo, error: userError } = await supabase
+        .from("Usuario")
+        .select("avatar_url")
+        .eq("id", userId)
+        .maybeSingle();
+  
+      if (userError) throw userError;
+  
       setUserData({
-        legendId: sessionData.session.user.user_metadata.full_name || 
-                 sessionData.session.user.user_metadata.display_name || 
-                 "",
-        email: sessionData.session.user.email || "",
-        provider: sessionData.session.user.app_metadata.provider || "",
+        legendId:
+          user.user_metadata?.full_name ||
+          user.user_metadata?.display_name ||
+          "",
+        email: user.email || "",
+        provider: user.app_metadata?.provider || "",
         pasosTotales: playerData?.pasos_totales || 0,
       });
-      setAvatarUrl(playerData.avatar_url || "");
+  
+      setAvatarUrl(userInfo?.avatar_url || "");
       setInitialized(true);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -66,6 +102,7 @@ export default function ProfileUser() {
       setInitialized(true);
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
