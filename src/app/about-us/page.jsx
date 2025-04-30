@@ -1,14 +1,11 @@
 'use client';
 
-
 import dynamic from 'next/dynamic';
 import supabase from '@/helpers/supabaseClient';
 import { useState, useEffect, useContext } from 'react';
 import { Header, Footer } from "@/components/ui";
 import { translationsAboutUs } from '@/lang/translations';
 import {
-  FaSun,
-  FaMoon,
   FaCoins,
   FaBuilding,
   FaTrophy,
@@ -16,9 +13,6 @@ import {
   FaBoxOpen,
   FaChartBar,
   FaDragon,
-  FaUsers,
-  FaHeart,
-  FaLightbulb,
   FaChevronDown,
   FaChevronUp
 } from 'react-icons/fa';
@@ -56,7 +50,7 @@ export default function AboutUs() {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem('theme') || 'light';
       setIsDarkMode(savedTheme === 'dark');
- 
+  
       if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
         document.documentElement.classList.remove('light');
@@ -64,33 +58,16 @@ export default function AboutUs() {
         document.documentElement.classList.add('light');
         document.documentElement.classList.remove('dark');
       }
- 
+  
       const handleScroll = () => {
         setIsScrolled(window.scrollY > 50);
       };
- 
+  
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     }
   }, []);
- 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      localStorage.setItem('theme', newMode ? 'dark' : 'light');
-     
-      if (newMode) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
-      }
 
-
-      return newMode;
-    });
-  };
 
 
   const handleLogout = async () => {
@@ -212,10 +189,7 @@ export default function AboutUs() {
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 rounded-xl blur-3xl opacity-10 dark:opacity-20 -z-10"></div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              {translation.title}
-            </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mt-20">
               {translation.description}
             </p>
           </motion.div>

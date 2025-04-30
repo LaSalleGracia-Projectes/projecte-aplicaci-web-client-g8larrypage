@@ -82,20 +82,41 @@ export default function Home() {
         </section>
 
         {/* Descarga */}
-        <section className="text-center py-40 bg-white-100 flex items-center justify-center gap-10 dark:bg-gray-900 dark:text-white">
-          <div className="w-3/5">
-            <Image src="/assets/img/anuncio-app.png" alt="Imagen Descarga" width={700} height={400} quality={100} />
+        <section className="py-16 px-6 bg-white dark:bg-gray-900 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10">  
+          <div className="w-full md:w-1/2">
+            <Image
+              src="/assets/img/anuncio-app.png"
+              alt="Imagen Descarga"
+              width={700}
+              height={400}
+              className="w-full h-auto"
+              quality={100}
+            />
           </div>
-          <div className="w-3/5 text-left">
-            <h2 className="text-4xl font-bold mb-4">{translation.download_title}</h2>
-            <p className="max-w-lg text-black-700 mb-6">{translation.download_description}</p>
-            <div className="flex">
-              <a href="#" className="ml-40 mt-4">
-                <Image src="/assets/img/googleplay.png" alt="Google Play" width={180} height={60} />
+
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+              {translation.download_title}
+            </h2>
+            <p className="mb-6 text-gray-700 dark:text-gray-300">
+              {translation.download_description}
+            </p>
+            <div className="flex justify-center md:justify-start">
+              <a href="#" className="mt-4">
+                <Image
+                  src="/assets/img/googleplay.png"
+                  alt="Google Play"
+                  width={180}
+                  height={60}
+                />
               </a>
             </div>
           </div>
+        </div>
         </section>
+
+
 
         {/* Noticias */}
         <section className="py-4 dark:bg-gray-900">
