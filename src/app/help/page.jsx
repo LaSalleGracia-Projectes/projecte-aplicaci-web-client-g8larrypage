@@ -12,7 +12,6 @@ import { UserContext } from '@/context/UserContext';
 
 export default function HelpPage() {
   const router = useRouter();
-  const [currentLanguage, setCurrentLanguage] = useState("es");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const { isLoggedIn, setIsLoggedIn, setUserRole, language, changeLanguage } = useContext(UserContext);
   const translation = translationsHelp[language] || translationsHelp["es"];
@@ -97,7 +96,7 @@ export default function HelpPage() {
       <Header language={language} changeLanguage={changeLanguage} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>
       <main className="container mx-auto px-4 py-8 mt-60 mb-60">
         <h1 className="text-3xl font-bold mb-6">{translation.manage_account}</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 px-2 md:px-8">
         {helpOptions.map((option, index) => (
           <Link key={index} href={option.link || "#"} passHref>
             <Card className="p-4 border shadow-lg rounded-lg flex flex-col items-start transition-transform duration-300 cursor-pointer 

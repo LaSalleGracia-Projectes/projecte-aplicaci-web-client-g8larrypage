@@ -111,13 +111,13 @@ export default function ClanPage() {
                         </div>
                     ) : clans.length > 0 ? (
                         <div className="bg-gray-900 bg-opacity-70 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-yellow-500 shadow-lg shadow-purple-500/20">
-                        <div className="grid grid-cols-12 bg-yellow-600 text-gray-900 font-bold p-4 items-center">
-                            <div className="col-span-5 pl-4">{translation.clan_name}</div>
-                            <div className="col-span-3">{translation.leader}</div>
-                            <div className="col-span-3 text-center">{translation.foundation}</div>
-                        </div>
-                        <div className="divide-y divide-purple-800">
-                            {clans.map((clan, index) => (
+                            <div className="grid grid-cols-12 bg-yellow-600 text-gray-900 font-bold p-4 items-center text-xs sm:text-base">
+                                <div className="col-span-5 pl-4">{translation.clan_name}</div>
+                                <div className="col-span-3">{translation.leader}</div>
+                                <div className="col-span-3 text-center">{translation.foundation}</div>
+                            </div>
+                            <div className="divide-y divide-purple-800">
+                                {clans.map((clan, index) => (
                                 <div key={clan.id_clan} className={`grid grid-cols-12 p-4 items-center hover:bg-purple-900 hover:bg-opacity-50 transition-colors ${
                                     index === 0 ? "bg-yellow-500 bg-opacity-10" :
                                     index % 2 === 0 ? "bg-gray-800 bg-opacity-30" : ""
@@ -127,26 +127,26 @@ export default function ClanPage() {
                                     <img
                                         src={`https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(clan.nombre)}`}
                                         alt={`Avatar de ${clan.nombre}`}
-                                        className="w-10 h-10 rounded-full bg-gray-700 p-1"
+                                        className="w-8 h-8 rounded-full bg-gray-700 p-1"
                                     />
                                     {/* Nombre del clan */}
                                     <span className={`${
-                                        index === 0 ? "text-yellow-400 font-bold text-lg" :
+                                        index === 0 ? "text-yellow-400 font-bold text-sm sm:text-base" :
                                         index < 3 ? "text-white font-medium" : "text-gray-300"
                                     }`}>
                                         {clan.nombre}
                                     </span>
                                     </div>
                                     <div className="col-span-3">
-                                    <span className="text-gray-300">{clan.jugador?.nombre || 'Desconocido'}</span>
+                                    <span className="text-gray-300 text-xs sm:text-base">{clan.jugador?.nombre || 'Desconocido'}</span>
                                     </div>
-                                    <div className="col-span-3 text-center text-gray-300">
+                                    <div className="col-span-3 text-center text-gray-300 text-xs sm:text-base">
                                     {clan.created_at ? formatDate(clan.created_at) : 'No registrada'}
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                        </div>
+                                ))}
+                            </div>
+                            </div>
                     ) : (
                         <div className="text-center py-16 bg-gray-900 bg-opacity-50 rounded-xl">
                             <p className="text-2xl text-white">{translation.no_clans}</p>
