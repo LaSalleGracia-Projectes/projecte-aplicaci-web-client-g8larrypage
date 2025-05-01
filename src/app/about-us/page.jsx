@@ -324,7 +324,7 @@ export default function AboutUs() {
       </main>
 
 
-      <Footer />
+      <Footer language={language}/>
     </div>
   );
 }

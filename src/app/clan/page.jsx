@@ -164,7 +164,7 @@ export default function ClanPage() {
             </main>
 
 
-            <Footer />
+            <Footer language={language}/>
         </div>
     );
 }

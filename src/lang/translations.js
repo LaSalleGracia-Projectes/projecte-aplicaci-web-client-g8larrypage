@@ -1516,6 +1516,34 @@ export const translationsShop = {
     no_items: "No items available at the moment.",
     more_gold_steps: "Need more Golden Steps?",
     buy_now: "Buy now!",
+    inventory: "Your Inventory",
+    empty_inventory: "Your inventory is empty.",
+    player_steps: "{playerName} • {steps} steps",
+    alerts: {
+      login_required: "You need to log in to make purchases.",
+      invalid_price: "Invalid price.",
+      insufficient_steps: "You don't have enough steps (Required: {required}, Available: {available}).",
+      purchase_success: "Purchase successful! You acquired {itemName} for {price} steps.",
+      purchase_error: "Error processing the purchase: {error}",
+    },
+    items: {
+      skins: {
+        epic_skin: "Epic Skin",
+        legendary_skin: "Legendary Skin",
+        rare_skin: "Rare Skin",
+      },
+      buildings: {
+        cannon: "Cannon",
+        town_hall: "Town Hall",
+        tesla: "Tesla",
+      },
+      boosters: {
+        x2_steps: "X2 Steps",
+        night_defense: "Night Defense",
+        attack_boost: "+50 Attack",
+        defense_boost: "+200 Defense",
+      },
+    },
   },
   es: {
     title: "Tienda Legendaria",
@@ -1528,6 +1556,34 @@ export const translationsShop = {
     no_items: "No hay artículos disponibles en este momento.",
     more_gold_steps: "¿Necesitas más Pasos de Oro?",
     buy_now: "¡Compra ahora!",
+    inventory: "Tu Inventario",
+    empty_inventory: "Tu inventario está vacío.",
+    player_steps: "{playerName} • {steps} pasos",
+    alerts: {
+      login_required: "Se requiere iniciar sesión para realizar compras.",
+      invalid_price: "Precio no válido.",
+      insufficient_steps: "No tienes suficientes pasos (Necesitas: {required}, Tienes: {available}).",
+      purchase_success: "¡Compra exitosa! Has adquirido {itemName} por {price} pasos.",
+      purchase_error: "Error al procesar la compra: {error}",
+    },
+    items: {
+      skins: {
+        epic_skin: "Skin Épica",
+        legendary_skin: "Skin Legendaria",
+        rare_skin: "Skin Rara",
+      },
+      buildings: {
+        cannon: "Cañón",
+        town_hall: "Ayuntamiento",
+        tesla: "Tesla",
+      },
+      boosters: {
+        x2_steps: "X2 Pasos",
+        night_defense: "Defensa Nocturna",
+        attack_boost: "+50 Ataque",
+        defense_boost: "+200 Defensa",
+      },
+    },
   },
   ca: {
     title: "Botiga Llegendària",
@@ -1540,5 +1596,33 @@ export const translationsShop = {
     no_items: "No hi ha articles disponibles en aquest moment.",
     more_gold_steps: "Necessites més Passos d'Or?",
     buy_now: "Compra ara!",
+    inventory: "El teu Inventari",
+    empty_inventory: "El teu inventari està buit.",
+    player_steps: "{playerName} • {steps} passos",
+    alerts: {
+      login_required: "Cal iniciar sessió per fer compres.",
+      invalid_price: "Preu no vàlid.",
+      insufficient_steps: "No tens prou passos (Necessites: {required}, Tens: {available}).",
+      purchase_success: "Compra realitzada amb èxit! Has adquirit {itemName} per {price} passos.",
+      purchase_error: "Error en processar la compra: {error}",
+    },
+    items: {
+      skins: {
+        epic_skin: "Skin Èpica",
+        legendary_skin: "Skin Llegendària",
+        rare_skin: "Skin Rara",
+      },
+      buildings: {
+        cannon: "Canó",
+        town_hall: "Ajuntament",
+        tesla: "Tesla",
+      },
+      boosters: {
+        x2_steps: "X2 Passos",
+        night_defense: "Defensa Nocturna",
+        attack_boost: "+50 Atac",
+        defense_boost: "+200 Defensa",
+      },
+    },
   },
 };
