@@ -1503,3 +1503,42 @@ export const translationsClan = {
     foundation: "Fundació",
   },
 };
+
+export const translationsShop = {
+  en: {
+    title: "Legendary Shop",
+    description: "Enhance your experience with our boosters, skins, and buildings.",
+    skins: "Skins",
+    buildings: "Buildings",
+    boosters: "Boosters",
+    buy: "Buy",
+    loading: "Loading...",
+    no_items: "No items available at the moment.",
+    more_gold_steps: "Need more Golden Steps?",
+    buy_now: "Buy now!",
+  },
+  es: {
+    title: "Tienda Legendaria",
+    description: "Mejora tu experiencia con nuestros potenciadores, skins y edificios.",
+    skins: "Skins",
+    buildings: "Edificios",
+    boosters: "Potenciadores",
+    buy: "Comprar",
+    loading: "Cargando...",
+    no_items: "No hay artículos disponibles en este momento.",
+    more_gold_steps: "¿Necesitas más Pasos de Oro?",
+    buy_now: "¡Compra ahora!",
+  },
+  ca: {
+    title: "Botiga Llegendària",
+    description: "Millora la teva experiència amb els nostres potenciadors, skins i edificis.",
+    skins: "Skins",
+    buildings: "Edificis",
+    boosters: "Potenciadors",
+    buy: "Comprar",
+    loading: "Carregant...",
+    no_items: "No hi ha articles disponibles en aquest moment.",
+    more_gold_steps: "Necessites més Passos d'Or?",
+    buy_now: "Compra ara!",
+  },
+};

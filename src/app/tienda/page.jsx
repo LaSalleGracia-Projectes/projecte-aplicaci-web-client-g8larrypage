@@ -5,12 +5,17 @@ import { useEffect, useState, useContext } from "react";
 import { Header, Footer } from "@/components/ui";
 import { UserContext } from "@/context/UserContext";
 import Slider from "react-slick";
+import { translationsShop } from "@/lang/translations";
+import { useRouter } from "next/navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function ShopPage() {
     const [loading, setLoading] = useState(true);
-    const {isLoggedIn, setIsLoggedIn} = useContext(UserContext);
+    const { isLoggedIn, setIsLoggedIn, language, changeLanguage } = useContext(UserContext);
+    const translation = translationsShop[language] || translationsShop['es'];
+
+    const router = useRouter();
 
     // Verificar sesión al cargar
     useEffect(() => {
@@ -37,7 +42,10 @@ export default function ShopPage() {
     const handleLogout = async () => {
         try {
             const { error } = await supabase.auth.signOut();
-            if (error) throw error;
+            if (!error) {
+                setIsLoggedIn(false);
+                router.push(`/?lang=${language}`);
+            }
         } catch (err) {
             console.error("Error en el proceso de cierre de sesión:", err);
         }
@@ -60,7 +68,6 @@ export default function ShopPage() {
         ),
     };
 
-    // Imágenes de ejemplo (reemplazar con tus propias imágenes)
     const skinImages = [
         { id: 1, src: "https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9ibWtSOVJ0ek1SejdpRlNTUGtHWi5wbmcifQ:supercell:gAVHMW6FXbQ8pudBGC0aB8DIkxOkhgzLU5cA5IXkODo?width=2400", alt: "Skin Épica", price: "5000 pasos" },
         { id: 2, src: "https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC83azZrN2l2d1RFYXFiQ3BYMm9LNS5wbmcifQ:supercell:Cqi2U1k1aphzpItPhJnuWWzB4fcJVJ_QAxY2aCpnVJU?width=2400", alt: "Skin Legendaria", price: "15000 pasos" },
@@ -82,16 +89,21 @@ export default function ShopPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-indigo-900 to-purple-900">
-            <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+            <Header
+                language={language}
+                changeLanguage={changeLanguage}
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+            />
 
             <main className="flex-1 py-12 mt-36">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <h1 className="text-3xl sm:text-5xl font-bold text-yellow-400 mb-4 font-[Electrolize] tracking-wide">
-                            Pases de Leyendas
+                            {translation.title}
                         </h1>
                         <p className="text-lg sm:text-xl text-white opacity-80">
-                            Mejora tu experiencia con nuestros potenciadores y skins
+                            {translation.description}
                         </p>
                     </div>
 
@@ -103,7 +115,9 @@ export default function ShopPage() {
                         <div className="space-y-16">
                             {/* Sección Skins */}
                             <div>
-                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">Skins</h2>
+                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">
+                                    {translation.skins}
+                                </h2>
                                 <div className="bg-gray-900 bg-opacity-70 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-yellow-500 shadow-lg shadow-purple-500/20">
                                     <Slider {...sliderSettings} className="relative">
                                         {skinImages.map((image) => (
@@ -121,7 +135,7 @@ export default function ShopPage() {
                                                         <div className="flex items-center space-x-2 sm:space-x-4">
                                                             <span className="text-yellow-400 text-base sm:text-xl">{image.price}</span>
                                                             <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-1 sm:py-2 px-4 sm:px-6 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
-                                                                Comprar
+                                                                {translation.buy}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -134,7 +148,9 @@ export default function ShopPage() {
 
                             {/* Sección Edificios */}
                             <div>
-                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">Edificios</h2>
+                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">
+                                    {translation.buildings}
+                                </h2>
                                 <div className="bg-gray-900 bg-opacity-70 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-yellow-500 shadow-lg shadow-purple-500/20">
                                     <Slider {...sliderSettings} className="relative">
                                         {buildingImages.map((image) => (
@@ -152,7 +168,7 @@ export default function ShopPage() {
                                                         <div className="flex items-center space-x-2 sm:space-x-4">
                                                             <span className="text-yellow-400 text-base sm:text-xl">{image.price}</span>
                                                             <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-1 sm:py-2 px-4 sm:px-6 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
-                                                                Comprar
+                                                                {translation.buy}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -165,7 +181,9 @@ export default function ShopPage() {
 
                             {/* Sección Potenciadores */}
                             <div>
-                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">Potenciadores</h2>
+                                <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">
+                                    {translation.boosters}
+                                </h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                     {boosters.map((booster) => (
                                         <div key={booster.id} className="bg-gray-900 bg-opacity-70 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-yellow-500 shadow-lg shadow-purple-500/20 hover:transform hover:scale-105 transition-transform">
@@ -181,7 +199,7 @@ export default function ShopPage() {
                                                 <div className="flex justify-between items-center mt-4">
                                                     <span className="text-yellow-400">{booster.price}</span>
                                                     <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-1 sm:py-2 px-4 sm:px-6 rounded-full text-sm sm:text-base transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
-                                                        Comprar
+                                                        {translation.buy}
                                                     </button>
                                                 </div>
                                             </div>
@@ -193,9 +211,9 @@ export default function ShopPage() {
                     )}
 
                     <div className="mt-16 text-center text-white">
-                        <p className="mb-4 text-xl">¿Necesitas más pasos de oro?</p>
+                        <p className="mb-4 text-xl">{translation.more_gold_steps}</p>
                         <button className="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/30">
-                            ¡Compra ahora!
+                            {translation.buy_now}
                         </button>
                     </div>
                 </div>
