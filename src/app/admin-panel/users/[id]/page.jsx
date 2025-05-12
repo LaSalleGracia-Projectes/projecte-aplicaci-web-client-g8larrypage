@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from 'react-hot-toast';
 import supabase from "@/helpers/supabaseClient";
 import {
   Card,
@@ -94,7 +95,7 @@ export default function EditUserPage({ params }) {
   
       if (updateTableError) throw updateTableError;
   
-      alert('Usuario actualizado correctamente');
+      toast.success('Usuario actualizado correctamente');
       router.push('/admin-panel/users');
     } catch (error) {
       console.error("Error al actualizar el usuario:", error);

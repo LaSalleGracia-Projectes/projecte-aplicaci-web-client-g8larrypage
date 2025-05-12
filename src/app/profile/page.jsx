@@ -2,6 +2,7 @@
 
 import supabase from "@/helpers/supabaseClient";
 import { v4 as uuid } from "uuid";
+import { toast } from 'react-hot-toast';
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Input, Card, CardBody, Typography } from "@/components/Material-Components";
@@ -41,39 +42,14 @@ export default function ProfileUser() {
       const user = sessionData.session.user;
       const userId = user.id;
   
-      // Verificar si existe en Jugador, si no crear
-      let { data: playerData, error: playerError } = await supabase
+      // Obtener datos del jugador
+      const { data: playerData, error: playerError } = await supabase
         .from("Jugador")
         .select("*")
         .eq("id_usuario", userId)
         .maybeSingle();
   
-        if (!playerData) {
-          const nombreJugador =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.display_name ||
-            "Jugador";
-        
-          const { error: insertError } = await supabase
-            .from("Jugador")
-            .insert([
-              {
-                id_usuario: userId,
-                nombre: nombreJugador,
-                pasos_totales: 0,
-              },
-            ]);        
-  
-        if (insertError) throw insertError;
-  
-        const { data: newPlayerData } = await supabase
-          .from("Jugador")
-          .select("*")
-          .eq("id_usuario", userId)
-          .maybeSingle();
-  
-        playerData = newPlayerData;
-      }
+      if (playerError) throw playerError;
   
       // Obtener avatar_url desde la tabla Usuario
       const { data: userInfo, error: userError } = await supabase
@@ -85,10 +61,7 @@ export default function ProfileUser() {
       if (userError) throw userError;
   
       setUserData({
-        legendId:
-          user.user_metadata?.full_name ||
-          user.user_metadata?.display_name ||
-          "",
+        legendId: playerData?.nombre || "",
         email: user.email || "",
         provider: user.app_metadata?.provider || "",
         pasosTotales: playerData?.pasos_totales || 0,
@@ -102,30 +75,29 @@ export default function ProfileUser() {
       setInitialized(true);
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
       if (sessionError || !sessionData.session) {
         setError("¡Inicia sesión para actualizar tu perfil!");
         return;
       }
-
+  
       const userId = sessionData.session.user.id;
-
+  
       // Subir imagen
       let newAvatarUrl = avatarUrl;
       if (avatarFile) {
         newAvatarUrl = await uploadAvatar(userId);
         setAvatarUrl(newAvatarUrl);
       }
-
+  
       // Actualizar los datos del usuario en la tabla "Usuario"
-      const { error: updateError } = await supabase
+      const { error: updateUserError } = await supabase
         .from("Usuario")
         .update({
           nombre: userData.legendId,
@@ -133,10 +105,20 @@ export default function ProfileUser() {
           avatar_url: newAvatarUrl,
         })
         .eq("id", userId);
-
-      if (updateError) throw updateError;
-
-      alert("¡Perfil actualizado con éxito!");
+  
+      if (updateUserError) throw updateUserError;
+  
+      // Actualizar los datos del jugador en la tabla "Jugador"
+      const { error: updatePlayerError } = await supabase
+        .from("Jugador")
+        .update({
+          nombre: userData.legendId,
+        })
+        .eq("id_usuario", userId);
+  
+      if (updatePlayerError) throw updatePlayerError;
+  
+      toast.success("Perfil actualizado con éxito.");
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
       setError("Error al actualizar el perfil. Por favor, inténtalo de nuevo.");
