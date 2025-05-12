@@ -3,6 +3,7 @@
 import supabaseAdmin from "@/helpers/supabaseAdmin";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from 'react-hot-toast';
 import { selectUsers } from "@/supabase/selectUsers";
 import { sendPasswordResetEmail } from "@/supabase/userActions";
 import { formatDate } from "@/utils/formatDate";
@@ -43,10 +44,10 @@ export default function UserList({ filteredUsers, searchActive }) {
   const handlePasswordReset = async (email) => {
     try {
       await sendPasswordResetEmail(email);
-      alert("Password reset email sent successfully");
+      toast.success("Password reset email sent successfully");
     } catch (err) {
       console.error("Error sending password reset email:", err);
-      alert("Error sending password reset email: " + err.message);
+      toast.error("Error sending password reset email: " + err.message);
     }
   };
 
@@ -93,12 +94,12 @@ export default function UserList({ filteredUsers, searchActive }) {
   
       if (deleteAuthError) throw deleteAuthError;
   
-      alert("User deleted successfully");
+      toast.success("User deleted successfully");
       setAllUsers(allUsers.filter(user => user.id !== id));
       setDisplayedUsers(displayedUsers.filter(user => user.id !== id));
     } catch (err) {
       console.error("Error deleting user:", err);
-      alert("Error deleting user: " + err.message);
+      toast.error("Error deleting user: " + err.message);
     }
   };
 
