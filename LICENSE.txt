@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 Grupo 8 - Larry Page (LaSalleGracia-Projectes)
+Copyright (c) 2025 - Ciudad de las Leyendas
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
