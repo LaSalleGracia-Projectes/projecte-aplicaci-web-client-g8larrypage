@@ -60,24 +60,24 @@
   <summary>Tabla de Contenidos</summary>
   <ol>
     <li>
-      <a href="#about-the-project">Sobre el Proyecto</a>
+      <a href="#sobre-el-proyecto">Sobre el Proyecto</a>
       <ul>
-        <li><a href="#built-with">Construido Con</a></li>
+        <li><a href="#construido-con">Construido Con</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Comenzando</a>
+      <a href="#comenzando">Comenzando</a>
       <ul>
-        <li><a href="#prerequisites">Prerrequisitos</a></li>
-        <li><a href="#installation">Instalación</a></li>
-        <li><a href="#deployment">Despliegue</a></li>
+        <li><a href="#prerrequisitos">Prerrequisitos</a></li>
+        <li><a href="#instalación">Instalación</a></li>
+        <li><a href="#despliegue">Despliegue</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Uso</a></li>
-    <li><a href="#test">Pruebas</a></li>
-    <li><a href="#roadmap">Hoja de Ruta</a></li>
-    <li><a href="#license">Licencia</a></li>
-    <li><a href="#acknowledgments">Agradecimientos</a></li>
+    <li><a href="#uso">Uso</a></li>
+    <li><a href="#pruebas">Pruebas</a></li>
+    <li><a href="#hoja-de-ruta">Hoja de Ruta</a></li>
+    <li><a href="#licencia">Licencia</a></li>
+    <li><a href="#agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
 
