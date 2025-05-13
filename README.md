@@ -179,6 +179,8 @@ La aplicación permite a los usuarios:
 2. Ver su inventario de objetos
 3. Comprar skins, edificios y potenciadores usando los pasos acumulados
 4. Cambiar entre idiomas (español, inglés y catalán)
+5. Panel de administrador para gestionar usuarios
+6. Formulario de contacto
 
 Para ver ejemplos de uso más detallados, consulta la [Documentación](https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage)
 
@@ -202,12 +204,8 @@ npm run test
 - [X] Tienda virtual con inventario
 - [X] Soporte multiidioma (ES, EN, CA)
 - [X] Sistema de "Pasos de Oro" como moneda del juego
-- [ ] Sistema de amigos y clanes
-- [ ] Competiciones semanales entre clanes
-- [ ] Expansión de ciudades por hitos de pasos
-- [ ] Lucky boxes y recompensas exclusivas
-- [ ] Integración con aplicaciones de fitness
-- [ ] Raids y eventos especiales
+- [X] Sistema de clanes
+- [X] Sistema de ranking
 
 <p align="right">(<a href="#readme-top">volver arriba</a>)</p>
 
