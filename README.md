@@ -1,55 +1,256 @@
-# ⚔️ Ciudad de las leyendas ⚔️
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-"Ciudad de las Leyendas" es una aplicación multiplataforma que combina la gamificación de hábitos saludables con la construcción de una ciudad virtual. Cada usuario tiene su propia ciudad, y cada paso que dan en la vida real se convierte en la divisa del juego, llamada "Pasos de Oro". Los usuarios pueden gastar sus Pasos para construir edificios y comprar lucky boxes además de participar en competencias semanales y enfrentar a otros grupos.
 
-## 🌟 Elementos clave y características
 
-### 🏃 Divisas de pasos
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+<!-- FUTURES
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]-->
 
-1. Los pasos registrados por el teléfono del usuario se convierten en "Pasos de Oro", la divisa del juego. Los Pasos se pueden acumular y gastar en el mercado virtual para adquirir edificios, lucky boxes con premios al azar, o mejoras para la ciudad. Los edificios generan ventajas estratégicas que pueden ayudar en competiciones y en el desarrollo de la ciudad.
 
-2. Algunos edificios, como los de alta gama, son más caros pero ofrecen beneficios especiales, como un multiplicador de pasos (por ejemplo, 1.5x) durante una hora a la semana. Este multiplicador puede usarse en momentos estratégicos para ganar más divisas.
 
-### 🛠️ Construcción y Mejoras de Edificios
 
-Prettier es una herramienta de formateo de código que garantiza un estilo de código consistente en todo el proyecto. El plugin Prettier para VSCode ayuda a aplicar estas reglas automáticamente.
 
-1. Cada edificio tiene un rol específico (como producir recursos o dar bonus a ciertas estadísticas) y dos atributos principales: Vida y Daño. Estos atributos influyen en las competencias semanales entre ciudades.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage">
+    <img src="public/assets/img/logo-principal.png" alt="Logo" width="80" height="80">
+  </a>
 
-2. Ejemplos de edificios:
-   - Torre de Fuerza: Incrementa el poder de ataque de la ciudad.
-   - Templo de Resistencia: Aumenta la defensa general..
+<h3 align="center">Ciudad de las Leyendas</h3>
 
-### 🏆 Competencias Semanales de Grupos
+  <p align="center">
+    Plataforma de juego que recompensa la actividad física con objetos virtuales y desafíos
+    <br />
+    <!-- Link to Memory PDF -->
+    <a href="https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage"><strong>Explora la documentación »</strong></a>
+    <br />
+    <br />
+    <!-- Link to Demo Video -->
+    <a href="https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage">Ver Demo</a>
+    ·
+    <a href="https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage/issues/new?labels=bug&template=bug-report---.md">Reportar Bug</a>
+    ·
+    <a href="https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage/issues/new?labels=enhancement&template=feature-request---.md">Solicitar Característica</a>
+  </p>
+</div>
 
--  Los jugadores pueden unirse a clanes con sus amigos y participar en competencias semanales, donde los clanes se enfrentan entre sí en "batallas de clanes".
+[![Contributors][contributors-shield]][contributors-url]
+[![MIT License][license-shield]][license-url]
 
-- Cada clan suma el poder de ataque y defensa de los edificios de sus integrantes, y el grupo con el total más alto de puntos de ataque y defensa gana la batalla semanal. Los clanes que estén en el top del ranking reciben grandes recompensas, como lucky boxes exclusivas.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Tabla de Contenidos</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">Sobre el Proyecto</a>
+      <ul>
+        <li><a href="#built-with">Construido Con</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Comenzando</a>
+      <ul>
+        <li><a href="#prerequisites">Prerrequisitos</a></li>
+        <li><a href="#installation">Instalación</a></li>
+        <li><a href="#deployment">Despliegue</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Uso</a></li>
+    <li><a href="#test">Pruebas</a></li>
+    <li><a href="#roadmap">Hoja de Ruta</a></li>
+    <li><a href="#license">Licencia</a></li>
+    <li><a href="#acknowledgments">Agradecimientos</a></li>
+  </ol>
+</details>
 
-- Estos enfrentamientos fomentan la colaboración y el fortalecimiento estratégico de los edificios, además de mantener a los jugadores activos.
 
-### 🧩 Desbloqueo de Áreas y construcciones
 
-Las villas empiezan todas con un tamaño determinado y limitado el cual se podrá ampliar (ejemplo 5x5) y al cumplir x pasos se irá expandiendo la villa permitiendo construir más edificios, los edificios construidos no se podrán destruir haciendo el el jugador construye los edificios de manera más eficiente y forzandolo a cumplir los objetivos de pasos para poder ampliar la villa (ej Al cumplir un total de 1.000.000 pasos la aldea se amplía a 5x7).
+<!-- ABOUT THE PROJECT -->
+## Sobre el Proyecto
 
-### 💸 Tienda de Lucky Boxes y Potenciadores
+[![Captura de Pantalla del Producto][product-screenshot]](https://g8larrypage.github.io/projecte-aplicaci-web-client/)
 
-- Los jugadores pueden usar sus Pasos para comprar lucky boxes, que contienen ítems aleatorios como skins, potenciadores o estructuras.
+Este proyecto es una aplicación web interactiva que gamifica la actividad física, permitiendo a los usuarios convertir sus pasos diarios en moneda virtual llamada "Pasos de Oro" para adquirir objetos, edificios y potenciadores en la tienda del juego.
 
-- Solo algunas estructuras épicas se pueden conseguir en lucky boxes que solo obtendrás quedando en el top 3 del ranking de las batallas en clanes.
+Características principales:
+- Sistema de autenticación con Supabase
+- Tienda virtual con diferentes categorías de objetos (skins, edificios, potenciadores)
+- Inventario personalizado para cada jugador
+- Soporte multilenguaje (español, inglés y catalán)
+- Sistema de clanes y competiciones semanales
+- Construcción y expansión de ciudades
+- Lucky boxes con recompensas aleatorias
+- Raids y eventos especiales
+- Sistema de estadísticas y clasificaciones globales
+- Interfaz atractiva inspirada en juegos móviles
 
-### 🥇 Estadísticas y Clasificación Global
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
 
-- Desde la página web, los usuarios pueden ver sus estadísticas personales y las de otros jugadores, incluyendo logros en hábitos, número total de pasos, rachas de actividad, y rendimiento en las competencias semanales.
+## Colaboradores
+[![Contributors][contributors-shield]][contributors-url]
 
-- Las clasificaciones globales incluyen categorías como "Mayor Número de Pasos Semanales", "Mejor Ciudad en Defensa" o "Ciudad con Más Edificios Especiales". Esto incentiva la competencia entre usuarios, motivándolos a mejorar sus hábitos y su ciudad.
+Grupo 8 - Larry Page
 
-### 🏹 Raids
+### Construido Con
 
-- Una vez cada semana se harán raids donde los usuarios tendrán de completar una ruta ese día y al completarla recibirán una lootbox o alguna recompensa.
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Tailwind][Tailwind.css]][Tailwind-url]
+* [![Supabase][Supabase]][Supabase-url]
 
-- También se harán raids mensuales para los diferentes grupos/clanes donde los miembros tendrán de hacer esas raids donde les darán recompensas dependiendo de cómo queden en el ranking.
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
 
-## 📢 Resumen de la experiencia
 
-"Ciudad de los Héroes" convierte los hábitos saludables en un juego social donde cada paso cuenta para construir y fortalecer una ciudad virtual. Los jugadores compiten en equipo cada semana, fortaleciendo sus ciudades con edificios, lucky boxes, y estrategias para ganar recompensas. Además, pueden disfrutar del avance en un mapa de aventuras y personalizar su ciudad mientras desarrollan hábitos saludables para todo el mundo.
+
+<!-- GETTING STARTED -->
+## Comenzando
+
+A continuación se detallan las instrucciones para configurar el proyecto localmente.
+
+### Prerrequisitos
+
+* Node.js (versión 18 o superior)
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+* Cuenta en Supabase para la base de datos
+
+
+### Instalación
+
+1. Clonar el repositorio
+   ```sh
+   git clone https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage.git
+   ```
+2. Navegar al directorio del proyecto
+   ```sh
+   cd projecte-aplicaci-web-client-g8larrypage
+   ```
+3. Instalar los paquetes NPM
+   ```sh
+   npm install
+   ```
+4. Crear un archivo `.env.local` con tus claves de Supabase
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_anon_de_supabase
+   ```
+
+### Despliegue
+1. Iniciar el servidor de desarrollo
+   ```sh
+   npm run dev
+   ```
+2. Para producción
+   ```sh
+   npm run build
+   npm run start
+   ```
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Uso
+
+La aplicación permite a los usuarios:
+
+1. Registrarse y iniciar sesión
+2. Ver su inventario de objetos
+3. Comprar skins, edificios y potenciadores usando los pasos acumulados
+4. Cambiar entre idiomas (español, inglés y catalán)
+
+Para ver ejemplos de uso más detallados, consulta la [Documentación](https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage)
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+
+## Pruebas
+
+Para ejecutar las pruebas:
+
+```sh
+npm run test
+```
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+<!-- ROADMAP -->
+## Hoja de Ruta
+
+- [X] Sistema de autenticación
+- [X] Tienda virtual con inventario
+- [X] Soporte multiidioma (ES, EN, CA)
+- [X] Sistema de "Pasos de Oro" como moneda del juego
+- [ ] Sistema de amigos y clanes
+- [ ] Competiciones semanales entre clanes
+- [ ] Expansión de ciudades por hitos de pasos
+- [ ] Lucky boxes y recompensas exclusivas
+- [ ] Integración con aplicaciones de fitness
+- [ ] Raids y eventos especiales
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+
+
+
+<!-- LICENSE -->
+## Licencia
+
+[![MIT License][license-shield]][license-url]
+
+Distribuido bajo la Licencia MIT. Ver `LICENSE.txt` para más información.
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Agradecimientos
+
+* [Next.js Documentation](https://nextjs.org/docs)
+* [Supabase Documentation](https://supabase.com/docs)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [React Slick](https://react-slick.neostack.com/)
+* [Font Awesome](https://fontawesome.com)
+
+<p align="right">(<a href="#readme-top">volver arriba</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage.svg?style=for-the-badge
+[contributors-url]: https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage/graphs/contributors
+[license-shield]: https://img.shields.io/github/license/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage.svg?style=for-the-badge
+[license-url]: https://github.com/LaSalleGracia-Projectes/projecte-aplicaci-web-client-g8larrypage/blob/main/LICENSE.txt
+[product-screenshot]: public/assets/img/preview.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Tailwind.css]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[Supabase]: https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white
+[Supabase-url]: https://supabase.com/
+
